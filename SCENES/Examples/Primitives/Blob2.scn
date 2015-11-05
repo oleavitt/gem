@@ -1,0 +1,160 @@
+//---------------------------------------------------------
+//	The blob object.
+//  This scene file demonstrates the effect of progressively
+//  varying the threshold and field strength values.
+//
+//	usage:
+//  blob <threshold>
+//  {
+//     // one or more blob elements:
+//     sphere <center>, <radius>, <field strength>;
+//     cylinder <start point>, <end point>, <radius>, <field strength>;
+//     plane <center>, <normal>, <distance>, <field strength>;
+//
+//	   <object modifiers>
+//  }
+//
+//  blob 0.25
+//	{
+//     sphere <-0.75, 0, 0>, 1;
+//     sphere <0.75, 0, 0>, 1;
+//	   <object modifiers>
+//  }
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+//
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+//
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+//
+main
+{
+	// Set up the viewport - the 'camera' or 'eye'
+	//
+	viewport
+	{
+		from = <1, -32, 5>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	// A basic solid background.
+	//
+	background Navy;
+
+	// Create two point light sources
+	//
+	light
+	{
+		location = <-4, -10, 10>;
+		color = 0.5;
+	}
+	light
+	{
+		location = <5, -10, 0>;
+		color = 0.5;
+	}
+
+	float Threshold;
+	float FieldStrength;
+	float Xpos, Zpos;
+
+	// First row at top:
+	// Threshold increasing left to right from 0.001 to 1.001.
+	// Field strength held constant at 1.
+	//
+	Threshold = 0.001;
+	FieldStrength = 1;
+	Zpos = 6;
+	for (Xpos = -10; Xpos <= 10; Xpos = Xpos + 2)
+	{
+		blob Threshold
+		{
+			sphere <0, 0, 0.5>, 1, FieldStrength;  
+			sphere <0, 0, -0.5>, 1, FieldStrength;
+			
+			Gloss { color = Red; }
+			
+			translate <Xpos, 0, Zpos>;
+		}
+
+		Threshold = Threshold + 0.1;
+	}
+
+	// Second row
+	// Threshold held constant at 0.25.
+	// Field strength of top sphere increasing left to right from -2 to +2.
+	// Field strength of bottom sphere held constant at 1.
+	//
+	Threshold = 0.25;
+	FieldStrength = -2;
+	Zpos = 2;
+	for (Xpos = -10; Xpos <= 10; Xpos = Xpos + 2)
+	{
+		blob Threshold
+		{
+			sphere <0, 0, 0.5>, 1, FieldStrength;  
+			sphere <0, 0, -0.5>, 1, 1;
+			
+			Gloss { color = Red; }
+			
+			translate <Xpos, 0, Zpos>;
+		}
+
+		FieldStrength = FieldStrength + 0.4;
+	}
+
+	// Third row:
+	// Threshold increasing left to right from 0.001 to 1.001.
+	// Field strength of top sphere increasing left to right from -2 to +2.
+	// Field strength of bottom sphere held constant at 1.
+	//
+	Threshold = 0.001;
+	FieldStrength = -2;
+	Zpos = -2;
+	for (Xpos = -10; Xpos <= 10; Xpos = Xpos + 2)
+	{
+		blob Threshold
+		{
+			sphere <0, 0, 0.5>, 1, FieldStrength;  
+			sphere <0, 0, -0.5>, 1, 1;
+			
+			Gloss { color = Red; }
+			
+			translate <Xpos, 0, Zpos>;
+		}
+
+		FieldStrength = FieldStrength + 0.4;
+		Threshold = Threshold + 0.1;
+	}
+
+	// Fourth row:
+	// Threshold randomly varying between 0.001 and 1.001.
+	// Field strength of top sphere randomly varying between -2 to +2.
+	// Field strength of bottom sphere held constant at 1.
+	//
+	Zpos = -6;
+	for (Xpos = -10; Xpos <= 10; Xpos = Xpos + 1.25)
+	{
+		Threshold = frand() + 0.001;
+		FieldStrength = frand() * 4 - 2;
+
+		blob Threshold
+		{
+			sphere <0, 0, 0.5>, 1, FieldStrength;  
+			sphere <0, 0, -0.5>, 1, 1;
+			
+			// Give each one a random color, too!
+			//
+			Gloss { color = vrand(); }
+			
+			translate <Xpos, 0, Zpos>;
+		}
+	}
+}

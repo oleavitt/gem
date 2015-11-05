@@ -1,0 +1,141 @@
+//---------------------------------------------------------
+//	The box primitive
+//
+//  usage:
+//  box <corner 1 (bmin)>, <corner 2 (bmax)>
+//  {
+//	   <object modifiers>
+//  }
+//
+//  box <-1, -1, -1>, <1, 1, 1>
+//	{
+//	   <object modifiers>
+//  }
+//
+//  box
+//	{
+//     bmin = <-1, -1, -1>;
+//     bmax = <1, 1, 1>;
+// 
+//	   <object modifiers>
+//  }
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	// Set up the viewport - the 'camera' or 'eye'
+	viewport
+	{
+		from = <5, -10, 7>;
+		at = <0, 0, 1.5>;
+		angle = 40;
+	}
+
+	// Turn on a couple of light sources
+	light
+	{
+		location = <-50, -25, 100>;
+		color = 0.5;
+		falloff = 0;
+	}
+	light
+	{
+		location = <0, -50, 50>;
+		color = 0.5;
+		falloff = 0;
+	}
+
+	// Make a scene out of nothing but boxes.
+
+	// A basic box
+	box
+	{
+		bmin = <-1, -1, -1>;
+		bmax = <1, 1, 1>;
+		surface
+		{
+			color = Green;
+			ambient = 0.3;
+			diffuse = 0.7;
+			specular = 0.25;
+			Phong = 100;
+		}
+
+		rotate <0, 0, 22.5>;
+		translate <-2, -2, 1>;
+	}
+
+	// A checkered box for the floor
+	box <-5, -5, -0.25>, <5, 5, 0>
+	{
+		surface
+		{
+			color = White;
+			ambient = 0.2;
+			diffuse = 0.6;
+			reflection = 0.2;
+			specular = 1;
+			Phong = 1000;
+			surface_shader
+			{
+				color = checker(O) ? White : Chocolate;
+			}
+		}
+	}
+
+	// Rotating and then scaling a box produces some
+	// interesting shapes.
+	box
+	{
+		bmin = <-1, -1, -1>;
+		bmax = <1, 1, 1>;
+		surface
+		{
+			color = Yellow;
+			ambient = 0.3;
+			diffuse = 0.7;
+			specular = 0.25;
+			Phong = 100;
+		}
+
+		rotate <0, 0, 45>;
+		rotate <0, 45, 0>;
+		scale <1, 1, 0.1>;
+		translate <2, -2, 1>;
+	}
+
+	// A stack of boxes in back
+	float x, w, h, startpos;
+	h = 0;
+	w = 5;
+	while (w > 0)
+	{
+		x = -w / 2;
+		repeat (w)
+		{
+			box 0, 1
+			{
+				surface
+				{
+					color = vrand();
+					ambient = 0.3;
+					diffuse = 0.7;
+					specular = 0.5;
+					Phong = 100;
+				}
+				translate <x, 2.5, h>;
+			}
+			x = x + 1;
+		}
+		w = w - 1;
+		h = h + 1;
+	}
+}

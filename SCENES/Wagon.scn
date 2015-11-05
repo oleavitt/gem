@@ -1,0 +1,95 @@
+//---------------------------------------------------------
+//	A wagon!
+//---------------------------------------------------------
+
+include "colors.inc"
+include "basicsurfs.inc"
+
+// Define a wheel for the wagon
+define Wheel object
+{
+	difference
+	{
+		closed_cylinder <0, 0, -0.5>, <0, 0, 0.5>, 4;
+		closed_cylinder <0, 0, -0.51>, <0, 0, 0.51>, 3;
+		Gloss { color = Black; }
+	}
+
+	torus <0, 0, 0>, 3, 0.45;
+	intersection
+	{
+		sphere <0, 0, 10>, 10.5;
+		sphere <0, 0, -10>, 10.5;
+	}
+
+	Polished { color = White; }
+}
+
+// Make the wagon - some assembly required...
+define Wagon object
+{
+	difference
+	{
+		box <-18, -6.5, 4>, <18, 6.5, 12>;
+		box <-17.5, -6, 4.5>, <17.5, 6, 12.5>;
+		Matte { color = Red; }
+	}
+	Wheel
+	{
+		rotate <90, 0, 0>;
+		translate <-12, -7, 4>;
+	}
+	Wheel
+	{
+		rotate <90, 0, 0>;
+		translate <12, -7, 4>;
+	}
+	Wheel
+	{
+		rotate <90, 0, 0>;
+		translate <-12, 7, 4>;
+	}
+	Wheel
+	{
+		rotate <90, 0, 0>;
+		translate <12, 7, 4>;
+	}
+}
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		from = <1, -60, 36>;
+		at = <0, 0, 4>;
+		angle = 30;
+	}
+
+	light
+	{
+		location = <-50, -50, 50>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+	light
+	{
+		location = <0, -50, 50>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+
+	Wagon
+	{
+		rotate <0, 0, 60>;
+	}
+
+	disc
+	{
+		center = <0, 0, 0>;
+		normal = <0, 0, 1>;
+		radius = 50;
+
+		Matte;
+	}
+}

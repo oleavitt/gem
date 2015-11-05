@@ -1,0 +1,413 @@
+//---------------------------------------------------------
+//	Demonstrates various surface shaders
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		from = <0, -10, 20>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	background White, SkyBlue
+	{
+	}
+
+	light
+	{
+		location = <25, -100, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+	light
+	{
+		location = <-100, -50, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+
+	float Column, Row;
+
+	// First row of spheres
+	Row = 4;
+
+	// First sphere in row
+	Column = -4;
+
+// Basic checker pattern
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			diffuse = 0.8;
+			ambient = 0.2;
+			Phong = 50;
+			specular = 1;
+
+			surface_shader
+			{
+				color = checker(<u * 2, v, 0> * 10) ? White : Blue;
+			}
+		}
+		rotate <30, 0, 30>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+// Layered colored checker pattern
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			color = Black;
+			diffuse = 1;
+			ambient = 0.4;
+			Phong = 50;
+
+			surface_shader
+			{
+				float u2 = u * 2;
+				ks = 0;
+
+				if (checker(<u2, v, 0> * 32))
+				{
+					color = color + Cyan;
+					ks = 1;
+				}
+				if (checker(<u2, v, 0> * 16))
+					color = color + Yellow;
+				if (checker(<u2, v, 0> * 8))
+					color = color + Green;
+				if (checker(<u2, v, 0> * 4))
+					color = color + Red;
+				if (checker(<u2, v, 0> * 2))
+					color = color + Blue;
+				color = color / 4;
+			}
+		}
+		rotate <-45, 0, 45>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+// Marble1
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			diffuse = 0.8;
+			ambient = 0.2;
+			Phong = 50;
+
+			surface_shader
+			{
+				float a = turb2(O*5, 3, 3, 1);
+				color = vlerp(abs(a), White, Red);
+			}
+		}
+		rotate <-45, 0, 0>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+// Marble2
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			diffuse = 0.8;
+			ambient = 0.2;
+			Phong = 50;
+
+			surface_shader
+			{
+				float a = turb2(O*5, 4, 1.618, 0.618);
+				color = vlerp(abs(a), White, Black);
+			}
+		}
+		rotate <-45, 0, 45>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+// Swirly mirror and gold leaf
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			specular = 1;
+			surface_shader
+			{
+				if (checker(<u*2 + v*20, 0, 0>))
+				{
+					color = Gold;
+					ka = 0.2;
+					kd = 0.8;
+					Phong = 10;
+					kr = 0;
+				}
+				else
+				{
+					color = White;
+					ka = 0;
+					kd = 0.2;
+					Phong = 300;
+					kr = 0.8;
+				}
+			}
+		}
+		rotate <-10, 0, 60>;
+		translate <Column, Row, 1>;
+	}
+
+	Row = Row - 2;
+	Column = -4;
+
+// Polished Chrome
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			color = White;
+			specular = 2;
+			Phong = 200;
+			diffuse = 0.1;
+			reflection = 0.9;
+		}
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+// Glass
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			color = White;
+			specular = 2;
+			Phong = 200;
+			diffuse = 0.1;
+			reflection = 0.1;
+			transmission = 0.8;
+			ior = 1.52;
+		}
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+// Wood
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			ambient = 0.2;
+			diffuse = 0.8;
+			specular = 0.5;
+			Phong = 10;
+			surface_shader
+			{
+				vector v0 = <O.x, O.y+0.75, O.z>;
+				vector v1 = sqrt(v0.x*v0.x+v0.y*v0.y);
+				float a = abs(cos(v1*30+turb(O*3, 3)));
+				//vector v1 = <O.x,0, 0>;
+				color = vlerp(a, Burlywood, Almond);
+				ks = 0.7 - (a + turb(O*50, 1)*0.3) * 0.5;
+			}
+		}
+		rotate <15, 15, 15>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+	// Marbly Wood like
+	sphere <0,0,0>, 1
+	{
+		surface
+		{
+			ambient = 0.1;
+			diffuse = 0.8;
+			specular = 0.7;
+			Phong = 20;
+			surface_shader
+			{
+				vector v0 = <O.x, O.y+0.75, O.z+0.9>;
+				vector v1 = sqrt(v0.x*v0.x+v0.y*v0.y);
+				float a = abs(cos(v1*80+turb(O*5, 3)*10));
+				//vector v1 = <O.x,0, 0>;
+				color = vlerp(a, <0.3,0.1,0.1>, <0.5,0.3,0.1>);
+				ks = 0.7 - (a + turb(O*50, 1)*1) * 0.5;
+			}
+		}
+		rotate <-25, 39, 80>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+	// Hexagons
+	sphere <0,0,0>, 1
+	{
+		surface
+		{
+			surface_shader
+			{
+				float n = hexagon(u*8,v*8);
+				if (n < 0)
+				{
+					color = Red;
+					kd = 0.2;
+					kt = 0;
+					kr = 0.8;
+					ka = 0;
+					Phong = 200;
+					ks = 0.7;
+				}
+				else if (n > 0)
+				{
+					color = White;
+					kd = 0.8;
+					kt = 0;
+					kr = 0;
+					ka = 0.2;
+					Phong = 20;
+					ks = 0.5;
+				}
+				else
+				{
+					kt = 1;
+					kd = 0;
+     					ks = 0;
+					ka = 0;
+					kr = 0;
+				}
+			}
+		}
+		rotate <0, 0, 0>;
+		translate <Column, Row, 1>;
+	}
+
+	Row = Row - 2;
+	Column = -4;
+
+// Polished Chrome
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			surface_shader
+			{
+				if (O.z < -0.3333)
+				{
+					color = Red;
+					ka = 0.2;
+					kd = 0.8;
+					ks = 0.5;
+					Phong = 10;
+				}
+				else if (O.z < 0.3333)
+				{
+					color = White;
+					ka = 0.2;
+					kd = 0.8;
+					ks = 0.5;
+					Phong = 10;
+				}
+				else
+				{
+					color = Blue;
+					ka = 0.2;
+					kd = 0.8;
+					ks = 0.5;
+					Phong = 10;
+				}
+			}
+		}
+		rotate <0,90,-30>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+	// Hexagons
+	sphere <0,0,0>, 1
+	{
+		surface
+		{
+			surface_shader
+			{
+				ka = 0.1;
+				kd = 0.8;
+				kr = 0.1;
+				float d = sqrt(O.x*O.x + O.y*O.y);
+				color = d < 0.33 ? White - image_map("eight.tga", O.x - 0.5, O.y - 0.5) : Black;
+				ks = 0.2;
+				Phong = 30;
+			}
+		}
+		rotate <-20, 10, 21>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+	// Dented Copper
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			color = White;
+			ambient = 0.0;
+			diffuse = 0.4;
+			reflection = Copper;
+			specular = 1.0;
+			Phong = 100;
+			surface_shader
+			{
+				ON = bump(vturb(O * 10, 4) * 0.2);
+			}
+		}
+		rotate <-25, 13, 30>;
+		translate <Column, Row, 1>;
+	}
+
+	Column = Column + 2;
+
+	// Bumpy Eggshell
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			color = OffWhite;
+			ambient = 0.1;
+			diffuse = 0.9;
+			specular = 0.4;
+			Phong = 20;
+			surface_shader
+			{
+				ON = bump(vturb(O * 200, 4) * 0.2);
+			}
+		}
+		translate <Column, Row, 1>;
+	}
+
+	npolygon 6
+	{
+		Matte;
+		scale 50;
+	}
+}

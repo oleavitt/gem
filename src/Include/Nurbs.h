@@ -1,0 +1,80 @@
+/*
+ * Nurbs.h Nurb surface processing code.
+ *
+ * John Peterson
+ */
+
+#ifndef NURBS_H
+#define NURBS_H
+
+#include "ggems.h"
+
+/* Rational (homogeneous) point */
+
+typedef struct Point4Struct {
+	double x, y, z, w;
+} Point4;
+typedef Point4 Vector4;
+
+/*
+ * Sampled point on a surface.	This contains the point, normal and
+ * surface coordinates (u,v).  This structure is passed to the rendering
+ * code for shading, etc.
+ */
+typedef struct SurfSample {
+	Point3 point, normal;   /* Point on surface, normal at that point */
+	double normLen;		/* Used for normalizing normals */
+	double u, v;		/* Parameters, e.g., used for texture mapping. */
+	/* Note the parameter's range is determined by the surface's knot vector,
+	 * i.e., u goes from kvU[orderU-1] to kvU[numU], and likewise for v */
+} SurfSample;
+
+#define MAXORDER 20		/* Maximum order allowed (for local array sizes) */
+
+typedef struct NurbSurface {
+	/* Number of Points in the U and V directions, respectivly */
+	long numU, numV;
+	/* Order of the surface in U and V (must be >= 2, < MAXORDER) */
+	long orderU, orderV;
+	/* Knot vectors, indexed as [0..numU+orderU-1] and [0..numV+orderV-1] */
+	double *kvU, *kvV;
+	/* Control points, indexed as points[0..numV-1][0..numU-1] */
+	/* Note the w values are *premultiplied* with the x, y and z values */
+	Point4 **points;
+
+	/* These fields are added to support subdivision */
+	/* Edge straightness flags for subdivision */
+	unsigned char strV0, strVn, strU0, strUn;
+	/* Surface flatness flags for subdivision */
+	unsigned char flatV, flatU;
+	/* Corner data structures for subdivision */
+	SurfSample c00, c0n, cn0, cnn;
+} NurbSurface;
+
+extern double SubdivTolerance;	/* Screen space tolerance for subdivision */
+
+/*#define CHECK( n ) \
+	{ if (!(n)) { fprintf( stderr, "Ran out of memory\n" ); exit(-1); } }
+*/
+/* TODO: */
+#define CHECK( n ) \
+	{ if (!(n)) {  } }
+
+#define DIVW( rpt, pt ) \
+	{ (pt)->x = (rpt)->x / (rpt)->w; \
+	  (pt)->y = (rpt)->y / (rpt)->w; \
+	  (pt)->z = (rpt)->z / (rpt)->w; }
+
+/* Function prototypes */
+
+extern void DrawSubdivision(NurbSurface *n);
+extern void DrawEvaluation(NurbSurface *n);
+
+extern long FindBreakPoint(double u, double *kv, long m, long k);
+extern int AllocNurb(NurbSurface *n, double *ukv, double *vkv);
+extern int CloneNurb(NurbSurface *src, NurbSurface *dst);
+extern void FreeNurb(NurbSurface * );
+extern void RefineSurface(NurbSurface *src, NurbSurface *dest, unsigned char dirflag);
+extern void CalcPoint(double u, double v, NurbSurface *n, Point3 *p, Point3 *utan, Point3 *vtan);
+
+#endif /* NURBS_H */

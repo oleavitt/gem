@@ -1,0 +1,186 @@
+//---------------------------------------------------------
+//	The cone and cylinder objects
+//
+//  usage:
+//
+//  // An open-ended hollow cone
+//  cone <base point>, <end point>, <base radius>, <end radius>
+//  {
+//	   <object modifiers>
+//  }
+//
+//  cone <0, 0, 0>, <0, 0, 1>, 1.0, 0.0
+//	{
+//	   <object modifiers>
+//  }
+//
+//  cone
+//	{
+//     basept = <0, 0, 0>;
+//     endpt = <0, 0, 1>;
+//     baserad = 1.0;
+//     endrad = 0.0;
+// 
+//	   <object modifiers>
+//  }
+//
+// For a solid cone with closed ends use:
+// closed_cone <same parameters as for cone>
+//
+//  // An open-ended hollow cylinder
+//  cylinder <base point>, <end point>, <radius>
+//  {
+//	   <object modifiers>
+//  }
+//
+//  cylinder <0, 0, 0>, <0, 0, 1>, 1.0
+//	{
+//	   <object modifiers>
+//  }
+//
+//  cylinder
+//	{
+//     basept = <0, 0, 0>;
+//     endpt = <0, 0, 1>;
+//     radius = 1.0;
+// 
+//	   <object modifiers>
+//  }
+//
+// For a solid cylinder with closed ends use:
+// closed_cylinder <same parameters as for cylinder>
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// This function generates a round fence made of cylinders.
+function MakeFence(vector Center, float Radius, float NumSegments,
+	float StartDegrees, float EndDegrees)
+{
+	vector LastBasePt, ThisBasePt;
+	float degrees;
+	float step = (EndDegrees - StartDegrees) / NumSegments;
+	for (degrees = StartDegrees;
+		degrees <= EndDegrees;
+		degrees = degrees + step)
+	{
+		ThisBasePt = <0, Radius, 0>;
+		ThisBasePt = vrotate(ThisBasePt, <0, 0, 1>, degrees*PI/180);
+		ThisBasePt = ThisBasePt + Center;
+
+		// Place a fence post.
+		closed_cylinder ThisBasePt, ThisBasePt + <0, 0, 1>, 0.15
+		{
+			Mirror;
+		}
+
+		// If not the first fence post, add two connecting struts
+		// between this one and the previous one.
+		if (degrees > StartDegrees)
+		{
+			cylinder LastBasePt, ThisBasePt, 0.05
+			{
+				Mirror;
+				translate <0, 0, 0.5>;
+			}
+
+			cylinder LastBasePt, ThisBasePt, 0.05
+			{
+				Mirror;
+				translate <0, 0, 0.9>;
+			}
+		}
+
+		LastBasePt = ThisBasePt;
+	}
+}
+
+// Main entry point to generate the scene
+main
+{
+	// Set up the viewport - the 'camera' or 'eye'
+	viewport
+	{
+		from = <0, -15, 10>;
+		at = <0, 0, 1>;
+		angle = 30;
+	}
+
+	// Set up a couple of light sources
+	light
+	{
+		location = <-50, -50, 50>;
+		color = 1;
+		falloff = 0.0001;
+	}
+	light
+	{
+		location = <50, -50, 50>;
+		color = 1;
+		falloff = 0.0001;
+	}
+
+	// And now, our featured items: Cones and cylinders!
+	// Everything in the scene is made of the these primitives
+	// and nothing else.
+
+	// Short and wide closed cylinder as the floor
+	closed_cylinder
+	{
+		basept = <0, 0, -1>;
+		endpt = <0, 0, 0>;
+		radius = 5;
+
+		Matte;
+	}
+
+	// A hollow open ended cylinder
+	cylinder <0, 0, 0>, <0, 0, 1>, 0.5
+	{
+		Gloss { color = Yellow; }
+		translate <-2.5, 0, 0>;
+	}
+
+	// A solid closed ends cylinder
+	closed_cylinder <0, 0, 0>, <0, 0, 1>, 0.5
+	{
+		Gloss { color = Green; }
+		translate <-1.5, 0, 0>;
+	}
+
+	// A hollow open ended cone
+	cone <0, 0, 0>, <0, 0, 1>, 0.5, 0.25
+	{
+		Gloss { color = Red; }
+		translate <-0.5, 0, 0>;
+	}
+
+	// A solid closed ends cone
+	closed_cone <0, 0, 0>, <0, 0, 1>, 0.5, 0.25
+	{
+		Gloss { color = LightBlue; }
+		translate <0.5, 0, 0>;
+	}
+
+	// A cone with a pointed end
+	closed_cone <0, 0, 0>, <0, 0, 1>, 0.5, 0.0
+	{
+		Gloss { color = Purple; }
+		translate <1.5, 0, 0>;
+	}
+
+	// A cone with a positive and negative radius.
+	cone <0, 0, 0>, <0, 0, 1>, 0.5, -0.5
+	{
+		Gloss { color = White; }
+		translate <2.5, 0, 0>;
+	}
+
+	// Construct a fence out of cylinders
+	MakeFence(<0, 0, 0>, 4.5, 12, -160, 160);
+}

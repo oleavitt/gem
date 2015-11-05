@@ -1,0 +1,21 @@
+Surface shaders return a surface color and can accept any number
+of user defined parameters.
+
+Surface functions:
+
+rgb Ambient(rgb)
+rgb Diffuse(rgb)
+rgb Phong(rgb)
+rgb ReflectRay(rgb)
+rgb TransmitRay(rgb, float ior)
+rgb TraceRay(vector origin, vector direction)
+
+vector GetBasePoint()
+vector GetNormal()
+void SetNormal(vector)
+void BumpNormal(vector direction, float angle)
+
+surface_shader <name> [parameters [, ...]]
+{
+	...	
+}

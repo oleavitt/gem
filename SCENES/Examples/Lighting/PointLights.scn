@@ -1,0 +1,108 @@
+//---------------------------------------------------------
+//	Point Light sources
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	// Set up the viewport
+	viewport
+	{
+		from = <0, -15, 15>;
+		at = <0, 0, 0>;
+		angle = 20;
+	}
+
+	// Put some objects in the scene.
+	closed_cylinder <0, 0, 0>, <0, 0, 2>, 0.5
+	{ 
+		Polished
+		{
+			color = Red;
+		}
+
+		translate <-2, 0, 0>;
+	}
+
+	closed_cylinder <0, 0, 0>, <0, 0, 2>, 0.5
+	{ 
+		Polished
+		{
+			color = Green;
+		}
+	}
+
+	closed_cylinder <0, 0, 0>, <0, 0, 2>, 0.5
+	{ 
+		Polished
+		{
+			color = Blue;
+		}
+
+		translate <2, 0, 0>;
+	}
+
+	closed_cylinder <0, 0, -1>, <0, 0, 1>, 0.5
+	{ 
+		Mirror;
+
+		rotate <90, 0, 0>;
+		rotate <0, 0, 68>;
+		translate <1.3, -2.1, 0.5>;
+	}
+
+	disc <0, 0, 0>, <0, 0, 1>, 10
+	{
+		surface
+		{
+			ambient = 0.1;
+			diffuse = 0.9;
+
+			// Two color 3D checker at unit intervals
+			surface_shader
+			{
+				color = checker(O) ? White : Cream;
+			}
+		}
+	}	
+
+	// Setup some point light sources wrapped in small bright white
+	// 'no_shadow' spheres to give them a physical presence in the scene.
+
+	// This vector sets both the center of the light source and the
+	// wrapper sphere.
+	vector lite_loc;
+
+	lite_loc = <0, 0, 4>;
+	light
+	{
+		location = lite_loc;
+		color = White;
+		falloff = 0.1;
+	}
+	sphere lite_loc, 0.05 { no_shadow = 1; surface { color = White; ambient = 5; } }
+	
+	lite_loc = <3, -3, 4>;
+	light
+	{
+		location = lite_loc;
+		color = White;
+		falloff = 0.05;
+	}
+	sphere lite_loc, 0.05 { no_shadow = 1; surface { color = White; ambient = 5; } }
+
+	lite_loc = <-3.25, -0.5, 0.5>;
+	light
+	{
+		location = lite_loc;
+		color = White;
+		falloff = 0.1;
+	}
+	sphere lite_loc, 0.05 { no_shadow = 1; surface { color = White; ambient = 5; } }
+}

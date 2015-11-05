@@ -1,0 +1,99 @@
+//---------------------------------------------------------
+//	Generates a 3D Sierpinski triangle out of spheres.
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+//      Pt1
+//      /|\
+//     / | \
+//    / Pt2 \
+//   / /   \ \
+// Pt3-------Pt4
+function GenerateSierpinski(vector Pt1, vector Pt2, vector Pt3, vector Pt4, float Depth, float which_surface)
+{
+	if (Depth > 0)
+	{
+		// Decrement the recursion depth.
+		Depth = Depth - 1;
+
+		// Calculate the midpoints for each of the six edges of the tetrahedron.
+		vector Pt12 = (Pt1 + Pt2) / 2;
+		vector Pt13 = (Pt1 + Pt3) / 2;
+		vector Pt14 = (Pt1 + Pt4) / 2;
+		vector Pt23 = (Pt2 + Pt3) / 2;
+		vector Pt24 = (Pt2 + Pt4) / 2;
+		vector Pt34 = (Pt3 + Pt4) / 2;
+
+		// Generate four new tetrahedrons that connect the edge midpoints
+		// to the corners of the original. 
+		GenerateSierpinski(Pt1 , Pt12, Pt13, Pt14, Depth, 0);
+		GenerateSierpinski(Pt12, Pt2 , Pt23, Pt24, Depth, 1);
+		GenerateSierpinski(Pt13, Pt23, Pt3 , Pt34, Depth, 2);
+		GenerateSierpinski(Pt14, Pt24, Pt34, Pt4 , Depth, 3);
+	}
+	else
+	{
+		// Place a sphere in the center point of the tetrahhedron.
+		sphere
+		{
+			center = (Pt1 + Pt2 + Pt3 + Pt4) / 4;
+			radius = vmag(Pt1 - center) * 0.866;
+
+			if ( which_surface == 0 )
+				Gloss { color = Red; }
+			else if ( which_surface == 1 )
+				Gloss { color = Green; }
+			else if ( which_surface == 2 )
+				Gloss { color = Blue; }
+			else
+				Gloss { color = White; }
+		}
+	}
+}
+
+main
+{
+	viewport
+	{
+		from = <5, -7, 6>;
+		at = <0, 0, 1.1>;
+		angle = 25;
+	}
+
+	light
+	{
+		location = <-10, 0, 14>;
+		color = <0.7, 0.7, 1>;
+		falloff = 0.005;
+	}
+	light
+	{
+		location = <0, -10, 13>;
+		color = <1, 0.7, 0.7>;
+		falloff = 0.005;
+	}
+	light
+	{
+		location = <10, 10, 10>;
+		color = <0.7, 1, 0.7>;
+		falloff = 0.005;
+	}
+
+	disc <0, 0, 0>, <0, 0, 1>, 10
+	{
+		Gloss { color = White; }
+	}
+
+	float Size = 2;
+	GenerateSierpinski(
+		<0, 0, sqrt(2)> * Size,
+		<0, 1, 0> * Size,
+		<-0.866, -0.5, 0> * Size,
+		<0.866, -0.5, 0> * Size,
+		6, 0); 
+}

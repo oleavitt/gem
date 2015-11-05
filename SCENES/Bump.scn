@@ -1,0 +1,105 @@
+//---------------------------------------------------------
+//	Bump that surface normal about!
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		// TODO: viewport types
+		// type = 1; // perspective
+		// type = 2; // anaglyph
+		from = <5, -15, 15>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	background White, SkyBlue
+	{
+	}
+
+	light
+	{
+		location = <25, -100, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+	light
+	{
+		location = <-100, -50, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+
+	sphere <-1, -1, 1>, 1
+	{
+		surface
+		{
+			color = Verdigris;
+			diffuse = 0.9;
+			ambient = 0.1;
+			//transmission = 0.99;
+			//ior = 1.52;
+		}
+	}
+
+	box 0, 1
+	{
+		surface
+		{
+			surface_shader
+			{
+				color = White;
+				ka = 0.1;
+				kd = 0.9;
+				kr = 0.0;
+				float d = vmag(O);
+				ON = bump(<sin(d*25), cos(d*25), sin(d*25)*cos(d*25)> * 0.5);
+			}
+		}
+		rotate <0,0,-45>;
+		rotate <0,-60,0>;
+		translate <0,0,2>;
+	}
+	 
+	npolygon 4
+	{
+		surface
+		{
+			surface_shader
+			{
+				ka = 0.2;
+				kd = 0.8;
+				color = checker(O) ? Blue : White;
+			}
+		}
+		scale 10;
+		rotate <0, 0, 45>;
+		rotate <90, 0, 0>;
+		translate <0, 5, 0>;
+	}
+
+	npolygon 6
+	{
+		surface
+		{
+			surface_shader
+			{
+				color = White;
+				ka = 0.1;
+				kd = 0.1;
+				kr = 0.8;
+				float d = sqrt(O.x*O.x + O.y*O.y);
+				ON = bump(<sin(d*50), cos(d*50), 0> * 0.002);
+			}
+		}
+		scale 50;
+	}
+}

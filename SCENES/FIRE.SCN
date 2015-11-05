@@ -1,0 +1,144 @@
+///////////////////////////////////////////////////////////
+//
+// A fire texture map.
+//
+///////////////////////////////////////////////////////////
+
+include "colors.inc"
+include "basicsurfs.inc"
+
+main
+{
+	viewport
+	{
+	  from = <0, -10, 0>;
+	  at = <0, 0, 0>;
+	  angle = 30;
+	}
+
+
+	box <-1, 0, 0>, <1, 1, 1>
+	{
+		surface
+		{
+			surface_shader
+			{
+				vector C0 = <1.0, 1.0, 0.95>;
+				vector C1 = <1.0, 0.95, 0.8>;
+				vector C2 = <0.0, 0.1, 1.0>;
+				vector C3 = <0.0, 0.0, 0.0>;
+				float i1 = 0.25, i2 = 0.5, i3 = 0.75, i4 = 1.0;
+
+				vector fs = 1, ts = 0; float ta = 0;
+				
+				float d = vmag(O*fs+vturb(O*ts, 3)*ta), a;
+				if(d < i1)
+					ka = C0;
+				else if(d < i2)
+				{
+					a = (d - i1) / (i2 - i1);
+					ka = C0 + a * (C1 - C0);
+				}
+				else if(d < i3)
+				{
+					a = (d - i2) / (i3 - i2);
+					ka = C1 + a * (C2 - C1);
+				}
+				else if(d < i4)
+				{
+					a = (d - i3) / (i4 - i3);
+					ka = C2 + a * (C3 - C2);
+				}
+				else
+					ka = C3;
+			}
+			diffuse = 0.0;
+		}
+		translate <0, 0, -0.5>;
+		scale <1, 1, 4>;
+		translate <-2, 0, 0>;
+	}
+
+	box <-1, 0, 0>, <1, 1, 1>
+	{
+		surface
+		{
+			surface_shader
+			{
+				vector C0 = <1.0, 1.0, 0.95>;
+				vector C1 = <1.0, 0.95, 0.8>;
+				vector C2 = <0.0, 0.1, 1.0>;
+				vector C3 = <0.0, 0.0, 0.0>;
+				float i1 = 0.25, i2 = 0.5, i3 = 0.75, i4 = 1.0;
+
+				vector fs = 1, ts = 1; float ta = 1;
+				
+				float d = vmag(O*fs+vturb(O*ts, 3)*ta), a;
+				if(d < i1)
+					ka = C0;
+				else if(d < i2)
+				{
+					a = (d - i1) / (i2 - i1);
+					ka = C0 + a * (C1 - C0);
+				}
+				else if(d < i3)
+				{
+					a = (d - i2) / (i3 - i2);
+					ka = C1 + a * (C2 - C1);
+				}
+				else if(d < i4)
+				{
+					a = (d - i3) / (i4 - i3);
+					ka = C2 + a * (C3 - C2);
+				}
+				else
+					ka = C3;
+			}
+			diffuse = 0.0;
+		}
+		translate <0, 0, -0.5>;
+		scale <1, 1, 4>;
+	}
+
+	box <-1, 0, 0>, <1, 1, 1>
+	{
+		surface
+		{
+			surface_shader
+			{
+				vector C0 = <1.0, 1.0, 0.95>;
+				vector C1 = <1.0, 0.95, 0.8>;
+				vector C2 = <0.0, 0.1, 1.0>;
+				vector C3 = <0.0, 0.0, 0.0>;
+				float i1 = 0.25, i2 = 0.5, i3 = 0.75, i4 = 1.0;
+
+				vector fs = 1, ts = <5, 5, 10>; float ta = 1.1;
+				
+				float d = vmag(O*fs+vturb(O*ts, 3)*ta), a;
+				if(d < i1)
+					ka = C0;
+				else if(d < i2)
+				{
+					a = (d - i1) / (i2 - i1);
+					ka = C0 + a * (C1 - C0);
+				}
+				else if(d < i3)
+				{
+					a = (d - i2) / (i3 - i2);
+					ka = C1 + a * (C2 - C1);
+				}
+				else if(d < i4)
+				{
+					a = (d - i3) / (i4 - i3);
+					ka = C2 + a * (C3 - C2);
+				}
+				else
+					ka = C3;
+			}
+			diffuse = 0.0;
+		}
+		translate <0, 0, -0.5>;
+		scale <1, 1, 4>;
+		translate <2, 0, 0>;
+	}
+}

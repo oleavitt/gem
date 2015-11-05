@@ -1,0 +1,16 @@
+polymesh [<name>]
+{
+	vertex <x, y, z> [, <nx, ny, nz>];
+	vertex <x, y, z> [, <nx, ny, nz>];
+	vertex <x, y, z> [, <nx, ny, nz>];
+	...
+
+	extrude
+	{
+		step <dx, dy, dz>;
+		step_to <x, y, z>;
+		turn <degx, degy, degz>;
+		converge_to <x, y, z> [, <nx, ny, nz>];
+		size <sx, sy, sz>;
+	}
+}

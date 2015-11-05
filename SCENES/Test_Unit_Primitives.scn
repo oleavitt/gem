@@ -1,0 +1,98 @@
+//---------------------------------------------------------
+//	Testing...1-2-3...Testing....Testing....
+//---------------------------------------------------------
+
+include "colors.inc"
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		from = <0, -10, 15>;
+		at = <0, 0, 1>;
+		angle = 30;
+	}
+
+	// Create an array of point light sources
+	float nlights = 3;
+	float span = 50;
+	float start = -span / 2;
+	float count = 0;
+	for (count = 0; count < nlights; count = count + 1)
+		light
+		{
+			location = <start + count * span/nlights, -50, 50>;
+			color = 1 / nlights;
+		//	falloff = 0.0001;
+		}
+
+	float step = 2, pos = -4;
+	sphere
+	{
+		Matte { color = Burlywood; }
+		translate <pos, 0, 1>;
+	}
+	pos = pos + step;
+	disc
+	{
+		Matte { color = Ivory; }
+		translate <pos, 0, 1>;
+	}
+	cylinder
+	{
+		Matte { color = LightSeaGreen; }
+		translate <pos, 3, 1>;
+	}
+	pos = pos + step;
+	torus
+	{
+		Matte { color = Thistle; }
+		translate <pos, 0, 1>;
+	}
+	pos = pos + step;
+	cone
+	{
+		Matte { color = LightSalmon; }
+		translate <pos, 0, 1>;
+	}
+	closed_cylinder
+	{
+		Matte { color = PaleGoldenrod; }
+		translate <pos, 3, 1>;
+	}
+	pos = pos + step;
+	box
+	{
+		Matte { color = LightBlue; }
+		translate <pos, 0, 1>;
+	}
+
+	polygon
+	{
+		vertex <0, 1, 0>;
+		vertex <-1, 0, 0>;
+		vertex <1, -1, 0>;
+
+		Matte { color = Yellow; }
+
+		translate <-2, -3, 1>;
+	}
+
+	npolygon 6
+	{
+		Matte { color = Tomato; }
+
+		translate <2, -3, 1>;
+	}
+
+	disc
+	{
+		center = <0, 0, 0>;
+		normal = <0, 0, 1>;
+		radius = 10;
+
+		Matte;
+	}
+}

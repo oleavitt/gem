@@ -1,0 +1,164 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Scn10 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ORENLE~1\LOCALS~1\Temp\RSP6B.tmp" with contents
+[
+/nologo /MLd /W4 /GX /Z7 /Od /I "..\include" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D CONFIG_VERSION_MAJOR=1 /D CONFIG_VERSION_MINOR=1 /Fp".\Debug/Scn10.pch" /YX"local.h" /Fo".\Debug/" /Fd".\Debug/" /FD /c 
+"C:\gem\src\Scn10\backgrnd.c"
+"C:\gem\src\Scn10\Blob.c"
+"C:\gem\src\Scn10\box.c"
+"C:\gem\src\Scn10\branch.c"
+"C:\gem\src\Scn10\colormap.c"
+"C:\gem\src\Scn10\cone.c"
+"C:\gem\src\Scn10\csg.c"
+"C:\gem\src\Scn10\define.c"
+"C:\gem\src\Scn10\disc.c"
+"C:\gem\src\Scn10\error.c"
+"C:\gem\src\Scn10\exeval.c"
+"C:\gem\src\Scn10\exparse.c"
+"C:\gem\src\Scn10\file.c"
+"C:\gem\src\Scn10\Findfile.c"
+"C:\gem\src\Scn10\gettoken.c"
+"C:\gem\src\Scn10\heightfield.c"
+"C:\gem\src\Scn10\implicit.c"
+"C:\gem\src\Scn10\light.c"
+"C:\gem\src\Scn10\loop.c"
+"C:\gem\src\Scn10\lvalue.c"
+"C:\gem\src\Scn10\message.c"
+"C:\gem\src\Scn10\misc.c"
+"C:\gem\src\Scn10\noise.c"
+"C:\gem\src\Scn10\Nurbs.c"
+"C:\gem\src\Scn10\object.c"
+"C:\gem\src\Scn10\param.c"
+"C:\gem\src\Scn10\parse.c"
+"C:\gem\src\Scn10\polygon.c"
+"C:\gem\src\Scn10\polymesh.c"
+"C:\gem\src\Scn10\scn10.c"
+"C:\gem\src\Scn10\scnbuild.c"
+"C:\gem\src\Scn10\sphere.c"
+"C:\gem\src\Scn10\stmt.c"
+"C:\gem\src\Scn10\surface.c"
+"C:\gem\src\Scn10\symbol.c"
+"C:\gem\src\Scn10\symtab.c"
+"C:\gem\src\Scn10\torus.c"
+"C:\gem\src\Scn10\triangle.c"
+"C:\gem\src\Scn10\viewport.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ORENLE~1\LOCALS~1\Temp\RSP6B.tmp" 
+Creating temporary file "C:\DOCUME~1\ORENLE~1\LOCALS~1\Temp\RSP6C.tmp" with contents
+[
+/nologo /out:".\Debug\Scn10.lib" 
+.\Debug\backgrnd.obj
+.\Debug\Blob.obj
+.\Debug\box.obj
+.\Debug\branch.obj
+.\Debug\colormap.obj
+.\Debug\cone.obj
+.\Debug\csg.obj
+.\Debug\define.obj
+.\Debug\disc.obj
+.\Debug\error.obj
+.\Debug\exeval.obj
+.\Debug\exparse.obj
+.\Debug\file.obj
+.\Debug\Findfile.obj
+.\Debug\gettoken.obj
+.\Debug\heightfield.obj
+.\Debug\implicit.obj
+.\Debug\light.obj
+.\Debug\loop.obj
+.\Debug\lvalue.obj
+.\Debug\message.obj
+.\Debug\misc.obj
+.\Debug\noise.obj
+.\Debug\Nurbs.obj
+.\Debug\object.obj
+.\Debug\param.obj
+.\Debug\parse.obj
+.\Debug\polygon.obj
+.\Debug\polymesh.obj
+.\Debug\scn10.obj
+.\Debug\scnbuild.obj
+.\Debug\sphere.obj
+.\Debug\stmt.obj
+.\Debug\surface.obj
+.\Debug\symbol.obj
+.\Debug\symtab.obj
+.\Debug\torus.obj
+.\Debug\triangle.obj
+.\Debug\viewport.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\ORENLE~1\LOCALS~1\Temp\RSP6C.tmp"
+<h3>Output Window</h3>
+Compiling...
+backgrnd.c
+Blob.c
+box.c
+branch.c
+C:\gem\src\Scn10\branch.c(171) : warning C4100: 'stmt' : unreferenced formal parameter
+colormap.c
+cone.c
+csg.c
+C:\gem\src\Scn10\csg.c(63) : warning C4020: 'Ray_FinishCSG' : too many actual parameters
+define.c
+disc.c
+error.c
+exeval.c
+C:\gem\src\Scn10\exeval.c(75) : warning C4100: 'expr' : unreferenced formal parameter
+exparse.c
+file.c
+Findfile.c
+gettoken.c
+C:\gem\src\Scn10\gettoken.c(321) : warning C4127: conditional expression is constant
+C:\gem\src\Scn10\gettoken.c(360) : warning C4127: conditional expression is constant
+C:\gem\src\Scn10\gettoken.c(405) : warning C4127: conditional expression is constant
+heightfield.c
+C:\gem\src\Scn10\gettoken.c(629) : warning C4701: local variable 'token' may be used without having been initialized
+implicit.c
+light.c
+C:\gem\src\Scn10\light.c(412) : warning C4100: 'stmt' : unreferenced formal parameter
+loop.c
+lvalue.c
+message.c
+misc.c
+C:\gem\src\Scn10\misc.c(38) : warning C4100: 'stmt' : unreferenced formal parameter
+C:\gem\src\Scn10\misc.c(43) : warning C4100: 'stmt' : unreferenced formal parameter
+noise.c
+Nurbs.c
+C:\gem\src\Scn10\noise.c(331) : warning C4701: local variable 'pll' may be used without having been initialized
+C:\gem\src\Scn10\Nurbs.c(270) : warning C4020: 'Ray_FinishCSG' : too many actual parameters
+object.c
+param.c
+parse.c
+C:\gem\src\Scn10\parse.c(273) : warning C4127: conditional expression is constant
+C:\gem\src\Scn10\parse.c(413) : warning C4127: conditional expression is constant
+C:\gem\src\Scn10\parse.c(480) : warning C4127: conditional expression is constant
+polygon.c
+polymesh.c
+C:\gem\src\Scn10\polymesh.c(572) : warning C4189: 'endpt' : local variable is initialized but not referenced
+scn10.c
+scnbuild.c
+sphere.c
+stmt.c
+C:\gem\src\Scn10\stmt.c(24) : warning C4100: 'stmt' : unreferenced formal parameter
+C:\gem\src\Scn10\stmt.c(28) : warning C4100: 'stmt' : unreferenced formal parameter
+surface.c
+symbol.c
+symtab.c
+torus.c
+triangle.c
+viewport.c
+Creating library...
+
+
+
+<h3>Results</h3>
+Scn10.lib - 0 error(s), 18 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,96 @@
+//---------------------------------------------------------
+//	Plot a bar graph in 3D.
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		// TODO: viewport types
+		// type = 1; // perspective
+		// type = 2; // anaglyph
+		from = <0.0, -10.0, 3.0>;
+		at = <0, 0, 1>;
+		angle = 30;
+	}
+
+	//visibility 50, Black;
+
+	background White, SkyBlue
+	{
+	}
+
+	light
+	{
+		location = <-10, -10, 30>;
+		color = 0.5;
+	}
+	light
+	{
+		location = <10, -10, 30>;
+		color = 0.5;
+	}
+
+	float y = 1;
+	float x = -2;
+	float d = 1;
+	repeat (10)
+	{
+		float f = d/3000000000;
+		y = 1;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 1.2;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 1.5;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 1.8;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 2.2;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 2.7;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 3.3;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 3.9;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 4.7;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 5.6;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 6.8;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		y = 8.2;
+		closed_cylinder <x, 0, 0>, <x, 0, y*f>, 0.01;
+		x = x + 0.02;
+		d = d * 10;
+	}
+
+	npolygon 7
+	{
+		scale 100;
+			surface
+			{
+				color = White;
+				ambient = 0.1;
+				diffuse = 0.9;
+			}
+	}
+}

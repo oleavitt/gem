@@ -1,0 +1,149 @@
+//-------------------------------------
+//	New scene description language spec
+//-------------------------------------
+
+
+light
+{
+	location = <-100, -100, 50>;
+	color = <1, 1, 1>;
+	falloff = 0.0001;
+}
+light
+{
+	location = <100, -100, 50>;
+	color = <1, 1, 1>;
+	falloff = 0.0001;
+}
+light
+{
+	location = <0, -100, 50>;
+	color = <1, 1, 1>;
+	falloff = 0.0001;
+}
+
+define RedSurface surface
+{
+	color = <1, 0, 0>;
+	ambient = 0.3;
+	diffuse = 0.7;
+	specular = 1;
+	Phong = 50;
+}
+
+define WhiteSurface surface
+{
+	color = <1, 1, 1>;
+	ambient = 0.3;
+	diffuse = 0.7;
+	specular = 1;
+	Phong = 50;
+}
+
+define ChromeSurface surface
+{
+	color = <1, 1, 1>;
+	ambient = 0.05;
+	diffuse = 0.15;
+	reflection = 0.8;
+	specular = 1;
+	Phong = 250;
+}
+
+
+main
+{
+	viewport {
+		from = <0, -5, 5>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	sphere
+	{
+		center = <0, 0, 0>;
+		radius = 1;
+
+		surface
+		{
+			color = <1.0, 1.0, 1.0>;
+			ambient = 0.0;
+			diffuse = 0.1;
+			specular = 1;
+			transmission = 0.9;
+			Phong = 500;
+			outior = 1.00;
+			ior = 1.52;
+		}
+	}
+
+	sphere
+	{
+		center = <0, 0, 0>;
+		radius = 0.95;
+
+		surface
+		{
+			color = <1.0, 1.0, 1.0>;
+			ambient = 0.0;
+			diffuse = 0.1;
+			specular = 1;
+			transmission = 0.9;
+			Phong = 500;
+			outior = 1.52;
+			ior = 1.00;
+		}
+	}
+
+	disc
+	{
+		center = <0, 0, 0>;
+		normal = <1, 1, 5>;
+		radius = 2;
+		inner_radius = 1.95;
+
+		surface
+		{
+			color = <1.0, 1.0, 0.9>;
+			ambient = 0.3;
+			diffuse = 0.7;
+			specular = 1;
+			Phong = 50;
+		}
+	}
+
+	box
+	{
+		bmin = <-2, -2, -0.25>;
+		bmax = <2, 2, 0>;
+
+		surface
+		{
+			color = <1.0, 1.0, 1.0>;
+			ambient = 0.3;
+			diffuse = 0.7;
+			specular = 1;
+			Phong = 50;
+		}
+
+		rotate <0, 0, 45>;
+		translate <0, 0, -1.5>;
+	}
+
+	box
+	{
+		bmin = <-10, -10, -0.25>;
+		bmax = <10, 10, 0>;
+
+		surface
+		{
+			color = <0.9, 1.0, 1.0>;
+			ambient = 0.3;
+			diffuse = 0.7;
+			specular = 1;
+			Phong = 50;
+		}
+
+		translate <0, 0, -2>;
+	}
+}

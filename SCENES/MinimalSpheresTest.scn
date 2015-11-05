@@ -1,0 +1,99 @@
+//---------------------------------------------------------
+//	Testing...1-2-3...Testing....Testing....
+//---------------------------------------------------------
+
+// TODO: Recognize an 'autoinclude' directory.
+// Any include files in that folder will automatically be included in
+// every scene file without the need for an include directive in the file.
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		// TODO: viewport types
+		// type = 1; // perspective
+		// type = 2; // anaglyph
+		from = <0.0, -10.0, 1.0>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	background White, SkyBlue
+	{
+	}
+
+	light
+	{
+		location = <-5, -5, 10>;
+		color = 0.5;
+	}
+	light
+	{
+		location = <5, -5, 10>;
+		color = 0.5;
+	}
+
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			color = <1, 1, 1>;
+			ambient = 0.2;
+			diffuse = 0.6;
+			specular = 0.5;
+			Phong = 100;
+		}
+	}
+
+	sphere <-1.0, -1.0, 0.0>, 1
+	{
+		surface
+		{
+			color = <1, 0, 0>;
+			ambient = 0.2;
+			diffuse = 0.6;
+			specular = 0.5;
+			Phong = 10;
+		}
+	}
+
+	sphere <1.0, 1.0, 0.0>, 1
+	{
+		surface
+		{
+			color = <0, 0, 1>;
+			ambient = 0.2;
+			diffuse = 0.8;
+			specular = 0.8;
+			Phong = 1000;
+		}
+	}
+
+	sphere <0.0, 0.0, 2.0>, 1
+	{
+		surface
+		{
+			color = <0, 1, 0>;
+			ambient = 0.2;
+			diffuse = 0.8;
+			specular = 1;
+			Phong = 1000;
+		}
+	}
+
+	sphere <0, 0, -21>, 20
+	{
+		surface
+		{
+			color = <1, 1, 1>;
+			ambient = 0.2;
+			diffuse = 0.8;
+		}
+	}
+}

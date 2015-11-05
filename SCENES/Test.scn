@@ -1,0 +1,100 @@
+//---------------------------------------------------------
+//	Testing...1-2-3...Testing....Testing....
+//---------------------------------------------------------
+
+// TODO: Recognize an 'autoinclude' directory.
+// Any include files in that folder will automatically be included in
+// every scene file without the need for an include directive in the file.
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+define Pluto object
+{
+	sphere <0,0,0>,1
+	{
+		surface
+		{
+			surface_shader
+			{
+				ka = 0.2;
+				kd = 0.8;
+				color = image_map("nh-pluto-map-2.tga", u, 1-v);
+				ks = 0.0;
+				Phong = 30;
+			}
+		}
+	}
+}
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		// TODO: viewport types
+		// type = 1; // perspective
+		// type = 2; // anaglyph
+		from = <1.0, -20.0, 5.0>;
+		at = <0, 0, 1>;
+		angle = 30;
+	}
+
+	//visibility 50, Black;
+
+	background Black
+	{
+	}
+
+	light
+	{
+		location = <-10, -10, 30>;
+		color = 0.5;
+	}
+	light
+	{
+		location = <10, -10, 30>;
+		color = 0.5;
+	}
+
+	Pluto
+	{
+		rotate <0, 0, 180>;
+		rotate <-35, 0, 0>;
+		translate <-4, 0, 2>;
+	}
+
+	Pluto
+	{
+		rotate <0, 0, 90>;
+		rotate <-35, 0, 0>;
+		translate <-1.33, 0, 2>;
+	}
+
+	Pluto
+	{
+		rotate <0, 0, 0>;
+		rotate <-35, 0, 0>;
+		translate <1.33, 0, 2>;
+	}
+
+	Pluto
+	{
+		rotate <0, 0, -90>;
+		rotate <-35, 0, 0>;
+		translate <4, 0, 2>;
+	}
+
+	npolygon 7
+	{
+		scale 100;
+			surface
+			{
+				color = White;
+				ambient = 0.1;
+				diffuse = 0.9;
+			}
+	}
+}

@@ -1,0 +1,155 @@
+//---------------------------------------------------------
+//	Truchet Cube demo - a 3D version of the Truchet tile scheme
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+define TruchetCube object
+{
+	intersection
+	{
+		union
+		{
+			torus <0, 0, 0>, 1, 0.2
+			{
+				rotate <90, 0, 0>;
+				translate <1, 0, 1>;
+			} 
+			torus <0, 0, 0>, 1, 0.2
+			{
+				rotate <0, 90, 0>;
+				translate <0, -1, -1>;
+			} 
+			torus <0, 0, 0>, 1, 0.2
+			{
+				translate <-1, 1, 0>;
+			}
+		} 
+		box -1, 1;
+	}
+}
+
+define TruchetCube_Glass object
+{
+	TruchetCube
+	{
+		surface
+		{
+			color = White;
+			diffuse = 0.05;
+			ambient = 0.02;
+			transmission = 0.93;
+			ior = 1.52;
+		}
+	}
+}
+
+define TruchetCube_ShinyRed object
+{
+	TruchetCube
+	{
+		surface
+		{
+			color = Red;
+			diffuse = 0.8;
+			ambient = 0.1;
+			specular = 0.8; 
+			Phong = 100;
+		}
+	}
+}
+
+define TruchetCube_Chrome object
+{
+	TruchetCube
+	{
+		surface
+		{
+			color = White;
+			diffuse = 0.1;
+			ambient = 0.0;
+			reflection = 0.9;
+			specular = 2.0; 
+			Phong = 300;
+		}
+	}
+}
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		// TODO: viewport types
+		// type = 1; // perspective
+		// type = 2; // anaglyph
+		from = <10, -17, 13>;
+		at = <4, 4, 4>;
+		angle = 30;
+	}
+
+	background White, SkyBlue
+	{
+	}
+
+	light
+	{
+		location = <25, -100, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+	light
+	{
+		location = <-100, -50, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+
+	float NumX, PosX, NumY, PosY, NumZ, PosZ;
+	
+	for (NumZ = 0; NumZ < 5; NumZ = NumZ + 1)
+	{
+		PosZ = NumZ * 2;
+		for (NumY = 0; NumY < 5; NumY = NumY + 1)
+		{
+			PosY = NumY * 2;
+			for (NumX = 0; NumX < 5; NumX = NumX + 1)
+			{
+				PosX = NumX * 2;
+				TruchetCube_Chrome
+				{
+					if (frand() > 0.5)
+						rotate <90, 0, 0>;
+					if (frand() > 0.5)
+						rotate <0, 90, 0>;
+					if (frand() > 0.5)
+						rotate <0, 0, 90>;
+					if (frand() > 0.5)
+						scale <-1, 1, 1>;
+					if (frand() > 0.5)
+						scale <1, -1, 1>;
+					if (frand() > 0.5)
+						scale <1, 1, -1>;
+					if (frand() > 0.5)
+						rotate <180, 0, 0>;
+					if (frand() > 0.5)
+						rotate <0, 180, 0>;
+					if (frand() > 0.5)
+						rotate <0, 0, 180>;
+					translate <PosX, PosY, PosZ>;
+				}
+			}
+		}
+	}  
+
+	npolygon 6
+	{
+		Matte;
+		scale 50;
+		translate <0, 0, -1>;
+	}
+}

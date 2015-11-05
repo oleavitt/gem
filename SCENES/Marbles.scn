@@ -1,0 +1,93 @@
+//---------------------------------------------------------
+//	Testing...1-2-3...Testing....Testing....
+//---------------------------------------------------------
+
+// TODO: Recognize an 'autoinclude' directory.
+// Any include files in that folder will automatically be included in
+// every scene file without the need for an include directive in the file.
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		// TODO: viewport types
+		// type = 1; // perspective
+		// type = 2; // anaglyph
+		from = <0, -20, 10>;
+		at = <0, 0, 0>;
+		angle = 40;
+	}
+
+	background White, SkyBlue
+	{
+	}
+
+	light
+	{
+		location = <25, -100, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+	light
+	{
+		location = <-100, -50, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+	float i, x, y, z;
+	for (i = 0; i < 10; i = i + 1)
+	{
+		x = (i - 5) * 2 + 1;
+		y = 0;
+		z = 1;
+		sphere <0, 0, 0>, 1
+		{
+			surface
+			{
+				color = Black;
+				diffuse = 0.1;
+				ambient = 0.0;
+				transmission = vrand();
+				ior = 1.52;
+				Phong = 50;
+			}
+			rotate <-45, 0, 45>;
+			translate <x, y, z>;
+		}
+	}
+
+	npolygon 6
+	{
+		surface
+		{
+			surface_shader
+			{
+				float x2 = x + 0.01, y2 = z + 0.01;
+				ks = 0;
+				color = Black;
+				if (checker(<x2, y2, 0> * 128))
+					color = color + Red;
+				if (checker(<x2, y2, 0> * 64))
+					color = color + Orange;
+				if (checker(<x2, y2, 0> * 32))
+					color = color + Yellow;
+				if (checker(<x2, y2, 0> * 16))
+					color = color + Green;
+				if (checker(<x2, y2, 0> * 8))
+					color = color + LightBlue;
+				if (checker(<x2, y2, 0> * 4))
+					color = color + Blue;
+				if (checker(<x2, y2, 0> * 2))
+					color = color + Violet;
+				color = color / 4;
+			}
+		}
+		scale 50;
+	}
+}

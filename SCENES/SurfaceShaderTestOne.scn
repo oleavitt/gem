@@ -1,0 +1,82 @@
+//---------------------------------------------------------
+//	Demonstrates various surface shaders
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+load_color_map Rainbow
+{
+	color <1.000, 0.000, 0.000>, 0.000;
+	color <1.000, 0.502, 0.000>, 0.093;
+	color <1.000, 1.000, 0.000>, 0.230;
+	color <0.000, 1.000, 0.000>, 0.360;
+	color <0.000, 1.000, 1.000>, 0.508;
+	color <0.000, 0.000, 1.000>, 0.722;
+	color <0.000, 0.000, 0.502>, 0.849;
+	color <0.502, 0.000, 1.000>, 1.000;
+}
+
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		from = <0, -10, 20>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	background White, SkyBlue
+	{
+	}
+
+	light
+	{
+		location = <25, -100, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+	light
+	{
+		location = <-100, -50, 100>;
+		color = 0.5;
+	//	falloff = 0.0001;
+	}
+
+	float Column, Row;
+
+	// First row of spheres
+	Row = 4;
+
+	// First sphere in row
+	Column = -4;
+
+
+// Wood
+	sphere <0, 0, 0>, 1
+	{
+		surface
+		{
+			ambient = 0.2;
+			diffuse = 0.8;
+			specular = 0.5;
+			Phong = 10;
+			surface_shader
+			{
+				color = color_map(Rainbow, O.x *0.5 - 1);
+			}
+		}
+		rotate <15, 15, 15>;
+		translate <Column, Row, 1>;
+	}
+	npolygon 6
+	{
+		Matte;
+		scale 50;
+	}
+}

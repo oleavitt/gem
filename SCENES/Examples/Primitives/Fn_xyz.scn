@@ -1,0 +1,117 @@
+//---------------------------------------------------------
+//	The fn_xyz object
+//
+//	usage:
+//  fn_xyz <fn(xyz)>, <bound box min>, <bound box max>, <xsteps, ysteps, zsteps>
+//  {
+//	   <object modifiers>
+//  }
+//
+//  // A sphere with a radius of 1
+//  fn_xyz (x^2 + y^2 + z^2 - 1), <-1, -1 ,-1>, <1, 1, 1>, <8, 8, 8>
+//	{
+//	   <object modifiers>
+//  }
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+// The implicit function primitive
+
+// Main entry point to generate the scene
+main
+{
+	// Set up the viewport - the 'camera' or 'eye'
+	viewport
+	{
+		from = <0, -10, 5>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	// create two point light sources
+	// light from <x, y, z>, color <r, g, b>, falloff factor (0 = none)
+	light
+	{
+		location = <10, -10, 10>;
+		color = White;
+	}
+
+	// fn_xyz fn(x, y, z), lobound, hibound, xyz steps { object modifiers }
+	// fn(x, y, z) is the function that defines a surface in 3D space where
+	// fn(x, y, z) = 0.
+
+	// Cosine surface
+	float Frequency = 4;
+	float Amplitude = 1;
+	float Damping = 4;
+	float Dist;
+	fn_xyz
+		(Dist = sqrt(x*x+y*y),
+		 cos(PI*Dist*Frequency) * exp(-Dist*Damping) * Amplitude - z),
+		-1, 1, <50, 50, 10> 
+	{
+		Gloss { color = Red; }
+	}
+
+	// Egg crate?
+	fn_xyz z - cos(x*PI*3)*cos(y*PI*3)*0.25,
+		-1, 1, <50, 50, 10>
+	{
+		Gloss { color = Yellow; }
+		translate <-2.5, 0, 0>;
+	}
+
+	// A "jack" from the game of jacks.
+	fn_xyz
+		(1/(x^2/9+4*y^2+4*z^2)^4 +
+		1/(y^2/9+4*x^2+4*z^2)^4 +
+		1/(z^2/9+4*y^2+4*x^2)^4 +
+		1/((4*x/3-4)^2+16*y^2/9+16*z^2/9)^4 +
+		1/((4*x/3+4)^2+16*y^2/9+16*z^2/9)^4 +
+		1/((4*y/3-4)^2+16*x^2/9+16*z^2/9)^4 +
+		1/((4*y/3+4)^2+16*x^2/9+16*z^2/9)^4)^-0.25-1,
+		<-4, -4, -4>, <4, 4, 4>, <32, 32, 32>
+	{
+		Gloss { color = Cyan; }
+		scale 0.25;
+		rotate <0, 0, 40>;
+		translate <2.5, 0, 0>;
+	}
+
+	// Splattered grape juice?
+	fn_xyz sqrt(x*x + y*y + z*z) - 0.25 + turb(O*5, 2),
+		-1, 1, <10, 10, 10> 
+	{
+		surface { color = Magenta; }
+		translate <0, -2.1, -1>;
+	}
+
+	// Snail shell or macaroni shell?
+	fn_xyz sqrt(x*x + y*y + z*z) - (0.75 + atan2(y, -z) * 0.05),
+		-1, 1, <10, 50, 10> 
+	{
+		Gloss { color = Green; }
+		translate <-2.1, -2.1, -1>;
+	}
+
+	// Ribbed sphere
+	fn_xyz sqrt(x*x + y*y + z*z) - 0.75 + sin(atan2(x, y) * 5) * 0.2,
+		<-1, -1, -1>, <1, 1, 1>, <50, 50, 50> 
+	{
+		Gloss { color = Blue; }
+		translate <2.1, -1.5, -1>;
+	}
+
+	// Fancy lathe work
+	fn_xyz sqrt(y*y + z*z) - 0.75 + sin(x*x) * 0.25,
+		<-5, -1, -1>, <5, 1, 1>, <10, 10, 10> 
+	{
+		Gloss { color = White; }
+		translate <0, 2, 1.5>;
+	}
+}

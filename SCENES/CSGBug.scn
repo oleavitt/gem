@@ -1,0 +1,50 @@
+//---------------------------------------------------------
+//	Balls and checkerboard - A raytraced classic!
+//---------------------------------------------------------
+
+include "basicsurfs.inc"
+
+light
+{
+	location = <-50, -50, 50>;
+	color = 1;
+	falloff = 0.0001;
+}
+light
+{
+	location = <50, -50, 50>;
+	color = 1;
+	falloff = 0.0001;
+}
+
+main
+{
+include "colors.inc"
+	viewport
+	{
+		from = <1, -5, 2.5>;
+		at = <0, 0, 1>;
+		angle = 30;
+	}
+
+	intersection
+	{
+		difference
+		{
+			sphere <0, 0, 0>, 1 { Matte { color = Red; } }
+			float a = 0;
+			repeat (6)
+				sphere <0, 1, 0>, 0.5 { Matte { color = vrand(); } rotate <0, 0, a=a+60>; }
+		}
+		box <-1, -1, -1>, <1, 1, 0> { Matte { color = Blue; } }
+		translate <0, 0, 1>;
+	}
+
+	box
+	{
+		bmin = <-10, -10, -0.25>;
+		bmax = <10, 10, 0>;
+
+		Matte;
+	}
+}

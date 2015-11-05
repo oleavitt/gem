@@ -1,0 +1,137 @@
+//---------------------------------------------------------
+//	The sphere object
+//
+//  usage:
+//  sphere <center point>, <radius>
+//  {
+//	   <object modifiers>
+//  }
+//
+//  sphere <0, 0, 0>, 1
+//	{
+//	   <object modifiers>
+//  }
+//
+//  sphere
+//	{
+//     center = <0, 0, 0>;
+//     radius = 1;
+// 
+//	   <object modifiers>
+//  }
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	// Set up the viewport - the 'camera' or 'eye'
+	viewport
+	{
+		from = <-0.7, -15, 5>;
+		at = <0, 0, 1>;
+		angle = 30;
+	}
+
+	// Set up a couple of light sources
+	light
+	{
+		location = <-50, -50, 50>;
+		color = 1;
+		falloff = 0.0001;
+	}
+	light
+	{
+		location = <50, -50, 50>;
+		color = 1;
+		falloff = 0.0001;
+	}
+
+	// And now, our featured item: Spheres!
+	// Everything in the scene is made of the sphere primitive
+	// and nothing else.
+
+	// Flattened sphere as the floor
+	sphere
+	{
+		center = <0, 0, 0>;
+		radius = 1;
+
+		Matte;
+
+		translate <0, 0, -1>;
+		scale <10, 10, 0.1>;
+	}
+
+	// Red ball in the middle
+	sphere
+	{
+		center = <0, 0, 0>;
+		radius = 1;
+	
+		Gloss
+		{
+			color = Red;
+		}
+
+		translate <0, 0, 2>;
+	}
+
+	// Scatter some little glass balls all around it.
+	repeat (25)
+	{
+		sphere
+		{
+			center = <0, 0, 1>;
+			radius = 1;
+
+			Glass;
+
+			scale 0.05 + frand() * 0.20;
+			translate <0, frand() * 5, 0>;
+			rotate <0, 0, frand() * 360>;
+		}
+	}
+
+	// A ring of random colored stretched ellipsoids with
+	// random colored mirrored balls on top
+	float Diameter = 5;
+	float Count = 20;
+
+	float i;
+	float step = 360 / Count;
+	for (i = 0; i < 360; i = i + step)
+	{
+		sphere
+		{
+			center = <0, 0, 0>;
+			radius = 1;
+			Matte
+			{
+				color = vrand();
+			}
+
+			scale <0.1, 0.1, 1>;
+			translate <0, Diameter, 1>;
+			rotate <0, 0, i>;
+		}
+
+		sphere
+		{
+			center = <0, Diameter, 2>;
+			radius = 0.25;
+			Mirror
+			{
+				color = vrand();
+			}
+
+			rotate <0, 0, i>;
+		}
+	}
+}

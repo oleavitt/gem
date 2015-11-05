@@ -1,0 +1,88 @@
+/*---------------------------------------------------------
+	Demonstrates a background using a shader.
+
+background
+{
+	shader
+	{
+		if (checker(D * 10))
+			color = Navy;
+	}
+}
+
+
+---------------------------------------------------------*/
+
+// Include a collection of pre-defined colors.
+//
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+//
+include "basicsurfs.inc"
+
+// Define a background shader
+//
+//background_shader RainbowTurbulant(float Depth, float Scale = 10)
+//{
+//	color = color + vturb(D * Scale, 3) * Depth;
+//}
+
+// Main entry point to generate the scene
+//
+main
+{
+	// Set up the 'eye' or 'camera' - where we are looking from, where we
+	// are looking at, and the viewing angle.
+	//
+	viewport
+	{
+		from = <0, -15, 1>;
+		at = <5, 0, 5>;
+		angle = 45; // A nice wide angle view.
+	}
+
+	// Create a two-tone white to sky blue background.
+	// Add a shader that will add a little random 'turbulance' to it.
+	// The variable 'color' is already initialized with the standard solid
+	// or two-tone color. If the shader does not modify 'color', the standard
+	// background will appear.
+	//
+	background White, SkyBlue
+	{
+		background_shader
+		{
+			color = color + vturb(D * 10, 1) * 0.1;
+		}
+
+		// This is how to use a pre-defined shader.
+		// CheckerBackground(Navy, 10); 
+	}
+
+	// Turn on a light.
+	//
+	light
+	{
+		location = <25, -25, 100>;
+		color = White;
+	}
+
+	// Add a mirrored sphere to give us a fish-eye view of the
+	// background we are demonstrating.
+	//
+	sphere <0, 0, 1>, 1
+	{
+		// Use the pre-defined Mirror surface as-is.
+		//
+		Mirror;
+	}
+
+	// Put a floor under everything.
+	//
+	disc <0, 0, 0>, <0, 0, 1>, 50
+	{
+		// Use the pre-defined Matte surface as-is.
+		//
+		Matte;
+	}
+}

@@ -1,0 +1,254 @@
+//---------------------------------------------------------
+//	The polygon and npolygon objects
+//
+//  usage:
+//  polygon
+//  {
+//	   <object modifiers>
+//     vertex <x, y, z>; // 3 or more times
+//  }
+//
+//  // A 2x2 square centered at <0, 0, 0>
+//  polygon
+//	{
+//     vertex <1, 1, 0>;
+//     vertex <-1, 1, 0>;
+//     vertex <-1, -1, 0>;
+//     vertex <1, -1, 0>;
+// 
+//	   <object modifiers>
+//  }
+//
+//  npolygon <number of sides>
+//  {
+//	   <object modifiers>
+//     // Note:
+//     // When the npolygon is created, it is at point <0, 0, 0> on the
+//     // XY plane and has a radius of 1.
+//     // Use transforms to set the desired scale, rotation, and location of
+//     // the object.
+//  }
+//
+//  // A hexagon that is 5 units across, rotated 90 degrees so that it
+//  // is facing along the Y axis, and centered at point <2, 2, 3>
+//  npolygon 6
+//  {
+//	   <object modifiers>
+//     scale 2.5; // radius = 2.5 (diameter = 5)
+//     rotate <90, 0, 0>; // rotate 90 degrees around the X axis
+//     translate <2, 2, 3>; // Move the polygon from its default center at <0, 0, 0>
+//  }
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	// Set up the viewport - the 'camera' or 'eye'
+	viewport
+	{
+		from = <0, -10, 10>;
+		at = <0, 0, 3>;
+		angle = 30;
+	}
+
+	// Set up a couple of light sources
+	light
+	{
+		location = <10, -10, 10>;
+		color = 1;
+		falloff = 0.003;
+	}
+	light
+	{
+		location = <-3, -10, 15>;
+		color = 1;
+		falloff = 0.0025;
+	}
+
+	// And now, our featured item: Polygons!
+	// Everything in the scene is made of polygons and nothing else.
+
+	// polygon { vertex <x, y, z> vertex <x, y, z> vertex <x, y, z> ... optional modifiers }
+	// NOTE: polygons must have at least three vertices - the first three vertices
+	// define the plane for the polygon, the remaining vertices are projected to
+	// the polygon's plane.
+	polygon
+	{
+		// define the vertices - a simple equilateral triangle
+		vertex <0, 1, 1>;
+		vertex <-0.866, -0.5, 1>;
+		vertex <0.866, -0.5, 1>;
+		// give it a cyan colored surface
+		Matte { color = Cyan; }
+	}
+
+	// red octagon
+	// use a for loop to compute the eight vertices of the octagon
+	polygon
+	{
+		// procedurally generate the vertices
+		float theta;
+		float step = PI / 4;
+		for(theta = PI * 2 - step / 2; theta > 0; theta = theta - step)
+			vertex <sin(theta) * 3, cos(theta) * 3, 0.5>;
+		// red colored surface
+		Matte { color = Red; }
+	}
+	
+	// Now for the easy way to generate n-sided polygons!
+	// Put an orange hexagon on top of the octagon.
+	npolygon 6
+	{
+		scale 2.5;
+		translate <0, 0, 0.51>;
+		
+		Matte { color = Orange; }
+	}
+
+	// Put a pentagon on top of the hexagon.
+	npolygon 5
+	{
+		scale 2;
+		translate <0, 0, 0.52>;
+		
+		Matte { color = Yellow; }
+	}
+
+	// Put diamond on top of the pentagon.
+	npolygon 4
+	{
+		scale 1.5;
+		translate <0, 0, 0.53>;
+		
+		Matte { color = Green; }
+	}
+
+	// put a large polygon under everybody else
+	polygon
+	{
+		// define the vertices - a simple rectangle
+		vertex <5, 7, 0>;
+		vertex <-5, 7, 0>;
+		vertex <-5, -5, 0>;
+		vertex <5, -5, 0>;
+		
+		// give it a matte-white surface
+		Matte { color = White; }
+	}
+
+	// create a wall and door
+	// the wall
+	polygon
+	{
+		vertex <5, 5, 0>;
+		vertex <5, 5, 5>;
+		vertex <-5, 5, 5>;
+		vertex <-5, 5, 0>;
+		vertex <-1, 5, 0>;
+		vertex <-1, 5, 4>;
+		vertex <1, 5, 4>;
+		vertex <1, 5, 0>;
+
+		// give it a matte-white surface
+		Matte { color = White; }
+	}
+
+	// the door
+	polygon
+	{
+		// We are going to use the rotate transform to open the door to
+		// a desired angle - since the point around which rotation will occur
+		// is at <0, 0, 0> we must originate the door's hinge there, apply the rotation,
+		// and then place it where we want it with the translate transform.
+		vertex <0, 0, 0>;
+		vertex <0, 0, 4>;
+		vertex <2, 0, 4>;
+		vertex <2, 0, 0>;
+
+		// give it a matte-white surface
+		Matte { color = White; }
+
+		// open the door by 120 degrees
+		rotate <0, 0, 120>;
+		// join it to the opening in the wall
+		translate <-1, 5, 0>;
+	}
+
+	// somebody's walking in
+	polygon
+	{
+		// define a crude body outline
+		vertex <0, 0, 1.6>;
+		vertex <-0.6, 0, 0>;
+		vertex <-0.3, 0, 2.1>;
+		vertex <-0.4, 0, 2.8>;
+		vertex <-0.8, 0, 1.6>;
+		vertex <-0.5, 0, 3>;
+		vertex <-0.15, 0, 3.2>;
+		vertex <-0.2, 0, 3.5>;
+		vertex <-0.13, 0, 3.7>;
+		vertex <0.13, 0, 3.7>;
+		vertex <0.2, 0, 3.5>;
+		vertex <0.15, 0, 3.2>;
+		vertex <0.5, 0, 3>;
+		vertex <0.8, 0, 1.6>;
+		vertex <0.4, 0, 2.8>;
+		vertex <0.3, 0, 2.1>;
+		vertex <0.6, 0, 0>;
+		
+		// give him/her a pink surface
+		Matte { color = Pink; }
+		
+		// stand him/her in front of the doorway
+		translate <0, 3, 0>;
+	}
+
+	// Order of polygon's vertices is important - as the two polygons on the wall,
+	// to the left and right of the door, demonstrate. They both have the same
+	// vertex locations, but a different sequence. They have been placed on the wall
+	// using the translate transform.
+	polygon
+	{
+		vertex <-1, 0, 1>;
+		vertex <1, 0, 1>;
+		vertex <1, 0, -1>;
+		vertex <-1, 0, -1>;
+		
+		// paint it lemon-yellow
+		surface
+		{
+			color = <1, 1, 0.5>;
+			ambient = 0.4;
+			diffuse = 0.6;
+		}
+		
+		// place it on the wall, left of the door
+		translate <-3, 4.9, 2.5>;
+	}
+	
+	polygon
+	{
+		vertex <-1, 0, 1>;
+		vertex <1, 0, 1>;
+		vertex <-1, 0, -1>;
+		vertex <1, 0, -1>;
+		
+		// paint it lemon-yellow
+		surface
+		{
+			color = <1, 1, 0.5>;
+			ambient = 0.4;
+			diffuse = 0.6;
+		}
+
+		// place it on the wall, right of the door
+		translate <3, 4.9, 2.5>;
+	}
+}

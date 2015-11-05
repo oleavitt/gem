@@ -1,0 +1,136 @@
+//-------------------------------------
+//	New scene description language spec
+//-------------------------------------
+
+// ANSI (C++ style) comments are supported.
+
+/*
+ * C style block comments are also supported.
+ */
+
+// 'global' context
+// Everything here is parsed and processed right away - no VM.
+
+// These objects are created and added to the scene as soon as they are parsed.
+sphere
+{
+	center = <0, 0, 2>;
+	radius = 1;
+
+	// A bright red color matte finish.
+	surface
+	{
+		ambient = 0.2;
+		diffuse = 0.8;
+		color = <1, 0, 0>;
+	}
+}
+
+sphere
+{
+	center = <0, 2.5, 2>;
+	radius = 1;
+
+	// A shiney chrome finish.
+	surface
+	{
+		ambient = 0.1;
+		diffuse = 0.1;
+		reflection = 0.8;
+		color = <1, 1, 1>;
+		specular = 1.0;
+		Phong = 100;
+	}
+}
+
+sphere
+{
+	center = <0, -2.5, 2>;
+	radius = 1;
+
+	// A solid glass finish.
+	surface
+	{
+		ambient = 0.0;
+		diffuse = 0.1;
+		specular = 1.0;
+		Phong = 200;
+		reflection = 0.0;
+		transmission = 0.9;
+		ior = 1.52;
+		color = <1, 1, 1>;
+	}
+}
+
+light
+{
+	location = <-10, 0, 10>;
+	color = <1, 1, 1>;
+	falloff = 0.005;
+}
+light
+{
+	location = <10, -10, 5>;
+	color = <1, 1, 1>;
+	falloff = 0.005;
+}
+
+function LineOfSpheres(vector StartPoint, vector EndPoint, float SphereDiameter)
+{
+	vector Delta = EndPoint - StartPoint;
+	float Length = vmag(Delta);
+	float a, Radius = SphereDiameter / 2;
+
+	Delta = Delta / Length;
+	for (a = 0; a < Length; a = a + SphereDiameter)
+	{
+		sphere 
+		{
+			radius = Radius;
+			center = StartPoint + Delta * a;
+			surface
+			{
+				// Give the surface a random pastel color with a shiney highlight.
+				color = vrand() * 0.3 + 0.7;
+				ambient = 0.3;
+				diffuse = 0.7;
+				Phong = 200;
+				specular = 1.0;
+			}
+		}
+	}
+}
+
+
+function BoxOfSpheres(vector Center, float Size, float SphereDiameter)
+{
+	float Size2 = Size / 2;
+	vector v1 = Center + <-Size2, -Size2, -Size2>;
+	vector v2 = Center + <Size2, -Size2, -Size2>;
+	vector v3 = Center + <Size2, Size2, -Size2>;
+	vector v4 = Center + <-Size2, Size2, -Size2>;
+	vector v5 = Center + <-Size2, -Size2, Size2>;
+	vector v6 = Center + <Size2, -Size2, Size2>;
+	vector v7 = Center + <Size2, Size2, Size2>;
+	vector v8 = Center + <-Size2, Size2, Size2>;
+
+	LineOfSpheres(v1, v2, SphereDiameter);
+	LineOfSpheres(v2, v3, SphereDiameter);
+	LineOfSpheres(v3, v4, SphereDiameter);
+	LineOfSpheres(v4, v1, SphereDiameter);
+	LineOfSpheres(v1, v5, SphereDiameter);
+	LineOfSpheres(v2, v6, SphereDiameter);
+	LineOfSpheres(v3, v7, SphereDiameter);
+	LineOfSpheres(v4, v8, SphereDiameter);
+	LineOfSpheres(v5, v6, SphereDiameter);
+	LineOfSpheres(v6, v7, SphereDiameter);
+	LineOfSpheres(v7, v8, SphereDiameter);
+	LineOfSpheres(v8, v5, SphereDiameter);
+}
+
+main
+{
+	BoxOfSpheres(<0, 0, 0>, 8, 0.5);
+	BoxOfSpheres(<0, 0, 2>, 6, 0.25);
+	BoxOfSpheres(<0, 0, 4>, 4, 0.15);
+}

@@ -1,0 +1,63 @@
+//---------------------------------------------------------
+//	Demonstrates a two-tone background statement.
+//
+//  background <color1>, <color2>
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+//
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+//
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+//
+main
+{
+	// Set up the 'eye' or 'camera' - where we are looking from, where we
+	// are looking at, and the viewing angle.
+	//
+	viewport
+	{
+		from = <0, -15, 1>;
+		at = <5, 0, 5>;
+		angle = 45; // A nice wide angle view.
+	}
+
+	// Create a two-tone white to sky blue background.
+	// This gives a realistic looking 'clear day' type of sky with
+	// a whitish haze at the horizon, and clearer blue towards the
+	// zenith.
+	//
+	background White, SkyBlue;
+
+	// Turn on a light.
+	//
+	light
+	{
+		location = <25, -25, 100>;
+		color = White;
+	}
+
+	// Add a mirrored sphere to give us a fish-eye view of the
+	// background we are demonstrating.
+	//
+	sphere <0, 0, 1>, 1
+	{
+		// Use the pre-defined Mirror surface as-is.
+		//
+		Mirror;
+	}
+
+	// Put a floor under everything.
+	//
+	disc <0, 0, 0>, <0, 0, 1>, 50
+	{
+		// Use the pre-defined Matte surface as-is.
+		//
+		Matte;
+	}
+}

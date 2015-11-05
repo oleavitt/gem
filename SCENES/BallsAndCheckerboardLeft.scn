@@ -1,0 +1,101 @@
+//---------------------------------------------------------
+//	Balls and checkerboard - A raytraced classic!
+//---------------------------------------------------------
+
+// Include some pre-defined colors.
+include "colors.inc"
+
+main
+{
+	// Define the viewport - where we are looking from in the scene.
+	viewport
+	{
+		from = <6, -7, 5>;
+		at = <0, 0, 1>;
+		angle = 30;
+	}
+
+	// Turn on a light source.
+	light
+	{
+		location = <-50, -50, 50>;
+		color = 1;
+		falloff = 0;
+	}
+
+	// Red ball
+	sphere
+	{
+		center = <0, 0, 0>;
+		radius = 1;
+	
+		surface
+		{
+			color = Red;
+			ambient = 0.3;
+			diffuse = 0.7;
+			specular = 0.5;
+			Phong = 50;
+		}
+
+		translate <-2.1, 0, 1>;
+	}
+
+	// Chrome ball
+	sphere
+	{
+		center = <0, 0, 0>;
+		radius = 1;
+	
+		surface
+		{
+			color = White;
+			ambient = 0.0;
+			diffuse = 0.1;
+			reflection = 0.9;
+			specular = 1.0;
+			Phong = 1000;
+		}
+
+		translate <0, 0, 1>;
+	}
+
+	// Polished Blue ball
+	sphere
+	{
+		center = <0, 0, 0>;
+		radius = 1;
+	
+		surface
+		{
+			color = Blue;
+			ambient = 0.2;
+			diffuse = 0.6;
+			reflection = 0.2;
+			specular = 1.0;
+			Phong = 300;
+		}
+
+		translate <2.1, 0, 1>;
+	}
+
+	// The checkerboard floor
+	box
+	{
+		bmin = <-10, -10, -0.25>;
+		bmax = <10, 10, 0>;
+
+		surface
+		{
+			color = White;
+			ambient = 0.3;
+			diffuse = 0.7;
+			specular = 1;
+			Phong = 10;
+			surface_shader
+			{
+				color = checker(O) ? White : Black;
+			}
+		}
+	}
+}

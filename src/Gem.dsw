@@ -1,0 +1,134 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "Gem"=.\Gem.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name Raytrace
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Math3D
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Image
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name Rend2D
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name NFF
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name NURBS
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name scn20
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "Image"=.\Image\Image.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "Math3D"=.\Math3D\Math3D.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "NFF"=.\NFF\NFF.DSP - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "NURBS"=.\NURBS\NURBS.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "Raytrace"=.\Raytrace\Raytrace.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "Rend2D"=.\Rend2D\Rend2D.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "scn20"=.\scn20\scn20.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

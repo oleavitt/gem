@@ -1,0 +1,62 @@
+//---------------------------------------------------------
+//	A sphere cage constructed with torii
+//---------------------------------------------------------
+
+include "colors.inc"
+include "basicsurfs.inc"
+
+light
+{
+	location = <25, -50, 50>;
+	color = 0.5;
+//	falloff = 0.0001;
+}
+light
+{
+	location = <-25, -50, 50>;
+	color = 0.5;
+//	falloff = 0.0001;
+}
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		from = <0, -15, 15>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	float angle = 0;
+	float diameter = 5;
+	float thickness = 0.1;
+	float dia, offset;
+
+	for (angle = 0; angle < 360; angle = angle + 10) 
+	{
+		torus <0, 0, 0>, diameter, thickness
+		{
+			Matte { color = White; }
+			rotate <90, 0, 0>;
+			rotate <0, 0, angle>;
+		}
+
+		if (angle < 90)
+		{
+			dia = diameter * cos(angle * PI / 180);
+			offset = diameter * sin(angle * PI / 180);
+			torus <0, 0, offset>, dia, thickness
+			{
+				Matte { color = White; }
+			}
+
+			if (angle > 0)
+				torus <0, 0, -offset>, dia, thickness
+				{
+					Matte { color = White; }
+				}
+		}
+	}
+	
+}

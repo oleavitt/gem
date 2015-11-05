@@ -1,0 +1,84 @@
+//---------------------------------------------------------
+//	The disc object
+//
+//  usage:
+//  disc <center point>, <normal>, <radius>, <inner radius>
+//  {
+//	   <object modifiers>
+//  }
+//
+//  disc <0, 0, 0>, <0, 0, 1>, 1, 0.5
+//	{
+//	   <object modifiers>
+//  }
+//
+//  disc
+//	{
+//     center = <0, 0, 0>;
+//     normal = <0, 0, 1>;
+//     radius = 1;
+//     inner_radius = 0.5;
+// 
+//	   <object modifiers>
+//  }
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+main
+{
+	// Set up the viewport - the 'camera' or 'eye'
+	viewport
+	{
+		from = <0, -15, 10>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	// Set up a couple of light sources
+	light
+	{
+		location = <0, -10, 50>;
+		color = 0.5;
+	}
+	light
+	{
+		location = <25, -25, 50>;
+		color = 0.5;
+	}
+
+	// And now, our featured item: The Disc!
+	// Everything in the scene is made of the disc primitive
+	// and nothing else.
+
+	// A big disc for the 'floor'
+	disc <0, 0, 0>, <0, 0, 1>, 10
+	{
+		Matte { color = White; }
+	}
+
+	// A disc with a hole in the middle
+	disc <0, 0, 1>, <0, 0, 1>, 5, 4
+	{
+		Matte { color = Yellow; }
+	}
+
+	// A sprinkling of colored confetti!
+	repeat (1000)
+	{
+		disc <0, 0, 0>, <0, 0, 1>, 0.1
+		{
+			center = <frand() * 9, 0, 0.01>;
+
+			Matte { color = vrand(); }
+			
+			rotate <0, 0, frand() * 360>;
+		}
+	}
+}

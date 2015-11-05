@@ -1,0 +1,87 @@
+//-------------------------------------
+//	New scene description language spec
+//-------------------------------------
+
+
+light
+{
+	location = <-100, -100, 50>;
+	color = <1, 1, 1>;
+	falloff = 0.0001;
+}
+light
+{
+	location = <100, -100, 50>;
+	color = <1, 1, 1>;
+	falloff = 0.0001;
+}
+light
+{
+	location = <0, -100, 50>;
+	color = <1, 1, 1>;
+	falloff = 0.0001;
+}
+
+define RedSurface surface
+{
+	color = <1, 0, 0>;
+	ambient = 0.3;
+	diffuse = 0.7;
+	specular = 1;
+	Phong = 50;
+}
+
+define WhiteSurface surface
+{
+	color = <1, 1, 1>;
+	ambient = 0.3;
+	diffuse = 0.7;
+	specular = 1;
+	Phong = 50;
+}
+
+define ChromeSurface surface
+{
+	color = <1, 1, 1>;
+	ambient = 0.05;
+	diffuse = 0.15;
+	reflection = 0.8;
+	specular = 1;
+	Phong = 250;
+}
+
+
+main
+{
+	viewport {
+		from = <0, -50, 0>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	float x, y, count = 0;
+
+	repeat (1000)
+	{
+		x = frand() * 30 - 15;
+		y = frand() * 30 - 15;
+		sphere
+		{
+			center = 0;
+			radius = 1;
+
+			surface
+			{
+				color = vrand();
+				ambient = 0.3;
+				diffuse = 0.7;
+				specular = 1;
+				Phong = 50;
+			}
+
+			scale vrand();
+			rotate vrand() * 360;
+			translate <x, 0, y>;
+		}
+	}
+}

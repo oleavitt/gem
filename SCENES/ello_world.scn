@@ -1,0 +1,91 @@
+//---------------------------------------------------------
+//	A scene for Ello
+//---------------------------------------------------------
+
+include "colors.inc"
+include "basicsurfs.inc"
+
+// The ello smily circle
+define ello object
+{
+	float ang1 = 15;
+	difference
+	{
+		closed_cylinder <0, 0, -0.025>, <0, 0, 0.025>, 0.5;
+		difference
+		{
+			cylinder <0, 0, -0.03>, <0, 0, 0.03>, 0.34;
+			cylinder <0, 0, -0.031>, <0, 0, 0.031>, 0.30;
+			box <-0.5, 0.0, -0.032>, <0.5, 0.5, 0.032> { rotate <0, 0, ang1>; }
+			box <-0.5, 0.0, -0.032>, <0.5, 0.5, 0.032> { rotate <0, 0, -ang1>; }
+		}
+		cylinder <0, 0, -0.3>, <0, 0, 0.3>, 0.02 { translate <0.32, 0, 0>; rotate <0, 0, ang1>; }
+		cylinder <0, 0, -0.3>, <0, 0, 0.3>, 0.02 { translate <-0.32, 0, 0>; rotate <0, 0, -ang1>; }
+	}
+}
+
+// Main entry point to generate the scene
+main
+{
+	viewport
+	{
+		// TODO: viewport types
+		// type = 1; // perspective
+		// type = 2; // anaglyph
+		from = <1.0, -12.0, 3.0>;
+		at = <0, 0, 1>;
+		angle = 30;
+	}
+
+	//visibility 50, Black;
+
+	background Firebrick, MidnightBlue;
+	
+	light
+	{
+		location = <-10, -10, 30>;
+		color = 0.5;
+	}
+	light
+	{
+		location = <10, -10, 30>;
+		color = 0.5;
+	}
+
+	ello
+	{
+	}
+
+	ello
+	{
+		scale 3;
+		rotate <-90, 0, 0>;
+		translate <3, 10, 3>;
+		surface
+		{
+			color = White; 
+			ambient = 0.6;
+			diffuse = 0.2;
+		}
+	}
+
+	ello
+	{
+		translate <0, 0, -0.025>;
+		scale 20;
+		Mirror
+		{
+			surface_shader
+			{
+				float d = vmag(O + <0.5, 0, 0>) * 1000;
+				ON = bump(<sin(d), cos(d), 0> * 0.001);
+				d = vmag(O - <0.25, 0, 0>) * 1000;
+				ON = bump(<sin(d), cos(d), 0> * 0.001);
+				d = vmag(O - <0, 0.3, 0>) * 1000;
+				ON = bump(<sin(d), cos(d), 0> * 0.001);
+				d = vmag(O - <0.2, -0.1, 0>) * 1000;
+				ON = bump(<sin(d), cos(d), 0> * 0.001);
+			}
+		}
+	}
+}
