@@ -1,0 +1,85 @@
+//
+// Generates recursed texture maps using the previous output file.
+//
+
+
+float amb = 0.1, diff = 0.9
+
+//
+// You are here...
+//
+camera
+	{
+	from <0, 12, -12>
+	at <0,0,-1>
+	up <0, 1, 0>
+	angle 35
+	}
+
+//
+// Shed a little light on the subject...
+//
+light
+	{
+	average
+//      light { from <0, 20, 0> }
+	light { from <20, 20,-20> }
+//      light { from <-20, 20,-20> }
+	color 1
+	}
+
+//
+// Terra firma...
+//
+object
+	{
+	disc 0, <0,1,0>, 25
+	texture
+		{
+		color <1.0, 0.65, 0.5>
+		surface amb, diff
+		}
+	}
+
+texture the_texture
+	{
+	color fn image("out.tga", x, -z)
+	surface amb, 1
+	}
+
+object
+	{
+	box <0,0,0>, <1,1,1>
+	the_texture
+	translate <-0.5,0,-0.5>
+	scale <6,0.15,6>
+	rotate <0, -10, 0>
+	translate <-2,0,2>
+	}
+object
+	{
+	box <0,0,0>, <1,1,1>
+	the_texture
+	translate <-0.5,0,-0.5>
+	scale <6,0.20,6>
+	rotate <0, -30, 0>
+	translate <2,0,2>
+	}
+object
+	{
+	box <0,0,0>, <1,1,1>
+	the_texture
+	translate <-0.5,0,-0.5>
+	scale <6,0.25,6>
+	translate <-2,0,-2>
+	}
+object
+	{
+	box <0,0,0>, <1,1,1>
+	the_texture
+	translate <-0.5,0,-0.5>
+	scale <6,0.30,6>
+	rotate <0, 90, 0>
+	translate <2,0,-2>
+	}
+ 

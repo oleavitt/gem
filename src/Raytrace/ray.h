@@ -86,7 +86,7 @@ extern void CSG_GetTextureInfo(Object *obj, Surface **surf, Xform **T);
  */
 extern void InitializeInter(void);
 extern void CloseInter(void);
-extern HitData *NewHit(void);
+extern HitData *NewHitData(void);
 extern HitData *DeleteHits(HitData *hits);
 extern HitData *GetNextHit(HitData *hit);
 extern int FindClosestIntersection(Object *first_obj, HitData *hits);

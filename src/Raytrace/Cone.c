@@ -41,7 +41,7 @@ static int IntersectCone(Object *obj, HitData *hits)
   ConeData *cone;
   Vec3 P, D;
   double ox, oy, oz, dx, dy, dz;
-  double a, b, c, d, dy2, ct1, ct2, pt1, pt2, bpt, ept, ray_scale, t[4];
+  double a, b, c, d, dy2, ct1, ct2, pt1, pt2, bpt, ept, ray_scale = 1.0, t[4];
   int valid_hits, i, entering;
 
   cone = obj->data.cone;
@@ -177,7 +177,7 @@ static int IntersectCone(Object *obj, HitData *hits)
   {
     if(valid_hits > 1)
     {
-      register j;
+      register int j;
 
       for(i = valid_hits-1; i >= 1; i--)
         for(j = 1; j <= i; j++)
@@ -339,24 +339,24 @@ void CalcExtentsCone(Object *obj, Vec3 *omin, Vec3 *omax)
 
   a = cone->base_pt.x - sin(acos(cone->ry.x)) * brad;
   b = cone->end_pt.x - sin(acos(cone->ry.x)) * erad;
-  omin->x = min(a, b);
+  omin->x = fmin(a, b);
   a = cone->base_pt.x + sin(acos(cone->ry.x)) * brad;
   b = cone->end_pt.x + sin(acos(cone->ry.x)) * erad;
-  omax->x = max(a, b);
+  omax->x = fmax(a, b);
 
   a = cone->base_pt.y - sin(acos(cone->ry.y)) * brad;
   b = cone->end_pt.y - sin(acos(cone->ry.y)) * erad;
-  omin->y = min(a, b);
+  omin->y = fmin(a, b);
   a = cone->base_pt.y + sin(acos(cone->ry.y)) * brad;
   b = cone->end_pt.y + sin(acos(cone->ry.y)) * erad;
-  omax->y = max(a, b);
+  omax->y = fmax(a, b);
 
   a = cone->base_pt.z - sin(acos(cone->ry.z)) * brad;
   b = cone->end_pt.z - sin(acos(cone->ry.z)) * erad;
-  omin->z = min(a, b);
+  omin->z = fmin(a, b);
   a = cone->base_pt.z + sin(acos(cone->ry.z)) * brad;
   b = cone->end_pt.z + sin(acos(cone->ry.z)) * erad;
-  omax->z = max(a, b);
+  omax->z = fmax(a, b);
 
 	omin->x -= EPSILON;
 	omin->y -= EPSILON;

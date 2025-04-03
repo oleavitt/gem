@@ -396,7 +396,7 @@ extern int parse_paramlist(const char *format, const char *forwhom,
  */
 extern void parse(RaySetupData * rsd);
 extern void parse_main(void);
-extern VMStmt * parse_vm_block();
+extern VMStmt * parse_vm_block(void);
 extern int parse_vm_vm_token(int token, VMStmt **stmtlist, int no_declare);
 extern int parse_vm_object_token(int token, VMStmt **stmtlist);
 extern int parse_vm_global_token(int token, VMStmt **stmtlist);
@@ -433,7 +433,6 @@ extern double parse_fexpr(void);
 extern void parse_vexpr(Vec3 * vresult);
 extern VMExpr *parse_exprtree(void);
 extern VMExpr *parse_vm_lvalue_expr(VMLValue *lv);
-extern void delete_exprtree(VMExpr *expr);
 
 
 

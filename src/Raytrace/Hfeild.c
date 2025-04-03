@@ -304,14 +304,14 @@ void IntersectCell(int x, int y, double zmin, double zmax)
 	}
 
 	/* Does ray intersect bounding box containing triangles? */
-	z = MAX(fz1, fz2);
+	z = fmax(fz1, fz2);
 	if (fz3 > z) 
 		z = fz3;
 	if (fz4 > z)
 		z = fz4;
 	if (z < zmin)
 		return;
-	z = MIN(fz1, fz2);
+	z = fmin(fz1, fz2);
 	if (fz3 < z)
 		z = fz3;
 	if (fz4 < z)
@@ -506,10 +506,10 @@ int IsInsideHField(Object *obj, Vec3 *P)
 	fz4 = (double)z4 / (double)USHRT_MAX;
 
 	/* Is point completely above or below triangles? */
-	z = MAX(fz1, fz2); if(fz3 > z) z = fz3; if(fz4 > z) z = fz4;
+	z = fmax(fz1, fz2); if(fz3 > z) z = fz3; if(fz4 > z) z = fz4;
 	if (z < Pt.z)
 		return (obj->flags & OBJ_FLAG_INVERSE); /* not inside */
-	z = MIN(fz1, fz2); if(fz3 < z) z = fz3; if(fz4 < z) z = fz4;
+	z = fmin(fz1, fz2); if(fz3 < z) z = fz3; if(fz4 < z) z = fz4;
 	if (z > Pt.z)
 		return (!(obj->flags & OBJ_FLAG_INVERSE)); /* inside */
 

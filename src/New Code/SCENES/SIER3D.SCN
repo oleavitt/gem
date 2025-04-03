@@ -1,0 +1,120 @@
+//-------------------------------------------------------------------------------
+//
+//  Generate a 3D Sierpinski tetrahedron.
+//
+//-------------------------------------------------------------------------------
+
+paths "c:\yart\include"
+include "textures.inc"
+
+//
+// Parameters for 3D tetrahedron
+//
+
+vector Center = <0, 8, 0>
+vector Rotation = <0, -10, 0>
+float Radius = 15
+float NumberOfSubDivisions = 3
+
+texture Tex1
+  {
+  color vrand
+  surface 0.3, 0.7
+  }
+
+texture Tex2
+  {
+  color vrand
+  surface 0.3, 0.7
+  }
+
+texture Tex3
+  {
+  color vrand
+  surface 0.3, 0.7
+  }
+
+texture Tex4
+  {
+  color vrand
+  surface 0.3, 0.7
+  }
+
+//
+// You are here...
+//
+camera
+  {
+  from <0, 40, -50>
+  at <0, 7, 0>
+  up <0, 1, 0>
+  angle 30
+  }
+
+//
+// Turn on some lights...
+//
+light
+  {
+  average
+  light { from <50, 100, -50> color White }
+  light { from <50, 100, 50> color White }
+  light { from <-50, 100, -50> color White }
+  light { from <-50, 100, 50> color White }
+  }
+
+
+//
+// Terra firma...
+//
+object
+  {
+  disc 0, <0, 1, 0>, 200
+  texture { color Off_White  surface 0.3, 0.7 }
+  }	
+
+
+//
+// Generate the tetrahedron...
+//
+proc SubDivideTetrahedron(vector P1, vector P2, vector P3, vector P4, float level)
+  {
+  if level > 0
+    {
+    //
+    // Compute mid-points and sub-divide...
+    //
+    level -= 1
+    SubDivideTetrahedron(P1,
+                        (P2 - P1) / 2 + P1,
+                        (P3 - P1) / 2 + P1,
+                        (P4 - P1) / 2 + P1, level)
+    SubDivideTetrahedron(P2,
+                        (P1 - P2) / 2 + P2,
+                        (P3 - P2) / 2 + P2,
+                        (P4 - P2) / 2 + P2, level)
+    SubDivideTetrahedron(P3,
+                        (P1 - P3) / 2 + P3,
+                        (P2 - P3) / 2 + P3,
+                        (P4 - P3) / 2 + P3, level)
+    SubDivideTetrahedron(P4,
+                        (P1 - P4) / 2 + P4,
+                        (P2 - P4) / 2 + P4,
+                        (P3 - P4) / 2 + P4, level)
+    }
+  else
+    {
+    //
+    // Emit a tetrahedron.
+    //
+    object { tri P1, P2, P3 Tex1 rotate Rotation }
+    object { tri P1, P2, P4 Tex2 rotate Rotation }
+    object { tri P1, P3, P4 Tex3 rotate Rotation }
+    object { tri P2, P3, P4 Tex4 rotate Rotation }
+    }
+  }
+
+SubDivideTetrahedron(rotate(<0, 1, 0>, <120, -120, 0>) * Radius + Center,
+                     rotate(<0, 1, 0>, <120, 120, 0>) * Radius + Center,
+                     rotate(<0, 1, 0>, <120, 0, 0>) * Radius + Center,
+                     <0, 1, 0> * Radius + Center, NumberOfSubDivisions)

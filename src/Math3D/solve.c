@@ -122,7 +122,7 @@ int SolvePoly(double *c, double *s, int order, double lo, double hi)
 	/* Sort the roots from smallest to largest if more than one... */
 	if(nroots > 2)
 		{
-		register j;
+		register int j;
 
 		for(i = nroots-1; i >= 1; i--)
 			for(j = 1; j <= i; j++)

@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "expr.h"	/* Math primitive types and Expr type. */
+#include "Expr.h"	/* Math primitive types and Expr type. */
 #include "image.h"	/* Image type. */
 #include "vm.h"		/* Virtual machine functions and types. */
 
@@ -696,8 +696,8 @@ extern void Ray_Close(void);
 
 /* Object functions. */
 /* Simple object primitives. */
-extern Object *Ray_MakeDisc(Vec3 *loc, Vec3 *norm, double or, double ir);
-extern void Ray_SetDisc(DiscData *disc, Vec3 *loc, Vec3 *norm, double or, double ir);
+extern Object *Ray_MakeDisc(Vec3 *loc, Vec3 *norm, double outerRadius, double innerRadius);
+extern void Ray_SetDisc(DiscData *disc, Vec3 *loc, Vec3 *norm, double outerRadius, double innerRadius);
 extern Object *Ray_MakeSphere(Vec3 *loc, double rad);
 extern void Ray_SetSphere(SphereData *sphere, Vec3 *loc, double rad);
 extern Object *Ray_MakeBox(Vec3 *bmin, Vec3 *bmax);

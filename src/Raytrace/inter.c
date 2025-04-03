@@ -49,7 +49,7 @@ int FindClosestIntersection(Object *first_obj, HitData *hits)
   Object *obj, *closest_obj;
   struct BBQ *first_bbox_queued, *last_bbox_queued, *bbq;
   double closest_t;
-  int entering;
+  int entering = 0;
 
   last_bbox_queued = NULL;
   first_bbox_queued = NULL;
@@ -254,7 +254,7 @@ void SortHits(HitData *hits, int nhits)
 }
 
 
-HitData *NewHit(void)
+HitData *NewHitData(void)
 {
   HitData *hit = (HitData *)Malloc(sizeof(HitData));
   if(hit != NULL)
@@ -283,7 +283,7 @@ HitData *DeleteHits(HitData *hits)
 HitData *GetNextHit(HitData *hit)
 {
   if(hit->next == NULL)
-    hit->next = NewHit();
+    hit->next = NewHitData();
   return hit->next;
 }
 

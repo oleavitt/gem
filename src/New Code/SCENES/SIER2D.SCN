@@ -1,0 +1,64 @@
+//
+// Generic test script file for YART.
+//
+
+paths "c:\yart\include"
+
+include "textures.inc"
+
+//
+// You are here...
+//
+camera {
+  from <0, 68, -68>
+  at <0, 5, 0>
+  up <0, 1, 0>
+  angle 30
+}
+
+//
+// Turn on some light...
+//
+light { from <0, 90, 0> color White }
+
+
+//
+// Terra firma...
+//
+object {
+  box <-60, -1, -120>, <60, 96, 60>
+  texture { color Off_White  surface 0.3, 0.7 }
+}	
+
+//
+// Some stuff...
+//
+
+texture
+  {
+  color Orange
+  surface 0.3, 0.7
+  }
+
+proc SubDivideTriangle(vector P1, vector P2, vector P3, float level)
+  {
+  vector MP12, MP13, MP23
+
+  if level > 0    // Sub-divide mid-points another level...
+    {
+    level -= 1
+    MP12 = (P2 - P1) / 2 + P1
+    MP13 = (P3 - P1) / 2 + P1
+    MP23 = (P3 - P2) / 2 + P2
+    SubDivideTriangle(P1, MP12, MP13, level)
+    SubDivideTriangle(MP12, P2, MP23, level)
+    SubDivideTriangle(MP13, MP23, P3, level)
+//    SubDivideTriangle(MP12, MP23, MP13, level)
+    }
+  else            // Emit a triangle...
+    {
+    object { tri P1, P2, P3 }
+    }
+  }
+
+SubDivideTriangle(<0,16,10>,<-16,1,-16>,<16,1,-16>,4)

@@ -57,7 +57,7 @@ include "colors.inc"
 
 // Include some pre-defined basic surface types.
 include "basicsurfs.inc"
-
+/*
 // This function generates a round fence made of cylinders.
 function MakeFence(vector Center, float Radius, float NumSegments,
 	float StartDegrees, float EndDegrees)
@@ -99,7 +99,7 @@ function MakeFence(vector Center, float Radius, float NumSegments,
 		LastBasePt = ThisBasePt;
 	}
 }
-
+*/
 // Main entry point to generate the scene
 main
 {
@@ -182,5 +182,5 @@ main
 	}
 
 	// Construct a fence out of cylinders
-	MakeFence(<0, 0, 0>, 4.5, 12, -160, 160);
+	//MakeFence(<0, 0, 0>, 4.5, 12, -160, 160);
 }

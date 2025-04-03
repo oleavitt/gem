@@ -63,12 +63,12 @@ void BBoxToWorld(Vec3 *bmin, Vec3 *bmax, Xform *T)
 
 		PointToWorld(&V, T);
 
-		tbmin.x = min(tbmin.x, V.x);
-		tbmax.x = max(tbmax.x, V.x);
-		tbmin.y = min(tbmin.y, V.y);
-		tbmax.y = max(tbmax.y, V.y);
-		tbmin.z = min(tbmin.z, V.z);
-		tbmax.z = max(tbmax.z, V.z);
+		tbmin.x = fmin(tbmin.x, V.x);
+		tbmax.x = fmax(tbmax.x, V.x);
+		tbmin.y = fmin(tbmin.y, V.y);
+		tbmax.y = fmax(tbmax.y, V.y);
+		tbmin.z = fmin(tbmin.z, V.z);
+		tbmax.z = fmax(tbmax.z, V.z);
 	}
 
 	*bmin = tbmin;
@@ -96,12 +96,12 @@ void BBoxToObject(Vec3 *bmin, Vec3 *bmax, Xform *T)
 
 		PointToObject(&V, T);
 
-		tbmin.x = min(tbmin.x, V.x);
-		tbmax.x = max(tbmax.x, V.x);
-		tbmin.y = min(tbmin.y, V.y);
-		tbmax.y = max(tbmax.y, V.y);
-		tbmin.z = min(tbmin.z, V.z);
-		tbmax.z = max(tbmax.z, V.z);
+		tbmin.x = fmin(tbmin.x, V.x);
+		tbmax.x = fmax(tbmax.x, V.x);
+		tbmin.y = fmin(tbmin.y, V.y);
+		tbmax.y = fmax(tbmax.y, V.y);
+		tbmin.z = fmin(tbmin.z, V.z);
+		tbmax.z = fmax(tbmax.z, V.z);
 	}
 
 	*bmin = tbmin;

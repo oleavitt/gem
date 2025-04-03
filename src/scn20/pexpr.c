@@ -701,16 +701,16 @@ VMExpr *Atom(void)
 			expr->isvec = (token == DECL_VECTOR) ? 1 : 0;
 			break;
 
-/*		case RT_D: /* Ray direction "D" variable. */
-/*			expr->data = (void *)&rt_D;
-			expr->fn = vmeval_rtvec;
-			expr->isvec = 1;
-			break;
-		case RT_N: /* World normal "N" variable. */
-/*			expr->data = (void *)&rt_WN;
-			expr->fn = vmeval_rtvec;
-			expr->isvec = 1;
-			break; */
+//		case RT_D: /* Ray direction "D" variable. */
+//			expr->data = (void *)&rt_D;
+//			expr->fn = vmeval_rtvec;
+//			expr->isvec = 1;
+//			break;
+//		case RT_N: /* World normal "N" variable. */
+//		expr->data = (void *)&rt_WN;
+//			expr->fn = vmeval_rtvec;
+//			expr->isvec = 1;
+//			break;
 		case RT_O: /* Object point hit "O" variable. */
 			expr->data = (void *)&rt_O;
 			expr->fn = vmeval_rtvec;
@@ -721,22 +721,22 @@ VMExpr *Atom(void)
 			expr->fn = vmeval_rtvec;
 			expr->isvec = 1;
 			break;
-/*		case RT_USCREEN: /* "uscreen" variable. */
-/*			expr->data = (void *)&rt_uscreen;
-			expr->fn = vmeval_rtfloat;
-			break;
-		case RT_VSCREEN: /* "vscreen" variable. */
-/*			expr->data = (void *)&rt_vscreen;
-			expr->fn = vmeval_rtfloat;
-			break;
-		case RT_U: /* Object "u" variable. */
-/*			expr->data = (void *)&rt_u;
-			expr->fn = vmeval_rtfloat;
-			break;
-		case RT_V: /* Object "v" variable. */
-/*			expr->data = (void *)&rt_v;
-			expr->fn = vmeval_rtfloat;
-			break; */
+//		case RT_USCREEN: /* "uscreen" variable. */
+//			expr->data = (void *)&rt_uscreen;
+//			expr->fn = vmeval_rtfloat;
+//			break;
+//		case RT_VSCREEN: /* "vscreen" variable. */
+//			expr->data = (void *)&rt_vscreen;
+//			expr->fn = vmeval_rtfloat;
+//			break;
+//		case RT_U: /* Object "u" variable. */
+//			expr->data = (void *)&rt_u;
+//			expr->fn = vmeval_rtfloat;
+//			break;
+//		case RT_V: /* Object "v" variable. */
+//			expr->data = (void *)&rt_v;
+//			expr->fn = vmeval_rtfloat;
+//			break;
 		case RT_X: /* Object "x" variable. */
 			expr->data = (void *)&rt_O.x;
 			expr->fn = vmeval_rtfloat;

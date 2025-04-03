@@ -77,7 +77,7 @@ void vm_evalvector(VMExpr *expr, Vec3 *vec)
 void vmeval_const(VMExpr *expr)
 {
 	/* No action here - constant value is already stored. */
-	expr;
+	//expr;
 }
 
 void vmeval_rtfloat(VMExpr *expr)

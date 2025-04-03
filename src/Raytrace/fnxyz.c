@@ -7,6 +7,7 @@
  */
 
 #include "ray.h"
+#include "scn20.h"
 
 /*************************************************************************
  *  Local stuff...
@@ -708,7 +709,7 @@ void CalcUVMapFnxyz(Object *obj, Vec3 *P, double *u, double *v)
 	*u = *v = 0.0;
 
 	/* Not used */
-	P; obj;
+	//P; obj;
 }
 
 

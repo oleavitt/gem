@@ -82,15 +82,16 @@ main
 		translate <6, 0, 3>;
 	}
 
-	// A floor made of concentric torii
+	// A floor made of concentric tori
 	float MajorRadius;
-	float MinorRadius = 0.1;
-	for (MajorRadius = MinorRadius; MajorRadius < 10; MajorRadius = MajorRadius + MinorRadius*2)
+	float MinorRadius = 1;
+	for (MajorRadius = MinorRadius; MajorRadius < 100; MajorRadius = MajorRadius + MinorRadius*2)
 		torus <0, 0, 0>, MajorRadius, MinorRadius
 		{
 			Matte;
 
 			// Add a little random rotation.
+			scale 0.1;
 			rotate (vrand() - 0.5) * 3;
 		}
 }

@@ -1,0 +1,79 @@
+//
+// Generic test script file for YART.
+//
+
+paths "c:\yart\include"
+include "textures.inc"
+include "funcs.inc"
+
+//
+// You are here...
+//
+camera
+  {
+  from <0, 68, -68>
+  at <0, 10, 0>
+  up <0, 1, 0>
+  angle 30
+  }
+
+//
+// Turn on some light...
+//
+light { from <50, 90, -50> color White }
+
+
+//
+// Terra firma...
+//
+object
+  {
+  box <-60, -1, -120>, <60, 96, 60>
+  texture { color Off_White  surface 0.3, 0.7 }
+  }	
+
+//
+// Some stuff...
+//
+
+vindex CmapUSA
+  vector Red,   0.0
+  vector Red,   1/6
+  vector White, 2/6
+  vector White, 3/6
+  vector Blue,  4/6
+  vector Blue,  5/6
+  vector Red,   1.0;
+
+object
+  {
+  sphere <0, 0, 0>, 1
+  texture
+    {
+    color fn vindex(CmapUSA, Gradient(y))
+    surface 0.3, 0.7
+    specular 0.8, 0.01
+    scale 0.2
+    }
+  rotate vrand * 360
+  translate <0, 1, 0>
+  scale 10
+  translate <0, 0, -20>
+  }
+
+object
+  {
+  sphere <0, 0, 0>, 1
+  Polished_Chrome
+  translate <0, 1, 0>
+  scale 10
+  translate <10, 0, 0>
+  }
+object
+  {
+  sphere <0, 0, 0>, 1
+  Polished_Brass
+  translate <0, 1, 0>
+  scale 10
+  translate <-10, 0, 0>
+  }

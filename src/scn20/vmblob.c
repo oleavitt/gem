@@ -266,7 +266,7 @@ VMStmt *parse_vm_blob_element(int blob_element_type_token)
  *
  *  Inserts a blob element into the parent blob object.
  *
- * @param   *curstmt - VMStmt - Pointer to the blob element statement container.
+ * @param   curstmt - VMStmt - Pointer to the blob element statement container.
  */
 void vm_blob_element(VMStmt *curstmt)
 {
@@ -342,7 +342,7 @@ void vm_blob_element(VMStmt *curstmt)
  *
  *  Free up resources used by the parameter expression trees.
  *
- * @param   *curstmt - VMStmt - Pointer to the blob element statement container.
+ * @param   curstmt - VMStmt - Pointer to the blob element statement container.
  */
 void vm_blob_element_cleanup(VMStmt *curstmt)
 {

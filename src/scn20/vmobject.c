@@ -84,7 +84,7 @@ VMStmtObj *finish_parse_object(
  *  'Pushes' the am stack state and performs common initialization for
  *  object statements.
  *
- * @param   *stmt - VMStmtObj - The object statement.
+ * @param   stmt - VMStmtObj - The object statement.
  */
 void vm_begin_object(VMStmtObj *stmt)
 {
@@ -94,7 +94,7 @@ void vm_begin_object(VMStmtObj *stmt)
 /**
  * Executes the statements in the object statement's block.
  *
- * @param   *stmtobj - VMStmtObj - The object statement.
+ * @param   stmtobj - VMStmtObj - The object statement.
  */
 void vm_execute_object_block(VMStmtObj *stmtobj)
 {
@@ -113,8 +113,8 @@ void vm_execute_object_block(VMStmtObj *stmtobj)
  *  to the renderer database, parent CSG, or symbol table.
  *  The vm stack is 'poped' to its previous state.
  *
- * @param   *stmt - VMStmtObj - The object statement
- * @param   *obj - Object - The renderer object.
+ * @param   stmt - VMStmtObj - The object statement
+ * @param   obj - Object - The renderer object.
  * @param   success - int - 1 indicates the object is valid, 0 idicates error - just cleanup.
  *
  * @return  int - 1 if succesful, or 0 if not.
@@ -180,7 +180,7 @@ int vm_finish_object(VMStmtObj *stmt, Object *obj, int success)
  * Frees up all resources used by the base object statement,
  * including the body statements.
  *
- * @param   *stmt - VMStmt - Pointer to the object statement container.
+ * @param   stmt - VMStmt - Pointer to the object statement container.
  */
 void vm_object_cleanup(VMStmt *stmt)
 {
@@ -300,7 +300,7 @@ VMStmt * parse_vm_sphere(void)
 /**
  *	VM sphere { block }
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_sphere(VMStmt *curstmt)
 {
@@ -367,7 +367,7 @@ void vm_sphere(VMStmt *curstmt)
 /**
  *	Cleanup function for VM 'sphere' stmt.
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_sphere_cleanup(VMStmt *curstmt)
 {
@@ -511,7 +511,7 @@ VMStmt * parse_vm_disc(void)
 /**
  *	VM disc { block }
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_disc(VMStmt *curstmt)
 {
@@ -579,7 +579,7 @@ void vm_disc(VMStmt *curstmt)
 /**
  *	Cleanup function for VM 'disc' stmt.
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_disc_cleanup(VMStmt *curstmt)
 {
@@ -715,7 +715,7 @@ VMStmt * parse_vm_box(void)
 /**
  *	VM box { block }
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_box(VMStmt *curstmt)
 {
@@ -766,7 +766,7 @@ void vm_box(VMStmt *curstmt)
 /**
  *	Cleanup function for VM 'box' stmt.
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_box_cleanup(VMStmt *curstmt)
 {
@@ -902,7 +902,7 @@ VMStmt * parse_vm_torus(void)
 /**
  *	VM torus { block }
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_torus(VMStmt *curstmt)
 {
@@ -961,7 +961,7 @@ void vm_torus(VMStmt *curstmt)
 /**
  *	Cleanup function for VM 'torus' stmt.
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_torus_cleanup(VMStmt *curstmt)
 {
@@ -1160,7 +1160,7 @@ VMStmt * parse_vm_cone_or_cylinder(int token)
 /**
  *	VM cone/cylinder/closed_cone/closed_cylinder { block }
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_cone(VMStmt *curstmt)
 {
@@ -1231,7 +1231,7 @@ void vm_cone(VMStmt *curstmt)
 /**
  *	Cleanup function for VM 'cone' stmt.
  *
- * @param   *curstmt - VMStmt - Pointer to the object statement container.
+ * @param   curstmt - VMStmt - Pointer to the object statement container.
  */
 void vm_cone_cleanup(VMStmt *curstmt)
 {
@@ -1273,7 +1273,7 @@ void vm_cone_cleanup(VMStmt *curstmt)
  *	Parse tokens that are common to all objects, such as
  *	surfaces, flags, etc.
  *
- * @param  VMStmt ** - Receives pointer to a list of statements if successful and any are found. NULL otherwise.
+ * @param  stmtlist - Receives pointer to a list of statements if successful and any are found. NULL otherwise.
  *
  * @return  int - 1 to indicate token was processed, 0 if not recognized.
  */

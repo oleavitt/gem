@@ -110,7 +110,7 @@ Surface *Ray_ShareSurface(Surface *s)
  * Creates an identical copy of a Surface from new resources.
  * Any transforms are deep copied.
  *
- * @param s - Surface* - Pointer to Surface to be copied.
+ * @param srcsurf - Surface* - Pointer to Surface to be copied.
  *
  * @return Surface* - Pointer to a new Surface instance, or NULL if alloc failed or src is NULL.
  */

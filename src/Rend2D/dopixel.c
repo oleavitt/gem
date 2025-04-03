@@ -22,7 +22,7 @@ typedef struct tag_icolor
 int threshsqrd;
 int level;
 double uinc, vinc;
-unsigned char *this_line, *next_line, *tl, *nl;
+unsigned char *this_line, *next_line, *this_line_ptr, *next_line_ptr;
 
 unsigned char cooked[AAGRIDSIZE+1][AAGRIDSIZE+1];
 IColor samples[AAGRIDSIZE+1][AAGRIDSIZE+1];
@@ -87,9 +87,9 @@ void DoPixelAdaptiveAA(Rend2DPixel *pixel)
 		 * Load the top right corner of sample grid with coresponding value
 		 * saved from the previous line. 
 		 */
-		samples[0][AAGRIDSIZE].r = *tl++;
-		samples[0][AAGRIDSIZE].g = *tl++;
-		samples[0][AAGRIDSIZE].b = *tl++;
+		samples[0][AAGRIDSIZE].r = *this_line_ptr++;
+		samples[0][AAGRIDSIZE].g = *this_line_ptr++;
+		samples[0][AAGRIDSIZE].b = *this_line_ptr++;
 		cooked[0][AAGRIDSIZE] = 1;
 	}
 	/* Sub divide pixel. */
@@ -98,9 +98,9 @@ void DoPixelAdaptiveAA(Rend2DPixel *pixel)
 	pixel->r = (unsigned char)c.r;
 	pixel->g = (unsigned char)c.g;
 	pixel->b = (unsigned char)c.b;
-	*nl++ = (unsigned char)samples[AAGRIDSIZE][0].r;
-	*nl++ = (unsigned char)samples[AAGRIDSIZE][0].g;
-	*nl++ = (unsigned char)samples[AAGRIDSIZE][0].b;
+	*next_line_ptr++ = (unsigned char)samples[AAGRIDSIZE][0].r;
+	*next_line_ptr++ = (unsigned char)samples[AAGRIDSIZE][0].g;
+	*next_line_ptr++ = (unsigned char)samples[AAGRIDSIZE][0].b;
 	for(i = 0; i <= AAGRIDSIZE; i++)
 	{
 		cooked[i][0] = cooked[i][AAGRIDSIZE];
@@ -112,8 +112,8 @@ void DoPixelAdaptiveAA(Rend2DPixel *pixel)
 void DoPixelStartOfLineAdaptiveAA(void)
 {
 	/* Reset the line ptrs. */
-	tl = this_line;
-	nl = next_line;
+	this_line_ptr = this_line;
+	next_line_ptr = next_line;
 	/* Clear all "cooked" flags. */
 	memset(cooked, 0, sizeof(unsigned char)*(AAGRIDSIZE+1)*(AAGRIDSIZE+1));
 	/*
@@ -122,9 +122,9 @@ void DoPixelStartOfLineAdaptiveAA(void)
 	 */
 	if(rend.y > rend.ystart)
 	{
-		samples[0][0].r = *tl++;
-		samples[0][0].g = *tl++;
-		samples[0][0].b = *tl++;
+		samples[0][0].r = *this_line_ptr++;
+		samples[0][0].g = *this_line_ptr++;
+		samples[0][0].b = *this_line_ptr++;
 		cooked[0][0] = 1;
 	}
 }
@@ -135,13 +135,13 @@ void DoPixelEndOfLineAdaptiveAA(void)
 	 * Save the sample at the far end of the next line.
 	 * (Which has been moved to the first column of the sample grid.)
 	 */
-	*nl++ = (unsigned char)samples[AAGRIDSIZE][0].r;
-	*nl++ = (unsigned char)samples[AAGRIDSIZE][0].g;
-	*nl++ = (unsigned char)samples[AAGRIDSIZE][0].b;
+	*next_line_ptr++ = (unsigned char)samples[AAGRIDSIZE][0].r;
+	*next_line_ptr++ = (unsigned char)samples[AAGRIDSIZE][0].g;
+	*next_line_ptr++ = (unsigned char)samples[AAGRIDSIZE][0].b;
   /* "next_line" becomes "this_line". */
-	tl = this_line;
+	this_line_ptr = this_line;
 	this_line = next_line;
-	next_line = tl;
+	next_line = this_line_ptr;
 }
 
 void DoPixelSetupAdaptiveAA(void)
@@ -163,8 +163,8 @@ void DoPixelSetupAdaptiveAA(void)
 	}
 	memset(this_line, 0, line_size);
 	memset(next_line, 0, line_size);
-	tl = this_line;
-	nl = next_line;
+	this_line_ptr = this_line;
+	next_line_ptr = next_line;
 	uinc = rend.uwidth / (double)rend.xres;
 	vinc = rend.vheight / (double)rend.yres;
 	rend.status = REND2D_STATUS_READY;

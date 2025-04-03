@@ -32,8 +32,8 @@ double Frand1(long *seed)
 {
   int j;
   long k;
-  static long iy = 0;
-  static long iv[NTAB];
+  static int iy = 0;
+  static int iv[NTAB];
   double temp;
 
   if(*seed <= 0 || iy == 0)        /* Initialize... */
@@ -45,7 +45,7 @@ double Frand1(long *seed)
       k = (*seed) / IQ;
       *seed = IA * (*seed - k * IQ) - IR * k;
       if(*seed < 0) *seed += IM;
-      if(j < NTAB) iv[j] = *seed;
+      if(j < NTAB) iv[j] = (int)*seed;
     }
     iy = iv[0];
   }
@@ -54,7 +54,7 @@ double Frand1(long *seed)
   if(*seed < 0) *seed += IM;
   j = iy / NDIV;
   iy = iv[j];
-  iv[j] = *seed;
+  iv[j] = (int)*seed;
   if((temp = AM * iy) > RNMX) return RNMX;
   else return temp;
 }

@@ -75,7 +75,7 @@ static Object *exclusions;
 
 void Ray_BuildBounds(Object **root)
 {
-  long max_list_size, bound_list_size;
+  long max_list_size = 0, bound_list_size = 0;
   Object *obj_list, *o, *prev;
   Object *bound_list, *bound;
   Object *new_list, *new_bound;
@@ -165,7 +165,7 @@ void Ray_BuildBounds(Object **root)
         {
           DivideObjectList(&bb->objects, &obj_list);
           Ray_SetBBox(bb);
-          max_list_size = max(max_list_size, bb->num_objects);
+          max_list_size = fmax(max_list_size, bb->num_objects);
 
           if(obj_list != NULL)
           {
@@ -181,12 +181,12 @@ void Ray_BuildBounds(Object **root)
               new_bound = new_bound->next;
             }
             bb = new_bound->data.bbox;
-            max_list_size = max(max_list_size, bb->num_objects);
+            max_list_size = fmax(max_list_size, bb->num_objects);
           }
         }
         else
         {
-          max_list_size = max(max_list_size, bb->num_objects);
+          max_list_size = fmax(max_list_size, bb->num_objects);
         }
         bound_list_size++;
 
@@ -250,16 +250,16 @@ static void DivideObjectList(Object **olist, Object **new_olist)
     (o->procs->CalcExtents)(o, &omin, &omax);
 
     tmp =(omin.x + omax.x) / 2.0;
-    medlo.x = min(medlo.x, tmp);
-    medhi.x = max(medhi.x, tmp);
+    medlo.x = fmin(medlo.x, tmp);
+    medhi.x = fmax(medhi.x, tmp);
     median.x += tmp;
     tmp =(omin.y + omax.y) / 2.0;
-    medlo.y = min(medlo.y, tmp);
-    medhi.y = max(medhi.y, tmp);
+    medlo.y = fmin(medlo.y, tmp);
+    medhi.y = fmax(medhi.y, tmp);
     median.y += tmp;
     tmp =(omin.z + omax.z) / 2.0;
-    medlo.z = min(medlo.z, tmp);
-    medhi.z = max(medhi.z, tmp);
+    medlo.z = fmin(medlo.z, tmp);
+    medhi.z = fmax(medhi.z, tmp);
     median.z += tmp;
 
     nobj++;
@@ -371,18 +371,18 @@ static void DivideObjectList2(Object **olist, Object **new_olist)
   {
     (o->procs->CalcExtents)(o, &omin, &omax);
 
-    lmin.x = min(lmin.x, omin.x);
-    lmin.y = min(lmin.y, omin.y);
-    lmin.z = min(lmin.z, omin.z);
-    lmax.x = max(lmax.x, omax.x);
-    lmax.y = max(lmax.y, omax.y);
-    lmax.z = max(lmax.z, omax.z);
-    lminmax.x = max(lminmax.x, omin.x);
-    lminmax.y = max(lminmax.y, omin.y);
-    lminmax.z = max(lminmax.z, omin.z);
-    lmaxmin.x = min(lmaxmin.x, omax.x);
-    lmaxmin.y = min(lmaxmin.y, omax.y);
-    lmaxmin.z = min(lmaxmin.z, omax.z);
+    lmin.x = fmin(lmin.x, omin.x);
+    lmin.y = fmin(lmin.y, omin.y);
+    lmin.z = fmin(lmin.z, omin.z);
+    lmax.x = fmax(lmax.x, omax.x);
+    lmax.y = fmax(lmax.y, omax.y);
+    lmax.z = fmax(lmax.z, omax.z);
+    lminmax.x = fmax(lminmax.x, omin.x);
+    lminmax.y = fmax(lminmax.y, omin.y);
+    lminmax.z = fmax(lminmax.z, omin.z);
+    lmaxmin.x = fmin(lmaxmin.x, omax.x);
+    lmaxmin.y = fmin(lmaxmin.y, omax.y);
+    lmaxmin.z = fmin(lmaxmin.z, omax.z);
 
     nobj++;
     o = o->next;
@@ -521,7 +521,7 @@ void Ray_SetBBox(BBoxData *bbox)
 {
   Object *o;
   Vec3 omin, omax;
-  long nobj;
+  int nobj;
 
   assert(bbox != NULL);
   o = bbox->objects;
@@ -539,12 +539,12 @@ void Ray_SetBBox(BBoxData *bbox)
   while(o != NULL)
   {
     (o->procs->CalcExtents)(o, &omin, &omax);
-    bbox->bmin.x = min(bbox->bmin.x, omin.x) - EPSILON;
-    bbox->bmax.x = max(bbox->bmax.x, omax.x) + EPSILON;
-    bbox->bmin.y = min(bbox->bmin.y, omin.y) - EPSILON;
-    bbox->bmax.y = max(bbox->bmax.y, omax.y) + EPSILON;
-    bbox->bmin.z = min(bbox->bmin.z, omin.z) - EPSILON;
-    bbox->bmax.z = max(bbox->bmax.z, omax.z) + EPSILON;
+    bbox->bmin.x = fmin(bbox->bmin.x, omin.x) - EPSILON;
+    bbox->bmax.x = fmax(bbox->bmax.x, omax.x) + EPSILON;
+    bbox->bmin.y = fmin(bbox->bmin.y, omin.y) - EPSILON;
+    bbox->bmax.y = fmax(bbox->bmax.y, omax.y) + EPSILON;
+    bbox->bmin.z = fmin(bbox->bmin.z, omin.z) - EPSILON;
+    bbox->bmax.z = fmax(bbox->bmax.z, omax.z) + EPSILON;
     nobj++;
     o = o->next;
   }

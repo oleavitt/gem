@@ -352,7 +352,7 @@ void CalcNormalPolygon(Object *obj, Vec3 *P, Vec3 *N)
 	N->y = p->ny;
 	N->z = p->nz;
 
-	P; // Not used
+	//P; // Not used
 }
 
 
@@ -438,14 +438,14 @@ void CalcExtentsPolygon(Object *obj, Vec3 *omin, Vec3 *omax)
 
 	for(i = 1; i < p->npts; i++)
 	{
-		omin->x = min(omin->x, *pts);
-		omax->x = max(omax->x, *pts);
+		omin->x = fmin(omin->x, *pts);
+		omax->x = fmax(omax->x, *pts);
 		pts++;
-		omin->y = min(omin->y, *pts);
-		omax->y = max(omax->y, *pts);
+		omin->y = fmin(omin->y, *pts);
+		omax->y = fmax(omax->y, *pts);
 		pts++;
-		omin->z = min(omin->z, *pts);
-		omax->z = max(omax->z, *pts);
+		omin->z = fmin(omin->z, *pts);
+		omax->z = fmax(omax->z, *pts);
 		pts++;
 	}
 	omin->x -= EPSILON;

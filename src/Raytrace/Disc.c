@@ -44,8 +44,8 @@ void Ray_SetDisc( DiscData *disc, Vec3 *loc, Vec3 *norm, double or, double ir )
 	disc->d = - V3Dot( &disc->norm, &disc->loc );
 
 	/* Some assembly required... */
-	disc->inrsq = MIN( ir, or );
-	disc->outrsq = MAX( ir, or );
+	disc->inrsq = fmin( ir, or );
+	disc->outrsq = fmax( ir, or );
 	disc->inrsq = disc->inrsq * disc->inrsq;
 	disc->outrsq = disc->outrsq * disc->outrsq;
 }
@@ -131,7 +131,7 @@ void CalcNormalDisc(Object *obj, Vec3 *Q, Vec3 *N)
 	}
 
 	/* Not used */
-	Q;
+	//Q;
 }
 
 

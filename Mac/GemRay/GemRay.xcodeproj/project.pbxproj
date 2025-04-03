@@ -1,0 +1,569 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8C0DEE2D1DEAFB3700697E06 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE2C1DEAFB3700697E06 /* AppDelegate.m */; };
+		8C0DEE301DEAFB3700697E06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE2F1DEAFB3700697E06 /* main.m */; };
+		8C0DEE331DEAFB3700697E06 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE321DEAFB3700697E06 /* ViewController.m */; };
+		8C0DEE351DEAFB3700697E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C0DEE341DEAFB3700697E06 /* Assets.xcassets */; };
+		8C0DEE381DEAFB3700697E06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C0DEE361DEAFB3700697E06 /* Main.storyboard */; };
+		8C0DEE431DEAFB3700697E06 /* GemRayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE421DEAFB3700697E06 /* GemRayTests.m */; };
+		8C0DEE4E1DEAFB3700697E06 /* GemRayUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE4D1DEAFB3700697E06 /* GemRayUITests.m */; };
+		8C0DEE6A1DEAFE0F00697E06 /* Include in Resources */ = {isa = PBXBuildFile; fileRef = 8C0DEE5B1DEAFE0F00697E06 /* Include */; };
+		8C0DEE6B1DEAFE0F00697E06 /* Math3D in Resources */ = {isa = PBXBuildFile; fileRef = 8C0DEE5F1DEAFE0F00697E06 /* Math3D */; };
+		8C0DEE6C1DEAFE0F00697E06 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE611DEAFE0F00697E06 /* matrix.c */; };
+		8C0DEE6D1DEAFE0F00697E06 /* Rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE621DEAFE0F00697E06 /* Rand.c */; };
+		8C0DEE6E1DEAFE0F00697E06 /* solve.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE631DEAFE0F00697E06 /* solve.c */; };
+		8C0DEE6F1DEAFE0F00697E06 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE641DEAFE0F00697E06 /* vector.c */; };
+		8C0DEE701DEAFE0F00697E06 /* Image in Resources */ = {isa = PBXBuildFile; fileRef = 8C0DEE651DEAFE0F00697E06 /* Image */; };
+		8C0DEE711DEAFE0F00697E06 /* Image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE661DEAFE0F00697E06 /* Image.c */; };
+		8C0DEE721DEAFE0F00697E06 /* Targa.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE681DEAFE0F00697E06 /* Targa.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8C0DEE3F1DEAFB3700697E06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C0DEE201DEAFB3600697E06 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C0DEE271DEAFB3600697E06;
+			remoteInfo = GemRay;
+		};
+		8C0DEE4A1DEAFB3700697E06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C0DEE201DEAFB3600697E06 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C0DEE271DEAFB3600697E06;
+			remoteInfo = GemRay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8C0DEE281DEAFB3600697E06 /* GemRay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GemRay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C0DEE2B1DEAFB3700697E06 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8C0DEE2C1DEAFB3700697E06 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8C0DEE2F1DEAFB3700697E06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8C0DEE311DEAFB3700697E06 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8C0DEE321DEAFB3700697E06 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8C0DEE341DEAFB3700697E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8C0DEE371DEAFB3700697E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8C0DEE391DEAFB3700697E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C0DEE3E1DEAFB3700697E06 /* GemRayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GemRayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C0DEE421DEAFB3700697E06 /* GemRayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GemRayTests.m; sourceTree = "<group>"; };
+		8C0DEE441DEAFB3700697E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C0DEE491DEAFB3700697E06 /* GemRayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GemRayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C0DEE4D1DEAFB3700697E06 /* GemRayUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GemRayUITests.m; sourceTree = "<group>"; };
+		8C0DEE4F1DEAFB3700697E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C0DEE5B1DEAFE0F00697E06 /* Include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Include; path = ../../src/Include; sourceTree = "<group>"; };
+		8C0DEE5C1DEAFE0F00697E06 /* math3d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = math3d.h; path = ../../src/Include/math3d.h; sourceTree = "<group>"; };
+		8C0DEE5D1DEAFE0F00697E06 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../../src/Include/config.h; sourceTree = "<group>"; };
+		8C0DEE5E1DEAFE0F00697E06 /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = image.h; path = ../../src/Include/image.h; sourceTree = "<group>"; };
+		8C0DEE5F1DEAFE0F00697E06 /* Math3D */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Math3D; path = ../../src/Math3D; sourceTree = "<group>"; };
+		8C0DEE601DEAFE0F00697E06 /* local.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = local.h; path = ../../src/Math3D/local.h; sourceTree = "<group>"; };
+		8C0DEE611DEAFE0F00697E06 /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = matrix.c; path = ../../src/Math3D/matrix.c; sourceTree = "<group>"; };
+		8C0DEE621DEAFE0F00697E06 /* Rand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Rand.c; path = ../../src/Math3D/Rand.c; sourceTree = "<group>"; };
+		8C0DEE631DEAFE0F00697E06 /* solve.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = solve.c; path = ../../src/Math3D/solve.c; sourceTree = "<group>"; };
+		8C0DEE641DEAFE0F00697E06 /* vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vector.c; path = ../../src/Math3D/vector.c; sourceTree = "<group>"; };
+		8C0DEE651DEAFE0F00697E06 /* Image */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Image; path = ../../src/Image; sourceTree = "<group>"; };
+		8C0DEE661DEAFE0F00697E06 /* Image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image.c; path = ../../src/Image/Image.c; sourceTree = "<group>"; };
+		8C0DEE671DEAFE0F00697E06 /* Local.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Local.h; path = ../../src/Image/Local.h; sourceTree = "<group>"; };
+		8C0DEE681DEAFE0F00697E06 /* Targa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Targa.c; path = ../../src/Image/Targa.c; sourceTree = "<group>"; };
+		8C0DEE691DEAFE0F00697E06 /* TARGA.H */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TARGA.H; path = ../../src/Image/TARGA.H; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8C0DEE251DEAFB3600697E06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C0DEE3B1DEAFB3700697E06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C0DEE461DEAFB3700697E06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8C0DEE1F1DEAFB3600697E06 = {
+			isa = PBXGroup;
+			children = (
+				8C0DEE5B1DEAFE0F00697E06 /* Include */,
+				8C0DEE5C1DEAFE0F00697E06 /* math3d.h */,
+				8C0DEE5D1DEAFE0F00697E06 /* config.h */,
+				8C0DEE5E1DEAFE0F00697E06 /* image.h */,
+				8C0DEE5F1DEAFE0F00697E06 /* Math3D */,
+				8C0DEE601DEAFE0F00697E06 /* local.h */,
+				8C0DEE611DEAFE0F00697E06 /* matrix.c */,
+				8C0DEE621DEAFE0F00697E06 /* Rand.c */,
+				8C0DEE631DEAFE0F00697E06 /* solve.c */,
+				8C0DEE641DEAFE0F00697E06 /* vector.c */,
+				8C0DEE651DEAFE0F00697E06 /* Image */,
+				8C0DEE661DEAFE0F00697E06 /* Image.c */,
+				8C0DEE671DEAFE0F00697E06 /* Local.h */,
+				8C0DEE681DEAFE0F00697E06 /* Targa.c */,
+				8C0DEE691DEAFE0F00697E06 /* TARGA.H */,
+				8C0DEE2A1DEAFB3600697E06 /* GemRay */,
+				8C0DEE411DEAFB3700697E06 /* GemRayTests */,
+				8C0DEE4C1DEAFB3700697E06 /* GemRayUITests */,
+				8C0DEE291DEAFB3600697E06 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8C0DEE291DEAFB3600697E06 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C0DEE281DEAFB3600697E06 /* GemRay.app */,
+				8C0DEE3E1DEAFB3700697E06 /* GemRayTests.xctest */,
+				8C0DEE491DEAFB3700697E06 /* GemRayUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C0DEE2A1DEAFB3600697E06 /* GemRay */ = {
+			isa = PBXGroup;
+			children = (
+				8C0DEE2B1DEAFB3700697E06 /* AppDelegate.h */,
+				8C0DEE2C1DEAFB3700697E06 /* AppDelegate.m */,
+				8C0DEE311DEAFB3700697E06 /* ViewController.h */,
+				8C0DEE321DEAFB3700697E06 /* ViewController.m */,
+				8C0DEE341DEAFB3700697E06 /* Assets.xcassets */,
+				8C0DEE361DEAFB3700697E06 /* Main.storyboard */,
+				8C0DEE391DEAFB3700697E06 /* Info.plist */,
+				8C0DEE2E1DEAFB3700697E06 /* Supporting Files */,
+			);
+			path = GemRay;
+			sourceTree = "<group>";
+		};
+		8C0DEE2E1DEAFB3700697E06 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C0DEE2F1DEAFB3700697E06 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8C0DEE411DEAFB3700697E06 /* GemRayTests */ = {
+			isa = PBXGroup;
+			children = (
+				8C0DEE421DEAFB3700697E06 /* GemRayTests.m */,
+				8C0DEE441DEAFB3700697E06 /* Info.plist */,
+			);
+			path = GemRayTests;
+			sourceTree = "<group>";
+		};
+		8C0DEE4C1DEAFB3700697E06 /* GemRayUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8C0DEE4D1DEAFB3700697E06 /* GemRayUITests.m */,
+				8C0DEE4F1DEAFB3700697E06 /* Info.plist */,
+			);
+			path = GemRayUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8C0DEE271DEAFB3600697E06 /* GemRay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C0DEE521DEAFB3700697E06 /* Build configuration list for PBXNativeTarget "GemRay" */;
+			buildPhases = (
+				8C0DEE241DEAFB3600697E06 /* Sources */,
+				8C0DEE251DEAFB3600697E06 /* Frameworks */,
+				8C0DEE261DEAFB3600697E06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GemRay;
+			productName = GemRay;
+			productReference = 8C0DEE281DEAFB3600697E06 /* GemRay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8C0DEE3D1DEAFB3700697E06 /* GemRayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C0DEE551DEAFB3700697E06 /* Build configuration list for PBXNativeTarget "GemRayTests" */;
+			buildPhases = (
+				8C0DEE3A1DEAFB3700697E06 /* Sources */,
+				8C0DEE3B1DEAFB3700697E06 /* Frameworks */,
+				8C0DEE3C1DEAFB3700697E06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C0DEE401DEAFB3700697E06 /* PBXTargetDependency */,
+			);
+			name = GemRayTests;
+			productName = GemRayTests;
+			productReference = 8C0DEE3E1DEAFB3700697E06 /* GemRayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8C0DEE481DEAFB3700697E06 /* GemRayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C0DEE581DEAFB3700697E06 /* Build configuration list for PBXNativeTarget "GemRayUITests" */;
+			buildPhases = (
+				8C0DEE451DEAFB3700697E06 /* Sources */,
+				8C0DEE461DEAFB3700697E06 /* Frameworks */,
+				8C0DEE471DEAFB3700697E06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C0DEE4B1DEAFB3700697E06 /* PBXTargetDependency */,
+			);
+			name = GemRayUITests;
+			productName = GemRayUITests;
+			productReference = 8C0DEE491DEAFB3700697E06 /* GemRayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8C0DEE201DEAFB3600697E06 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Oren Leavitt";
+				TargetAttributes = {
+					8C0DEE271DEAFB3600697E06 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					8C0DEE3D1DEAFB3700697E06 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8C0DEE271DEAFB3600697E06;
+					};
+					8C0DEE481DEAFB3700697E06 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8C0DEE271DEAFB3600697E06;
+					};
+				};
+			};
+			buildConfigurationList = 8C0DEE231DEAFB3600697E06 /* Build configuration list for PBXProject "GemRay" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8C0DEE1F1DEAFB3600697E06;
+			productRefGroup = 8C0DEE291DEAFB3600697E06 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8C0DEE271DEAFB3600697E06 /* GemRay */,
+				8C0DEE3D1DEAFB3700697E06 /* GemRayTests */,
+				8C0DEE481DEAFB3700697E06 /* GemRayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8C0DEE261DEAFB3600697E06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C0DEE701DEAFE0F00697E06 /* Image in Resources */,
+				8C0DEE6A1DEAFE0F00697E06 /* Include in Resources */,
+				8C0DEE351DEAFB3700697E06 /* Assets.xcassets in Resources */,
+				8C0DEE381DEAFB3700697E06 /* Main.storyboard in Resources */,
+				8C0DEE6B1DEAFE0F00697E06 /* Math3D in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C0DEE3C1DEAFB3700697E06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C0DEE471DEAFB3700697E06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8C0DEE241DEAFB3600697E06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C0DEE6D1DEAFE0F00697E06 /* Rand.c in Sources */,
+				8C0DEE331DEAFB3700697E06 /* ViewController.m in Sources */,
+				8C0DEE6F1DEAFE0F00697E06 /* vector.c in Sources */,
+				8C0DEE721DEAFE0F00697E06 /* Targa.c in Sources */,
+				8C0DEE711DEAFE0F00697E06 /* Image.c in Sources */,
+				8C0DEE301DEAFB3700697E06 /* main.m in Sources */,
+				8C0DEE6E1DEAFE0F00697E06 /* solve.c in Sources */,
+				8C0DEE6C1DEAFE0F00697E06 /* matrix.c in Sources */,
+				8C0DEE2D1DEAFB3700697E06 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C0DEE3A1DEAFB3700697E06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C0DEE431DEAFB3700697E06 /* GemRayTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C0DEE451DEAFB3700697E06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C0DEE4E1DEAFB3700697E06 /* GemRayUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8C0DEE401DEAFB3700697E06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C0DEE271DEAFB3600697E06 /* GemRay */;
+			targetProxy = 8C0DEE3F1DEAFB3700697E06 /* PBXContainerItemProxy */;
+		};
+		8C0DEE4B1DEAFB3700697E06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C0DEE271DEAFB3600697E06 /* GemRay */;
+			targetProxy = 8C0DEE4A1DEAFB3700697E06 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8C0DEE361DEAFB3700697E06 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8C0DEE371DEAFB3700697E06 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8C0DEE501DEAFB3700697E06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8C0DEE511DEAFB3700697E06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8C0DEE531DEAFB3700697E06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GemRay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.orenleavitt.GemRay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8C0DEE541DEAFB3700697E06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GemRay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.orenleavitt.GemRay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8C0DEE561DEAFB3700697E06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GemRayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.orenleavitt.GemRayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GemRay.app/Contents/MacOS/GemRay";
+			};
+			name = Debug;
+		};
+		8C0DEE571DEAFB3700697E06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GemRayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.orenleavitt.GemRayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GemRay.app/Contents/MacOS/GemRay";
+			};
+			name = Release;
+		};
+		8C0DEE591DEAFB3700697E06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GemRayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.orenleavitt.GemRayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = GemRay;
+			};
+			name = Debug;
+		};
+		8C0DEE5A1DEAFB3700697E06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GemRayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.orenleavitt.GemRayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = GemRay;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8C0DEE231DEAFB3600697E06 /* Build configuration list for PBXProject "GemRay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C0DEE501DEAFB3700697E06 /* Debug */,
+				8C0DEE511DEAFB3700697E06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C0DEE521DEAFB3700697E06 /* Build configuration list for PBXNativeTarget "GemRay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C0DEE531DEAFB3700697E06 /* Debug */,
+				8C0DEE541DEAFB3700697E06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8C0DEE551DEAFB3700697E06 /* Build configuration list for PBXNativeTarget "GemRayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C0DEE561DEAFB3700697E06 /* Debug */,
+				8C0DEE571DEAFB3700697E06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8C0DEE581DEAFB3700697E06 /* Build configuration list for PBXNativeTarget "GemRayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C0DEE591DEAFB3700697E06 /* Debug */,
+				8C0DEE5A1DEAFB3700697E06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8C0DEE201DEAFB3600697E06 /* Project object */;
+}

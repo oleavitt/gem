@@ -400,12 +400,12 @@ void CalcExtentsTriangle(Object *obj, Vec3 *omin, Vec3 *omax)
 {
 	TriangleData *tri = obj->data.triangle;
 
-	omin->x = min(min(tri->pts[0],tri->pts[3]),tri->pts[6])-EPSILON;
-	omax->x = max(max(tri->pts[0],tri->pts[3]),tri->pts[6])-EPSILON;
-	omin->y = min(min(tri->pts[1],tri->pts[4]),tri->pts[7])-EPSILON;
-	omax->y = max(max(tri->pts[1],tri->pts[4]),tri->pts[7])+EPSILON;
-	omin->z = min(min(tri->pts[2],tri->pts[5]),tri->pts[8])+EPSILON;
-	omax->z = max(max(tri->pts[2],tri->pts[5]),tri->pts[8])+EPSILON;
+	omin->x = fmin(fmin(tri->pts[0],tri->pts[3]),tri->pts[6])-EPSILON;
+	omax->x = fmax(fmax(tri->pts[0],tri->pts[3]),tri->pts[6])-EPSILON;
+	omin->y = fmin(fmin(tri->pts[1],tri->pts[4]),tri->pts[7])-EPSILON;
+	omax->y = fmax(fmax(tri->pts[1],tri->pts[4]),tri->pts[7])+EPSILON;
+	omin->z = fmin(fmin(tri->pts[2],tri->pts[5]),tri->pts[8])+EPSILON;
+	omax->z = fmax(fmax(tri->pts[2],tri->pts[5]),tri->pts[8])+EPSILON;
 }
 
 

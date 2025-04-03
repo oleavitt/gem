@@ -1,7 +1,7 @@
 /**
  *****************************************************************************
  *  @file scn20.h
- *  External functions, defiens and types for the SCN 2.0 parser
+ *  External functions, defines and types for the SCN 2.0 parser
  *
  *****************************************************************************
  */
@@ -102,5 +102,6 @@ extern MSGFN scn20_set_msgfn(MSGFN msgfn);
  */
 extern int scn20_get_error_status(void);
 
+extern void delete_exprtree(VMExpr *expr);
 
 #endif /* __SCN20_H__ */

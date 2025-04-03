@@ -148,7 +148,7 @@ Object *Ray_MakeCSG(int type)
 			csg->olist = NULL;   /* Not used in group objects. */
 			csg->litelist = NULL;
 			csg->boundobj = NULL;
-			csg->hits = NewHit();
+			csg->hits = NewHitData();
 			obj->data.csg = csg;
 			obj->procs = (type == OBJ_CSGUNION) ? &csgunion_procs :
 				(type == OBJ_CSGDIFFERENCE) ? &csgdifference_procs :
@@ -1113,7 +1113,7 @@ void CopyCSG(Object *destobj, Object *srcobj)
 			else
 				o = destcsg->boundobj = Ray_CloneObject(srccsg->boundobj);
 		}
-		destcsg->hits = NewHit();
+		destcsg->hits = NewHitData();
 	}
 }
 

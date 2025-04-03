@@ -1198,7 +1198,7 @@ void CalcUVMapBlob(Object *obj, Vec3 *P, double *u, double *v)
 {
 	*u = *v = 0.0;
 	/* Not used: */
-	obj; P;
+	//obj; P;
 }
 
 
@@ -1231,12 +1231,12 @@ void CalcExtentsBlob(Object *obj, Vec3 *omin, Vec3 *omax)
 			return;  /* The object is infinite, return now. */
 		}
 
-		omin->x = min(omin->x, be->loc.x - be->rad);
-		omax->x = max(omax->x, be->loc.x + be->rad);
-		omin->y = min(omin->y, be->loc.y - be->rad);
-		omax->y = max(omax->y, be->loc.y + be->rad);
-		omin->z = min(omin->z, be->loc.z - be->rad);
-		omax->z = max(omax->z, be->loc.z + be->rad);
+		omin->x = fmin(omin->x, be->loc.x - be->rad);
+		omax->x = fmax(omax->x, be->loc.x + be->rad);
+		omin->y = fmin(omin->y, be->loc.y - be->rad);
+		omax->y = fmax(omax->y, be->loc.y + be->rad);
+		omin->z = fmin(omin->z, be->loc.z - be->rad);
+		omax->z = fmax(omax->z, be->loc.z + be->rad);
 	}
 
 	omin->x -= EPSILON;
@@ -1321,5 +1321,5 @@ void DrawBlob(Object *obj)
 {
 	Set_Pt(-1, 0.0, 0.0, 0.0);
 	/* Not used: */
-	obj;
+	//obj;
 }

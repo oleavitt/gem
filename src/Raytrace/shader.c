@@ -170,8 +170,8 @@ Shader *Ray_CloneShaderList(Shader *srcshaderlist)
 /**
  * Runs the VMShader
  *
- * @param - shader - Shader* - Shader list element containing current shader to run.
- * @param - data - Generic pointer to renderer object that shader works on.
+ * @param shader - Shader* - Shader list element containing current shader to run.
+ * @param data - Generic pointer to renderer object that shader works on.
  */
 void Ray_RunShader(Shader *shader, void *data)
 {

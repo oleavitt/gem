@@ -1,0 +1,178 @@
+//
+// Hexagonal tiles.
+//
+
+paths "c:\yart\include"
+
+include "textures.inc"
+
+//
+// You are here...
+//
+camera {
+  from <0, 36, -48>
+  at <0, 0, 0>
+  up <0, 1, 0>
+  angle 27
+}
+
+//
+// Turn on some light...
+//
+light {
+  average
+  light { from <-30, 90, -30> color White }
+  light { from <30, 90, -30> color White }
+  light { from <-30, 90, 30> color White }
+  light { from <30, 90, 30> color White }
+}
+
+//
+// The room...
+//
+object {
+  box <-60, -1, -60>, <60, 96, 60>
+  texture {
+    surface 0.3, 0.7
+    color Off_White
+  }
+}	
+
+//
+// Some stuff...
+//
+
+float t = 0.25, s = 1/0.866 - t
+
+object Pink_Hex_Tile {
+  object {
+  (uv_tri <0, t, 0>, <0, t, s>, <s*0.866, t, s*0.5>, 0, 0, 0, 1, 1, 1) +
+//  (uv_tri <0, -t, 0>, <0, -t, s>, <s*0.866, -t, s*0.5>, 0, 0, 0, 1, 1, 1) +
+  (uv_tri <0, t, 0>, <s*0.866, t, s*0.5>, <s*0.866, t, -s*0.5>, 0, 0, 0, 1, 1, 1) + 
+//  (uv_tri <0, -t, 0>, <s*0.866, -t, s*0.5>, <s*0.866, -t, -s*0.5>, 0, 0, 0, 1, 1, 1) +
+  (uv_tri <0, t, 0>, <s*0.866, t, -s*0.5>, <0, t, -s>, 0, 0, 0, 1, 1, 1) + 
+//  (uv_tri <0, -t, 0>, <s*0.866, -t, -s*0.5>, <0, -t, -s>, 0, 0, 0, 1, 1, 1) +
+  (uv_tri <0, t, 0>, <0, t, -s>, <-s*0.866, t, -s*0.5>, 0, 0, 0, 1, 1, 1) + 
+//  (uv_tri <0, -t, 0>, <0, -t, -s>, <-s*0.866, -t, -s*0.5>, 0, 0, 0, 1, 1, 1) +
+  (uv_tri <0, t, 0>, <-s*0.866, t, -s*0.5>, <-s*0.866, t, s*0.5>, 0, 0, 0, 1, 1, 1) + 
+//  (uv_tri <0, -t, 0>, <-s*0.866, -t, -s*0.5>, <-s*0.866, -t, s*0.5>, 0, 0, 0, 1, 1, 1) +
+  (uv_tri <0, t, 0>, <-s*0.866, t, s*0.5>, <0, t, s>, 0, 0, 0, 1, 1, 1)
+// + (uv_tri <0, -t, 0>, <-s*0.866, -t, s*0.5>, <0, -t, s>, 0, 0, 0, 1, 1, 1)
+  texture {
+    Shiny
+    surface 0.3, 0.7
+    color fn v * Pink + (1 - v) * White
+  }
+  } +
+  object {
+  (sphere <0, 0, s>, t) +
+  (cyl <0, 0, s>, <s*0.866, 0, s*0.5>, t) + 
+  (sphere <s*0.866, 0, s*0.5>, t) +
+  (cyl <s*0.866, 0, s*0.5>, <s*0.866, 0, -s*0.5>, t) + 
+  (sphere <s*0.866, 0, -s*0.5>, t) +
+  (cyl <s*0.866, 0, -s*0.5>, <0, 0, -s>, t) + 
+  (sphere <0, 0, -s>, t) +
+  (cyl <0, 0, -s>, <-s*0.866, 0, -s*0.5>, t) + 
+  (sphere <-s*0.866, 0, -s*0.5>, t) +
+  (cyl <-s*0.866, 0, -s*0.5>, <-s*0.866, 0, s*0.5>, t) + 
+  (sphere <-s*0.866, 0, s*0.5>, t) +
+  (cyl <-s*0.866, 0, s*0.5>, <0, 0, s>, t)
+  texture {
+    Shiny
+    surface 0.3, 0.7
+    color Pink
+  }
+  }
+}
+
+
+object Black_Hex_Tile {
+  (polygon <0, t, s>, <s*0.866, t, s*0.5>, <s*0.866, t, -s*0.5>,
+          <0, t, -s>, <-s*0.866, t, -s*0.5>, <-s*0.866, t, s*0.5>) +
+//  (polygon <0, -t, s>, <s*0.866, -t, s*0.5>, <s*0.866, -t, -s*0.5>,
+//          <0, -t, -s>, <-s*0.866, -t, -s*0.5>, <-s*0.866, -t, s*0.5>) +
+  (sphere <0, 0, s>, t) +
+  (cyl <0, 0, s>, <s*0.866, 0, s*0.5>, t) + 
+  (sphere <s*0.866, 0, s*0.5>, t) +
+  (cyl <s*0.866, 0, s*0.5>, <s*0.866, 0, -s*0.5>, t) + 
+  (sphere <s*0.866, 0, -s*0.5>, t) +
+  (cyl <s*0.866, 0, -s*0.5>, <0, 0, -s>, t) + 
+  (sphere <0, 0, -s>, t) +
+  (cyl <0, 0, -s>, <-s*0.866, 0, -s*0.5>, t) + 
+  (sphere <-s*0.866, 0, -s*0.5>, t) +
+  (cyl <-s*0.866, 0, -s*0.5>, <-s*0.866, 0, s*0.5>, t) + 
+  (sphere <-s*0.866, 0, s*0.5>, t) +
+  (cyl <-s*0.866, 0, s*0.5>, <0, 0, s>, t)
+  texture {
+    surface 0.3, 0.5, 0.2
+    specular 4, 0.005
+    color Black
+  }
+}
+
+
+float s3 = 1.73
+
+object Row {
+  (Black_Hex_Tile translate <-11,0,0>) +
+  (Pink_Hex_Tile translate <-9,0,0>) +
+  (Pink_Hex_Tile translate <-7,0,0>) +
+  (Black_Hex_Tile translate <-5,0,0>) +
+  (Pink_Hex_Tile translate <-3,0,0>) +
+  (Pink_Hex_Tile translate <-1,0,0>) +
+  (Black_Hex_Tile translate <1,0,0>) +
+  (Pink_Hex_Tile translate <3,0,0>) +
+  (Pink_Hex_Tile translate <5,0,0>) +
+  (Black_Hex_Tile translate <7,0,0>) +
+  (Pink_Hex_Tile translate <9,0,0>) +
+  (Pink_Hex_Tile translate <11,0,0>) +
+  (
+    (Pink_Hex_Tile translate <-11,0,0>) +
+    (Black_Hex_Tile translate <-9,0,0>) +
+    (Pink_Hex_Tile translate <-7,0,0>) +
+    (Pink_Hex_Tile translate <-5,0,0>) +
+    (Black_Hex_Tile translate <-3,0,0>) +
+    (Pink_Hex_Tile translate <-1,0,0>) +
+    (Pink_Hex_Tile translate <1,0,0>) +
+    (Black_Hex_Tile translate <3,0,0>) +
+    (Pink_Hex_Tile translate <5,0,0>) +
+    (Pink_Hex_Tile translate <7,0,0>) +
+    (Black_Hex_Tile translate <9,0,0>) +
+    (Pink_Hex_Tile translate <11,0,0>)
+    translate <1, 0, -s3>
+  )
+}
+
+
+object {
+  (Row translate <0, 0, -5 * s3>) +
+  (Row translate <0, 0, -3 * s3>) +
+  (Row translate <0, 0, -s3>) +
+  (Row translate <0, 0, s3>) +
+  (Row translate <0, 0, 3 * s3>) +
+  (Row translate <0, 0, 5 * s3>) +
+  (Row translate <0, 0, 7 * s3>)
+  translate <0, -t, 0>
+  scale 6
+}
+
+object {
+  sphere <0, 6, 0>, 6
+  texture
+    {
+    Dented_Copper
+    specular Copper * 8, 0.01
+    }
+  translate <-7, 0, 0>
+}
+
+object {
+  sphere <0, 6, 0>, 6
+  texture
+    {
+    Polished_Brass
+    specular Brass * 8, 0.01
+    }
+  translate <7, 0, 0>
+}
+

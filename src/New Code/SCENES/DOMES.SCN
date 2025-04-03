@@ -1,0 +1,128 @@
+//
+// A procedurally generated geodesic dome.
+//
+
+paths "c:\yart\include"
+
+include "textures.inc"
+
+//--------------------------------------------------------------------------
+//
+//  Parameters for the dome...
+//
+//--------------------------------------------------------------------------
+
+//
+// Center and radius of dome
+//
+vector Center = <0, 6, 0>
+float Radius = 24
+
+//
+// Number of segments for dome.
+// Should be, at least, three.
+//
+float NumberOfSegments = 6
+
+//
+// Common texture for triangles that make up the dome.
+//
+texture DomeTexture
+  {
+  color Orange
+  surface 0.3, 0.7
+  }
+
+
+//--------------------------------------------------------------------------
+
+
+//
+// You are here...
+//
+camera
+  {
+  from <0, 68, -68>
+  at <0, 8, 0>
+  up <0, 1, 0>
+  angle 30
+  }
+
+//
+// Turn on some lights...
+//
+light
+  {
+  from <50, 100, 50>
+  color (Cyan + White) / 2 * 0.5
+  }
+
+light
+  {
+  from <-50, 50, -50>
+  color Lemon_Yellow * 0.5
+  }
+
+
+//
+// Terra firma...
+//
+object
+  {
+  disc 0, <0, 1, 0>, 100
+  texture
+    {
+    color Off_White
+    surface 0.3, 0.7
+    }
+  }	
+
+//
+// Generate the dome...
+//
+
+//
+// Procedure that sub-divides a segment of the dome's surface
+// into a mesh of triangles.
+//
+proc SubDivideTriangle(vector P1, vector P2, vector P3, float level)
+  {
+  vector MP12, MP13, MP23
+
+  if level > 0
+    {
+    //
+    // Compute mid-points and project them onto a sphere
+    //
+    MP12 = vnorm((P2 - P1) / 2 + P1) * Radius
+    MP13 = vnorm((P3 - P1) / 2 + P1) * Radius
+    MP23 = vnorm((P3 - P2) / 2 + P2) * Radius
+    //
+    // Sub-divide down another level...
+    //
+    level -= 1
+    SubDivideTriangle(P1, MP12, MP13, level)
+    SubDivideTriangle(MP12, P2, MP23, level)
+    SubDivideTriangle(MP13, MP23, P3, level)
+    SubDivideTriangle(MP12, MP23, MP13, level)
+    }
+  else            // Emit a triangle...
+    {
+    object
+      {
+      tri P1, P2, P3
+      DomeTexture
+      translate Center
+      }
+    }
+  }
+
+
+float th = 0, Angle = 360 / NumberOfSegments
+
+while th < 359
+  {
+  SubDivideTriangle(<0,Radius,0>,rotate(<0,0,Radius>,<0,th,0>),
+    rotate(<0,0,Radius>,<0,th+Angle,0>),2)
+  th += Angle
+  }

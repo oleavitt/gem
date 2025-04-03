@@ -1,0 +1,49 @@
+
+include "colors.inc"
+include "basicsurfs.inc"
+
+main {
+	viewport {
+		from = <0, 4, 3>;
+		at = <0, 0, 2>;
+		angle = 30;
+	}
+
+	light {
+		location = <10, 30, 30>;
+		color = White;
+		falloff = 0.0006;
+	}
+	light {
+		location = <-20, 30, 10>;
+		color = White;
+		falloff = 0.0004;
+	}
+
+	disc <0, 0, 0>, <0, 0, 1>, 100 {
+		surface {
+			color = White;
+			diffuse = 0.8;
+			ambient = 0.2;
+		}
+	}
+	clip {
+	intersection {
+//		bound {
+//			closed_cylinder <0, 0, -0.51>, <0, 0, 0.51>, 0.331;
+//		}
+		fn_xyz sqrt(x*x + y*y + z*z) - 0.25 + turb(O*<3, 3, 10>, 3),
+			-1, 1, <100, 100, 100>;
+		closed_cylinder <0, 0, -0.5>, <0, 0, 0.5>, 0.33;
+		surface {
+			color = Magenta;
+			diffuse = 0.8;
+			ambient = 0.2;
+			specular = 1;
+			Phong = 100;
+		}
+		translate <0, 0, 2>;
+	}
+	closed_cylinder <0, 0, -0.51>, <0, 0, 0.51>, 0.331
+	}
+}

@@ -167,8 +167,8 @@ int Intersect_Box(Vec3 *B, Vec3 *D, Vec3 *bmin, Vec3 *bmax,
 		t2 = (bmax->x - B->x) / D->x;
 		if(t1 < EPSILON && t2 < EPSILON)
 			return 0;              /* Behind ya. */
-		tmin.x = min(t1, t2);
-		tmax.x = max(t1, t2);
+		tmin.x = fmin(t1, t2);
+		tmax.x = fmax(t1, t2);
 	}
 	else  /* Ray is parallel to X planes. */
 	{
@@ -184,8 +184,8 @@ int Intersect_Box(Vec3 *B, Vec3 *D, Vec3 *bmin, Vec3 *bmax,
 		t2 = (bmax->y - B->y) / D->y;
 		if(t1 < EPSILON && t2 < EPSILON)
 			return 0;              /* Behind ya. */
-		tmin.y = min(t1, t2);
-		tmax.y = max(t1, t2);
+		tmin.y = fmin(t1, t2);
+		tmax.y = fmax(t1, t2);
 	}
 	else  /* Ray is parallel to Y planes. */
 	{
@@ -201,8 +201,8 @@ int Intersect_Box(Vec3 *B, Vec3 *D, Vec3 *bmin, Vec3 *bmax,
 		t2 =(bmax->z - B->z) / D->z;
 		if(t1 < EPSILON && t2 < EPSILON)
 			return 0;              /* Behind ya. */
-		tmin.z = min(t1, t2);
-		tmax.z = max(t1, t2);
+		tmin.z = fmin(t1, t2);
+		tmax.z = fmax(t1, t2);
 	}
 	else  /* Ray is parallel to Z planes. */
 	{
@@ -214,10 +214,10 @@ int Intersect_Box(Vec3 *B, Vec3 *D, Vec3 *bmin, Vec3 *bmax,
 
 	t1 = tmin.x;
 	t2 = tmax.x;
-	t1 = max(t1, tmin.y);
-	t2 = min(t2, tmax.y);
-	t1 = max(t1, tmin.z);
-	t2 = min(t2, tmax.z);
+	t1 = fmax(t1, tmin.y);
+	t2 = fmin(t2, tmax.y);
+	t1 = fmax(t1, tmin.z);
+	t2 = fmin(t2, tmax.z);
 
 	if(t1 < t2)
 	{
@@ -294,7 +294,7 @@ void CalcUVMapBox(Object *obj, Vec3 *P, double *u, double *v)
 	*u = *v = 0.0;
 
 	/* Not used */
-	P; obj;
+	//P; obj;
 }
 
 

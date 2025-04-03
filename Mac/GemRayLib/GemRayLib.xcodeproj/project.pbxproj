@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8C4FA44F1DEACE7400CC2CB9 /* local.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4FA44A1DEACE7400CC2CB9 /* local.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8C4FA4501DEACE7400CC2CB9 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C4FA44B1DEACE7400CC2CB9 /* matrix.c */; };
+		8C4FA4511DEACE7400CC2CB9 /* Rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C4FA44C1DEACE7400CC2CB9 /* Rand.c */; };
+		8C4FA4521DEACE7400CC2CB9 /* solve.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C4FA44D1DEACE7400CC2CB9 /* solve.c */; };
+		8C4FA4531DEACE7400CC2CB9 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C4FA44E1DEACE7400CC2CB9 /* vector.c */; };
+		8C4FA4561DEACE9D00CC2CB9 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4FA4541DEACE9D00CC2CB9 /* config.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8C4FA4571DEACE9D00CC2CB9 /* math3d.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4FA4551DEACE9D00CC2CB9 /* math3d.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8C4FA4681DEAD31300CC2CB9 /* Image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C4FA4641DEAD31300CC2CB9 /* Image.c */; };
+		8C4FA4691DEAD31300CC2CB9 /* Local.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4FA4651DEAD31300CC2CB9 /* Local.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8C4FA46A1DEAD31300CC2CB9 /* Targa.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C4FA4661DEAD31300CC2CB9 /* Targa.c */; };
+		8C4FA46B1DEAD31300CC2CB9 /* TARGA.H in Headers */ = {isa = PBXBuildFile; fileRef = 8C4FA4671DEAD31300CC2CB9 /* TARGA.H */; settings = {ATTRIBUTES = (Private, ); }; };
+		8C4FA46D1DEAD33100CC2CB9 /* image.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4FA46C1DEAD33100CC2CB9 /* image.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8C4FA45E1DEAD03A00CC2CB9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8C4FA4421DEACE4400CC2CB9 /* libGemRayLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGemRayLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C4FA44A1DEACE7400CC2CB9 /* local.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = local.h; path = ../../src/Math3D/local.h; sourceTree = "<group>"; };
+		8C4FA44B1DEACE7400CC2CB9 /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = matrix.c; path = ../../src/Math3D/matrix.c; sourceTree = "<group>"; };
+		8C4FA44C1DEACE7400CC2CB9 /* Rand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Rand.c; path = ../../src/Math3D/Rand.c; sourceTree = "<group>"; };
+		8C4FA44D1DEACE7400CC2CB9 /* solve.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = solve.c; path = ../../src/Math3D/solve.c; sourceTree = "<group>"; };
+		8C4FA44E1DEACE7400CC2CB9 /* vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vector.c; path = ../../src/Math3D/vector.c; sourceTree = "<group>"; };
+		8C4FA4541DEACE9D00CC2CB9 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../../src/Include/config.h; sourceTree = "<group>"; };
+		8C4FA4551DEACE9D00CC2CB9 /* math3d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = math3d.h; path = ../../src/Include/math3d.h; sourceTree = "<group>"; };
+		8C4FA4641DEAD31300CC2CB9 /* Image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Image.c; path = ../../src/Image/Image.c; sourceTree = "<group>"; };
+		8C4FA4651DEAD31300CC2CB9 /* Local.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Local.h; path = ../../src/Image/Local.h; sourceTree = "<group>"; };
+		8C4FA4661DEAD31300CC2CB9 /* Targa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Targa.c; path = ../../src/Image/Targa.c; sourceTree = "<group>"; };
+		8C4FA4671DEAD31300CC2CB9 /* TARGA.H */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TARGA.H; path = ../../src/Image/TARGA.H; sourceTree = "<group>"; };
+		8C4FA46C1DEAD33100CC2CB9 /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = image.h; path = ../../src/Include/image.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8C4FA43F1DEACE4400CC2CB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8C4FA4391DEACE4400CC2CB9 = {
+			isa = PBXGroup;
+			children = (
+				8C4FA46C1DEAD33100CC2CB9 /* image.h */,
+				8C4FA4631DEAD2F500CC2CB9 /* Image */,
+				8C4FA4541DEACE9D00CC2CB9 /* config.h */,
+				8C4FA4551DEACE9D00CC2CB9 /* math3d.h */,
+				8C4FA4491DEACE5400CC2CB9 /* Math3D */,
+				8C4FA4431DEACE4400CC2CB9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8C4FA4431DEACE4400CC2CB9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C4FA4421DEACE4400CC2CB9 /* libGemRayLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C4FA4491DEACE5400CC2CB9 /* Math3D */ = {
+			isa = PBXGroup;
+			children = (
+				8C4FA44A1DEACE7400CC2CB9 /* local.h */,
+				8C4FA44B1DEACE7400CC2CB9 /* matrix.c */,
+				8C4FA44C1DEACE7400CC2CB9 /* Rand.c */,
+				8C4FA44D1DEACE7400CC2CB9 /* solve.c */,
+				8C4FA44E1DEACE7400CC2CB9 /* vector.c */,
+			);
+			name = Math3D;
+			sourceTree = "<group>";
+		};
+		8C4FA4631DEAD2F500CC2CB9 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				8C4FA4641DEAD31300CC2CB9 /* Image.c */,
+				8C4FA4651DEAD31300CC2CB9 /* Local.h */,
+				8C4FA4661DEAD31300CC2CB9 /* Targa.c */,
+				8C4FA4671DEAD31300CC2CB9 /* TARGA.H */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8C4FA4401DEACE4400CC2CB9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C4FA46D1DEAD33100CC2CB9 /* image.h in Headers */,
+				8C4FA4571DEACE9D00CC2CB9 /* math3d.h in Headers */,
+				8C4FA46B1DEAD31300CC2CB9 /* TARGA.H in Headers */,
+				8C4FA4561DEACE9D00CC2CB9 /* config.h in Headers */,
+				8C4FA4691DEAD31300CC2CB9 /* Local.h in Headers */,
+				8C4FA44F1DEACE7400CC2CB9 /* local.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8C4FA4411DEACE4400CC2CB9 /* GemRayLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C4FA4461DEACE4400CC2CB9 /* Build configuration list for PBXNativeTarget "GemRayLib" */;
+			buildPhases = (
+				8C4FA43E1DEACE4400CC2CB9 /* Sources */,
+				8C4FA43F1DEACE4400CC2CB9 /* Frameworks */,
+				8C4FA4401DEACE4400CC2CB9 /* Headers */,
+				8C4FA45E1DEAD03A00CC2CB9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GemRayLib;
+			productName = GemRayLib;
+			productReference = 8C4FA4421DEACE4400CC2CB9 /* libGemRayLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8C4FA43A1DEACE4400CC2CB9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = OrenLeavitt;
+				TargetAttributes = {
+					8C4FA4411DEACE4400CC2CB9 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8C4FA43D1DEACE4400CC2CB9 /* Build configuration list for PBXProject "GemRayLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8C4FA4391DEACE4400CC2CB9;
+			productRefGroup = 8C4FA4431DEACE4400CC2CB9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8C4FA4411DEACE4400CC2CB9 /* GemRayLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8C4FA43E1DEACE4400CC2CB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C4FA4531DEACE7400CC2CB9 /* vector.c in Sources */,
+				8C4FA4521DEACE7400CC2CB9 /* solve.c in Sources */,
+				8C4FA4511DEACE7400CC2CB9 /* Rand.c in Sources */,
+				8C4FA46A1DEAD31300CC2CB9 /* Targa.c in Sources */,
+				8C4FA4501DEACE7400CC2CB9 /* matrix.c in Sources */,
+				8C4FA4681DEAD31300CC2CB9 /* Image.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8C4FA4441DEACE4400CC2CB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8C4FA4451DEACE4400CC2CB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8C4FA4471DEACE4400CC2CB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8C4FA4481DEACE4400CC2CB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8C4FA43D1DEACE4400CC2CB9 /* Build configuration list for PBXProject "GemRayLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C4FA4441DEACE4400CC2CB9 /* Debug */,
+				8C4FA4451DEACE4400CC2CB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C4FA4461DEACE4400CC2CB9 /* Build configuration list for PBXNativeTarget "GemRayLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C4FA4471DEACE4400CC2CB9 /* Debug */,
+				8C4FA4481DEACE4400CC2CB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8C4FA43A1DEACE4400CC2CB9 /* Project object */;
+}

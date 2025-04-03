@@ -205,7 +205,7 @@ void Ray_GetSetup(RaySetupData *rsd)
 void Ray_Close(void)
 {
 	CloseBackground();
-   CloseVisibility();
+    CloseVisibility();
 	CloseInter();
 	CloseTraceStack();
 	CloseLight();

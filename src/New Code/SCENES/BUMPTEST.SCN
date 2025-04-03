@@ -1,0 +1,125 @@
+//
+// Generic test script file for YART.
+//
+
+
+include "colors.inc"
+
+//
+// You are here...
+//
+camera
+  {
+  from <-36, 20, -120>
+  at <0, 6, 0>
+  up <0, 1, 0>
+  angle 30
+  }
+
+
+//
+// Set background...
+//
+background <0, 0, 0.33> , <0, 0, 0>
+
+
+//
+// Turn on some light...
+//
+vector Moon_Loc = <1200, 500, 10000>
+
+light { from Moon_Loc color 0.5 }
+object
+  {
+  sphere Moon_Loc, 150
+  texture
+    {
+    color White
+    surface 5, 0, 0
+    }
+    no_shadow
+  }
+
+light {
+average
+light { from <500, 5, 500> color 0.3 ambient }
+light { from <-500, 5, 500> color 0.3 ambient }
+light { from <500, 5, -500> color 0.3 ambient }
+light { from <-500, 5, -500> color 0.3 ambient }
+light { from <500, 500, 500> color 0.3 ambient }
+light { from <-500, 500, 500> color 0.3 ambient }
+light { from <500, 500, -500> color 0.3 ambient }
+light { from <-500, 500, -500> color 0.3 ambient }
+}
+
+light { from <0, 2.9, 0> color <1.0, 0.95, 0.85> falloff 0.8 scale 6 }
+//
+// Terra firma...
+//
+object
+  {
+  disc <0, 0, 0>, <0, 1, 0>, 5000
+  texture
+    {
+    color <0.1, 0.2, 0.6>
+    surface 0.1, 0.3, 0.5
+    bump
+      (
+      vnorm(O) * cos(|O|) +
+      vnorm(O+<201,0,191>) * cos(|O+<201,0,191>|) +
+      vnorm(O+<-153,0,279>) * cos(|O+<-153,0,279>|) +
+      vnorm(O+<150,0,-211>) * cos(|O+<150,0,-211>|) +
+      vnorm(O+<-235,0,-120>) * cos(|O+<-235,0,-120>|)
+      ) / 5 * 0.05
+    }
+  }
+	
+
+//
+// Some stuff...
+//
+
+object 
+{
+object
+  {
+  sphere <0, 1.1, 0>, 1
+  texture
+    {
+    color <1.0, 0.8, 0.7>
+    surface 0, 1
+    specular 0.8, 0.05
+    }
+  } +
+object
+  {
+  box <-3,0,-3>, <3, 0.1, 3>
+  texture
+    {
+    color fn checker(O) ? White : Gray
+    surface 0, 1
+    }
+  } +
+object
+  {
+  object { cyl <2.5, 0, 2.5>, <2.5, 3, 2.5>, 0.25 } +
+  object { cyl <-2.5, 0, 2.5>, <-2.5, 3, 2.5>, 0.25 } +
+  object { cyl <2.5, 0, -2.5>, <2.5, 3, -2.5>, 0.25 } +
+  object { cyl <-2.5, 0, -2.5>, <-2.5, 3, -2.5>, 0.25 }
+  texture
+    {
+    color White
+    surface 0, 1
+    }
+  } +
+object
+  {
+  box <-3,3,-3>, <3, 3.5, 3>
+  texture
+    {
+    color fn checker(O) ? White : Gray
+    surface 0, 1
+    }
+  }
+  scale 6
+}

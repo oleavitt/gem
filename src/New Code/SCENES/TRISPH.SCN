@@ -1,0 +1,73 @@
+//
+// A procedurally generated sphere made of triangles.
+//
+
+paths "c:\yart\include"
+
+include "textures.inc"
+include "tessel.inc"
+
+
+//
+// Common texture for triangles that make up the sphere.
+//
+texture
+  {
+  color Orange
+  surface 0.3, 0.7
+  specular 1.0, 0.05
+  }
+
+
+//
+// You are here...
+//
+camera
+  {
+  from <0, 30, -60>
+  at <0, 12, 0>
+  up <0, 1, 0>
+  angle 30
+  }
+
+
+//
+// Turn on some lights...
+//
+light
+  {
+  from <50, 100, 50>
+  color (Cyan + White) / 2 * 0.5
+  }
+
+light
+  {
+  from <-50, 50, -50>
+  color Lemon_Yellow * 0.5
+  }
+
+
+//
+// Terra firma...
+//
+object
+  {
+  disc 0, <0, 1, 0>, 100
+  texture
+    {
+    color Off_White
+    surface 0.3, 0.7
+    }
+  }	
+
+
+//
+// Generate the sphere...
+//
+//              +------------------ Sphere's center
+//              |      +----------- Sphere's radius
+//              |      |  +-------- Level of recursion for sub-division
+//              |      |  |  +----- Initial # of segments for each hemisphere
+//              |      |  |  |  +-- Hemisphere flags, 1 = top, 2 = bottom
+//              |      |  |  |  |     3 = both
+TessSphere1(<0,12,0>, 12, 3, 6, 3)

@@ -53,10 +53,10 @@ typedef struct tag_mat4x4
 *************************************************************************/
 
 /* Ridiculously big. */
-#ifdef HUGE
-#undef HUGE
-#endif
-#define HUGE		1e10
+//#ifdef HUGE
+//#undef HUGE
+//#endif
+//#define HUGE		1e10
 
 /* Ridiculously small. */
 #ifdef EPSILON
@@ -82,9 +82,9 @@ typedef struct tag_mat4x4
 #define RTOD		(180.0 / PI)
 #define DEG(a)		((a) * RTOD)
 
-#define ABS(a)		((a) < 0 ? -(a) : (a))
-#define MIN(a, b)	((a) < (b) ? (a) : (b))
-#define MAX(a, b)	((a) > (b) ? (a) : (b))
+//#define ABS(a)		((a) < 0 ? -(a) : (a))
+//#define MIN(a, b)	((a) < (b) ? (a) : (b))
+//#define MAX(a, b)	((a) > (b) ? (a) : (b))
 
 /* Square a value. */
 #define SQR(a)		((a)*(a))
@@ -95,7 +95,7 @@ typedef struct tag_mat4x4
 /* Clamp a to the range specified by lo and hi. */
 #define CLAMP(a, lo, hi) ((a) < (lo) ? (lo) : (a) > (hi) ? (hi) : (a))
 /* True if number is smaller than EPSILON. */
-#define ISZERO(a)	(ABS(a) < EPSILON)
+#define ISZERO(a)	(fabs(a) < EPSILON)
 
 /*************************************************************************
 *
@@ -232,7 +232,7 @@ extern void M3x3Copy(Mat3x3 *Mdest, Mat3x3 *Msrc);
 extern void M3x3Identity(Mat3x3 *M);
 extern void M3x3Transpose(Mat3x3 *M);
 extern void M3x3Mul(Mat3x3 *Mout, Mat3x3 *M1, Mat3x3 *M2);
-extern void M3x3Inverse(Mat3x3 *I);
+extern void M3x3Inverse(Mat3x3 *Inv);
 
 /*************************************************************************
 *
@@ -243,7 +243,7 @@ extern void M4x4Copy(Mat4x4 *Mdest, Mat4x4 *Msrc);
 extern void M4x4Identity(Mat4x4 *M);
 extern void M4x4Transpose(Mat4x4 *M);
 extern void M4x4Mul(Mat4x4 *Mout, Mat4x4 *M1, Mat4x4 *M2);
-extern void M4x4Inverse(Mat4x4 *I);
+extern void M4x4Inverse(Mat4x4 *Inv);
 extern void M4x4Translate(Mat4x4 *M, Vec3 *V);
 extern void M4x4Scale(Mat4x4 *M, Vec3 *V);
 extern void M4x4RotateX(Mat4x4 *M, double angle);

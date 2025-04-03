@@ -36,7 +36,7 @@ static TraceStack *NewTraceStackElem(void)
   if(ts != NULL)
   {
     memset(ts, 0, sizeof(TraceStack));
-    ts->hits = NewHit();
+    ts->hits = NewHitData();
     if(ts->hits == NULL)
       ts = DeleteTraceStackElem(ts);
   }

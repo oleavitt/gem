@@ -1,0 +1,16 @@
+Gem TODO:
+========================================================================
+Mac app:
+
+
+Add antialiasing check box
+
+Save image to file
+	1. Make original TGA work
+	2. Add option to save to other formats - JPEG, PNG, TIFF, etc
+
+Save state for resume
+========================================================================
+Ray tracer core:
+Re-implement "inverse" flag in objects
+"bound" object type

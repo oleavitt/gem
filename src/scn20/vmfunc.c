@@ -494,7 +494,7 @@ void vm_delete_arglist(VMArgument *arglist)
 {
 	VMArgument *arg;
 
-	while (arglist != NULL && arglist != 0xdddddddd)
+	while (arglist != NULL)
 	{
 		arg = arglist;
 		arglist = arglist->next;

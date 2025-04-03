@@ -1,0 +1,9 @@
+/* 
+  Localized.strings
+  Gem
+
+  Created by Oren Leavitt on 3/20/20.
+  Copyright © 2020 Oren Leavitt. All rights reserved.
+*/
+
+"render_time_fmt" = "Render time: %.3g";

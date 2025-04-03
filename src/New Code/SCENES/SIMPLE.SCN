@@ -1,0 +1,86 @@
+//
+// simple.scn
+//
+// A fully commented minimal scene consisting of a red sphere
+// and a white plane, intended to be a self-explanatory
+// "quick start" scene.
+//
+
+//
+// A minimal scene usualy consists of a "camera", at least one "light"
+// source, and at least one "object".
+//
+
+//
+// A file containing many pre-defined colors.
+// The "include" statement causes the contents of the specified file
+// to be read as if its contents were typed directly into this file.
+//
+include "colors.inc"
+
+//
+// Set up our view point...
+//
+camera
+  {
+  from <0, 1.2, -8>        //  Point we are looking from
+  at <0, 1, 0>             //  Point that we are looking at
+  up <0, 1, 0>             //  Define which direction is "up"
+  angle 30                 //  The width of our field of view
+  }
+
+
+//
+// Set background color to black...
+//
+background <0, 0, 0>
+
+
+//
+// Create a light source...
+//
+light
+  {
+  from <10, 10, -10>       //  Set location of light source
+  color White              //  Set light color to the pre-defined White
+  }
+
+
+//
+// Define a white plane...
+//
+object
+  {
+  plane <0, 0, 0>, <0, 1, 0>
+
+  //
+  // Define the white texture...
+  //
+  texture
+    {
+    color White            //  Set base color for surface
+    ambient 0.3            //  Set ambient light level
+    diffuse 0.7            //  Set diffuse light level
+    }
+  }
+
+
+//
+// Define a red sphere...
+//
+object
+  {
+  sphere <0, 1, 0>, 1      //  Create a sphere and set location
+                           //  and radius
+
+  //
+  // Define the red texture...
+  //
+  texture
+    {
+    color Red              //  Set color to pre-defined red
+    ambient 0.3            //  Set ambient light level
+    diffuse 0.7            //  Set diffuse light level
+    specular 0.8, 0.02     //  Set the amount, and size,
+    }                      //    of the specular highlight
+  }

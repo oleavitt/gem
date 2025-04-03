@@ -166,7 +166,7 @@ Object *Ray_MakeMesh(PARAMS *par)
 
 	return NULL;
 }
-#endif OLDCODE
+#endif //OLDCODE
 
 /*
  * Create a new mesh Object.
@@ -889,16 +889,16 @@ int CalcTriListExtents(MeshTri *tris, int ntris,
 		if (bmin->z > t->v3->z) bmin->z = t->v3->z;
 		if (bmax->z < t->v3->z) bmax->z = t->v3->z;
 		m = (t->v1->x + t->v2->x + t->v3->x) / 3.0;
-		mxl = min(m, mxl);
-		mxh = max(m, mxh);
+		mxl = fmin(m, mxl);
+		mxh = fmax(m, mxh);
 		mx += m;
 		m = (t->v1->y + t->v2->y + t->v3->y) / 3.0;
-		myl = min(m, myl);
-		myh = max(m, myh);
+		myl = fmin(m, myl);
+		myh = fmax(m, myh);
 		my += m;
 		m = (t->v1->z + t->v2->z + t->v3->z) / 3.0;
-		mzl = min(m, mzl);
-		mzh = max(m, mzh);
+		mzl = fmin(m, mzl);
+		mzh = fmax(m, mzh);
 		mz += m;
 	}
 	mx /= (double)ntris;
