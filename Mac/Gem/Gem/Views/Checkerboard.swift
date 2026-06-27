@@ -8,9 +8,9 @@ import SwiftUI
 /// A checkerboard pattern of fixed-size squares, like the transparency backdrop
 /// in image-editing software. Fills its bounds; partial edge squares are clipped.
 struct Checkerboard: View {
-    var squareSize: CGFloat = 50
-    var light = Color(white: 0.82)
-    var dark = Color(white: 0.62)
+    var squareSize: CGFloat = 10
+    var light = Color(white: 0.5)
+    var dark = Color(white: 0.25)
 
     var body: some View {
         Canvas { context, size in
