@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+@main
 struct GemApp: App {
     @State private var model = RenderModel()
 

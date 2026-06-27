@@ -23,21 +23,15 @@
 		8C0DEE9A1DED2E7300697E06 /* Image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE961DED2E7300697E06 /* Image.c */; };
 		8C0DEE9B1DED2E7300697E06 /* Targa.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE981DED2E7300697E06 /* Targa.c */; };
 		8C2BF9C41DEA809E005DDF33 /* GemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2BF9C31DEA809E005DDF33 /* GemTests.swift */; };
-		8C79436A243EDF8E003BBB83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C794369243EDF8E003BBB83 /* Constants.swift */; };
-		8C79436D243EDFB0003BBB83 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79436C243EDFB0003BBB83 /* AppCoordinator.swift */; };
 		8C794371243EE01E003BBB83 /* CGRect+Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79436F243EE01E003BBB83 /* CGRect+Aspect.swift */; };
 		8C794372243EE01E003BBB83 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C794370243EE01E003BBB83 /* String+Localization.swift */; };
 		8C794384243EE04C003BBB83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C794374243EE04B003BBB83 /* Localizable.strings */; };
 		8C794385243EE04C003BBB83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C794376243EE04B003BBB83 /* Assets.xcassets */; };
-		8C794388243EE04C003BBB83 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79437B243EE04B003BBB83 /* MainViewController.swift */; };
-		8C794389243EE04C003BBB83 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79437C243EE04B003BBB83 /* ImageViewController.swift */; };
 		8C79438A243EE04C003BBB83 /* TestRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79437E243EE04B003BBB83 /* TestRenderer.swift */; };
 		8C79438B243EE04C003BBB83 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79437F243EE04B003BBB83 /* Renderer.swift */; };
 		8C79438C243EE04C003BBB83 /* OutputFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C794382243EE04B003BBB83 /* OutputFile.swift */; };
 		8C79438D243EE04C003BBB83 /* RawOutputFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C794383243EE04B003BBB83 /* RawOutputFile.swift */; };
 		8C794392243EE12B003BBB83 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79438E243EE12A003BBB83 /* AppData.swift */; };
-		8C794393243EE12B003BBB83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79438F243EE12A003BBB83 /* AppDelegate.swift */; };
-		8C794395243EE12B003BBB83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C794391243EE12A003BBB83 /* Main.storyboard */; };
 		8C794397243EEFEF003BBB83 /* RayTraceRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C794396243EEFEF003BBB83 /* RayTraceRenderer.swift */; };
 		8CC28B51244A4FF0009ABE88 /* todo.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8CC28B50244A4FF0009ABE88 /* todo.txt */; };
 		8CC28B53244AA51D009ABE88 /* BinaryInteger+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC28B52244AA51D009ABE88 /* BinaryInteger+String.swift */; };
@@ -158,22 +152,16 @@
 		8C2BF9C51DEA809E005DDF33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C2BF9CE1DEA809E005DDF33 /* GemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemUITests.swift; sourceTree = "<group>"; };
 		8C2BF9D01DEA809E005DDF33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C794369243EDF8E003BBB83 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		8C79436C243EDFB0003BBB83 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8C79436F243EE01E003BBB83 /* CGRect+Aspect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Aspect.swift"; sourceTree = "<group>"; };
 		8C794370243EE01E003BBB83 /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		8C794375243EE04B003BBB83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8C794376243EE04B003BBB83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8C79437B243EE04B003BBB83 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		8C79437C243EE04B003BBB83 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		8C79437E243EE04B003BBB83 /* TestRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRenderer.swift; sourceTree = "<group>"; };
 		8C79437F243EE04B003BBB83 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		8C794382243EE04B003BBB83 /* OutputFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputFile.swift; sourceTree = "<group>"; };
 		8C794383243EE04B003BBB83 /* RawOutputFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawOutputFile.swift; sourceTree = "<group>"; };
 		8C79438E243EE12A003BBB83 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
-		8C79438F243EE12A003BBB83 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C794390243EE12A003BBB83 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C794391243EE12A003BBB83 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8C794396243EEFEF003BBB83 /* RayTraceRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RayTraceRenderer.swift; sourceTree = "<group>"; };
 		8CC28B4D24496A33009ABE88 /* Gem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gem.entitlements; sourceTree = "<group>"; };
 		8CC28B50244A4FF0009ABE88 /* todo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo.txt; sourceTree = "<group>"; };
@@ -374,9 +362,7 @@
 				8C79437A243EE04B003BBB83 /* View Controllers */,
 				8C794377243EE04B003BBB83 /* View Port */,
 				8C79438E243EE12A003BBB83 /* AppData.swift */,
-				8C79438F243EE12A003BBB83 /* AppDelegate.swift */,
 				8C794390243EE12A003BBB83 /* Info.plist */,
-				8C794391243EE12A003BBB83 /* Main.storyboard */,
 				8C0DEE731DED1E2A00697E06 /* GemCtoSwift.h */,
 				8C0DEE741DED1E2A00697E06 /* GemCtoSwift.m */,
 			);
@@ -404,7 +390,6 @@
 		8C794368243EDF5B003BBB83 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				8C794369243EDF8E003BBB83 /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -412,7 +397,6 @@
 		8C79436B243EDFB0003BBB83 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				8C79436C243EDFB0003BBB83 /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -446,8 +430,6 @@
 		8C79437A243EE04B003BBB83 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8C79437B243EE04B003BBB83 /* MainViewController.swift */,
-				8C79437C243EE04B003BBB83 /* ImageViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -645,7 +627,6 @@
 				8CC28B51244A4FF0009ABE88 /* todo.txt in Resources */,
 				8C794384243EE04C003BBB83 /* Localizable.strings in Resources */,
 				8C794385243EE04C003BBB83 /* Assets.xcassets in Resources */,
-				8C794395243EE12B003BBB83 /* Main.storyboard in Resources */,
 			);
 		};
 		8C2BF9BD1DEA809E005DDF33 /* Resources */ = {
@@ -689,20 +670,16 @@
 				8CE7B1981DEFE4D0002461C3 /* param.c in Sources */,
 				8CE7B1A91DEFE4D0002461C3 /* vmlight.c in Sources */,
 				8CE7B14E1DEFDFFF002461C3 /* backgrnd.c in Sources */,
-				8C79436D243EDFB0003BBB83 /* AppCoordinator.swift in Sources */,
 				8CE7B1511DEFDFFF002461C3 /* box.c in Sources */,
 				8CE7B1AC1DEFE4D0002461C3 /* vmpoly.c in Sources */,
 				8C79438B243EE04C003BBB83 /* Renderer.swift in Sources */,
 				8CE7B1531DEFDFFF002461C3 /* Cone.c in Sources */,
 				8CE7B1AE1DEFE4D0002461C3 /* vmsrface.c in Sources */,
 				8CE7B1601DEFDFFF002461C3 /* sphere.c in Sources */,
-				8C794389243EE04C003BBB83 /* ImageViewController.swift in Sources */,
 				8CE7B19D1DEFE4D0002461C3 /* scn20.c in Sources */,
 				8C0DEE911DED2E5300697E06 /* Rand.c in Sources */,
-				8C794388243EE04C003BBB83 /* MainViewController.swift in Sources */,
 				8CE7B1A11DEFE4D0002461C3 /* symtab.c in Sources */,
 				8C79438C243EE04C003BBB83 /* OutputFile.swift in Sources */,
-				8C79436A243EDF8E003BBB83 /* Constants.swift in Sources */,
 				8CE7B1B01DEFE4D0002461C3 /* vmviewpt.c in Sources */,
 				8CE7B19A1DEFE4D0002461C3 /* pcontext.c in Sources */,
 				8CE7B1541DEFDFFF002461C3 /* Csg.c in Sources */,
@@ -742,7 +719,6 @@
 				8CE7B19B1DEFE4D0002461C3 /* pexpr.c in Sources */,
 				8C0DEE941DED2E5300697E06 /* vector.c in Sources */,
 				8C0DEE9A1DED2E7300697E06 /* Image.c in Sources */,
-				8C794393243EE12B003BBB83 /* AppDelegate.swift in Sources */,
 				8C794392243EE12B003BBB83 /* AppData.swift in Sources */,
 				5055070FED6954D9F6446FB6 /* PixelColor.swift in Sources */,
 				4BED033B046AE9F6B291B43A /* RenderTypes.swift in Sources */,
