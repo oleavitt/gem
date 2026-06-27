@@ -31,14 +31,4 @@ struct PixelColor: Sendable, Equatable {
         self.g = byte(green)
         self.b = byte(blue)
     }
-
-    /// Temporary bridge used while renderers still return `CGColor`. Removed in Task 5.
-    init(cgColor: CGColor) {
-        let c = cgColor.components ?? [0, 0, 0, 1]
-        let red   = c.count > 0 ? Double(c[0]) : 0
-        let green = c.count > 1 ? Double(c[1]) : 0
-        let blue  = c.count > 2 ? Double(c[2]) : 0
-        let alpha = c.count > 3 ? Double(c[3]) : 1
-        self.init(red: red, green: green, blue: blue, alpha: alpha)
-    }
 }

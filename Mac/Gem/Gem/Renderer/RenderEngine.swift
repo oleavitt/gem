@@ -44,7 +44,17 @@ actor RenderEngine {
         let height = Int(imageSize.height)
         let bounds = viewPortBounds.adjustedFor(aspectMode: aspectMode, targetSize: imageSize)
 
-        renderer.setup(viewPortBounds: bounds)
+        do {
+            try renderer.setup(viewPortBounds: bounds)
+        } catch let error as RenderError {
+            continuation.yield(.failed(error))
+            continuation.finish()
+            return
+        } catch {
+            continuation.yield(.failed(.engineFailure(String(describing: error))))
+            continuation.finish()
+            return
+        }
         defer { renderer.finished() }
 
         continuation.yield(.started(width: width, height: height))
@@ -56,9 +66,9 @@ actor RenderEngine {
             rowPixels.reserveCapacity(width)
             for x in 0 ..< width {
                 let currentX = bounds.origin.x + (CGFloat(x) / CGFloat(width) * bounds.width)
-                let cgColor = renderer.color(at: CGPoint(x: currentX, y: currentY))
-                rowPixels.append(PixelColor(cgColor: cgColor))
-                outputFile?.savePixel(color: cgColor)
+                let pixel = renderer.color(at: CGPoint(x: currentX, y: currentY))
+                rowPixels.append(pixel)
+                outputFile?.savePixel(pixel)
             }
             continuation.yield(.row(y: y, pixels: rowPixels))
         }

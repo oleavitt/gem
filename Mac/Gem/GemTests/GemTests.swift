@@ -14,11 +14,6 @@ final class PixelColorTests: XCTestCase {
         let p = PixelColor(red: -0.5, green: 2.0, blue: 0.5, alpha: 1)
         XCTAssertEqual(p, PixelColor(a: 255, r: 0, g: 255, b: 128))
     }
-
-    func testInitFromCGColor() {
-        let cg = CGColor(red: 1.0, green: 0.0, blue: 0.5, alpha: 1.0)
-        XCTAssertEqual(PixelColor(cgColor: cg), PixelColor(a: 255, r: 255, g: 0, b: 128))
-    }
 }
 
 final class RenderUpdateTests: XCTestCase {
@@ -81,5 +76,33 @@ final class RenderEngineTests: XCTestCase {
             }
         }
         XCTAssertEqual(rows, 3)          // reaching here proves it did not hang
+    }
+}
+
+private final class FailingRenderer: Renderer {
+    func setup(viewPortBounds: CGRect) throws { throw RenderError.sceneParseFailed }
+    func color(at pointOnViewPort: CGPoint) -> PixelColor { PixelColor(r: 0, g: 0, b: 0) }
+    func finished() {}
+}
+
+final class RendererMigrationTests: XCTestCase {
+
+    func testTestRendererIsDeterministicAndOpaque() throws {
+        let renderer = TestRenderer()
+        try renderer.setup(viewPortBounds: CGRect(x: -1, y: 1, width: 2, height: 2))
+        let first = renderer.color(at: CGPoint(x: 0, y: 0))
+        let second = renderer.color(at: CGPoint(x: 0, y: 0))
+        XCTAssertEqual(first, second)
+        XCTAssertEqual(first.a, 255)
+    }
+
+    func testEngineEmitsFailedWhenSetupThrows() async {
+        let engine = RenderEngine(renderer: FailingRenderer())
+        var updates: [RenderUpdate] = []
+        let stream = engine.render(imageSize: NSSize(width: 4, height: 4),
+                                   bounds: CGRect(x: -1, y: 1, width: 2, height: 2),
+                                   aspectMode: .none)
+        for await update in stream { updates.append(update) }
+        XCTAssertEqual(updates, [.failed(.sceneParseFailed)])
     }
 }
