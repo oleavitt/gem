@@ -14,6 +14,7 @@ struct RenderCanvasView: View {
                 ScrollView([.horizontal, .vertical]) {
                     Image(decorative: image, scale: 1.0)
                         .interpolation(.none)
+                        .background { Checkerboard() }
                 }
             } else {
                 ContentUnavailableView("No Render",
