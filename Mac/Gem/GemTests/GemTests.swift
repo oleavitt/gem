@@ -42,3 +42,44 @@ final class RenderUpdateTests: XCTestCase {
         XCTAssertNotEqual(RenderUpdate.failed(.sceneParseFailed), .failed(.engineSetupFailed))
     }
 }
+
+final class RenderEngineTests: XCTestCase {
+
+    private let unitBounds = CGRect(x: -1, y: 1, width: 2, height: 2)
+
+    func testStreamsStartedThenRowsThenFinished() async {
+        let engine = RenderEngine(renderer: TestRenderer())
+        var updates: [RenderUpdate] = []
+        let stream = engine.render(imageSize: NSSize(width: 4, height: 3),
+                                   bounds: unitBounds, aspectMode: .none)
+        for await update in stream { updates.append(update) }
+
+        guard case .started(let w, let h)? = updates.first else {
+            return XCTFail("expected .started first, got \(String(describing: updates.first))")
+        }
+        XCTAssertEqual(w, 4)
+        XCTAssertEqual(h, 3)
+        XCTAssertEqual(updates.last, .finished)
+
+        let rows: [(Int, Int)] = updates.compactMap {
+            if case .row(let y, let px) = $0 { return (y, px.count) }
+            return nil
+        }
+        XCTAssertEqual(rows.map { $0.0 }, [0, 1, 2])
+        XCTAssertTrue(rows.allSatisfy { $0.1 == 4 }, "every row should have width pixels")
+    }
+
+    func testCancellingConsumerStopsEarlyWithoutHanging() async {
+        let engine = RenderEngine(renderer: TestRenderer())
+        let stream = engine.render(imageSize: NSSize(width: 100, height: 100),
+                                   bounds: unitBounds, aspectMode: .none)
+        var rows = 0
+        for await update in stream {
+            if case .row = update {
+                rows += 1
+                if rows == 3 { break }   // terminates the stream -> engine task is cancelled
+            }
+        }
+        XCTAssertEqual(rows, 3)          // reaching here proves it did not hang
+    }
+}
