@@ -25,8 +25,6 @@
 		8C794372243EE01E003BBB83 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C794370243EE01E003BBB83 /* String+Localization.swift */; };
 		8C794384243EE04C003BBB83 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C794374243EE04B003BBB83 /* Localizable.strings */; };
 		8C794385243EE04C003BBB83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C794376243EE04B003BBB83 /* Assets.xcassets */; };
-		8C794386243EE04C003BBB83 /* ViewPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C794378243EE04B003BBB83 /* ViewPort.swift */; };
-		8C794387243EE04C003BBB83 /* BasicViewPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C794379243EE04B003BBB83 /* BasicViewPort.swift */; };
 		8C794388243EE04C003BBB83 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79437B243EE04B003BBB83 /* MainViewController.swift */; };
 		8C794389243EE04C003BBB83 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79437C243EE04B003BBB83 /* ImageViewController.swift */; };
 		8C79438A243EE04C003BBB83 /* TestRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79437E243EE04B003BBB83 /* TestRenderer.swift */; };
@@ -148,8 +146,6 @@
 		8C794370243EE01E003BBB83 /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		8C794375243EE04B003BBB83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8C794376243EE04B003BBB83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8C794378243EE04B003BBB83 /* ViewPort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPort.swift; sourceTree = "<group>"; };
-		8C794379243EE04B003BBB83 /* BasicViewPort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicViewPort.swift; sourceTree = "<group>"; };
 		8C79437B243EE04B003BBB83 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8C79437C243EE04B003BBB83 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		8C79437E243EE04B003BBB83 /* TestRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRenderer.swift; sourceTree = "<group>"; };
@@ -411,8 +407,6 @@
 		8C794377243EE04B003BBB83 /* View Port */ = {
 			isa = PBXGroup;
 			children = (
-				8C794378243EE04B003BBB83 /* ViewPort.swift */,
-				8C794379243EE04B003BBB83 /* BasicViewPort.swift */,
 			);
 			path = "View Port";
 			sourceTree = "<group>";
@@ -644,7 +638,6 @@
 				8CE7B1971DEFE4D0002461C3 /* noise.c in Sources */,
 				8C79438A243EE04C003BBB83 /* TestRenderer.swift in Sources */,
 				8CE7B1A61DEFE4D0002461C3 /* vmexpr.c in Sources */,
-				8C794386243EE04C003BBB83 /* ViewPort.swift in Sources */,
 				8CE7B1991DEFE4D0002461C3 /* parse.c in Sources */,
 				8CE7B1A31DEFE4D0002461C3 /* vmbkgrnd.c in Sources */,
 				8CE7B1921DEFE4D0002461C3 /* error.c in Sources */,
@@ -653,7 +646,6 @@
 				8CE7B1631DEFDFFF002461C3 /* trace.c in Sources */,
 				8CE7B1651DEFDFFF002461C3 /* Triangle.c in Sources */,
 				8C794372243EE01E003BBB83 /* String+Localization.swift in Sources */,
-				8C794387243EE04C003BBB83 /* BasicViewPort.swift in Sources */,
 				8CE7B1AA1DEFE4D0002461C3 /* vmlval.c in Sources */,
 				8C0DEE851DED2DC800697E06 /* rend2d.c in Sources */,
 				8C0DEE921DED2E5300697E06 /* solve.c in Sources */,

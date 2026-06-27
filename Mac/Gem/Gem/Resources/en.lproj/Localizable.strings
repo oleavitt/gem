@@ -7,3 +7,4 @@
 */
 
 "render_time_fmt" = "Render time: %.3g";
+"render_failed" = "Render failed";
