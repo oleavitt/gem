@@ -9,10 +9,6 @@
 import Foundation
 import CoreGraphics
 
-enum ViewPortAspectMode {
-    case none, fit, fill
-}
-
 protocol ViewPort {
     func setup(delegate: ViewPortDelegate, imageSize: NSSize, viewPortBounds: CGRect, aspectMode: ViewPortAspectMode)
     func set(renderer: Renderer)

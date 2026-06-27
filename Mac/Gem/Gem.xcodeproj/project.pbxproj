@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BED033B046AE9F6B291B43A /* RenderTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87550690C10EACA53E1A8956 /* RenderTypes.swift */; };
 		5055070FED6954D9F6446FB6 /* PixelColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72DED65C6986B7242B71270 /* PixelColor.swift */; };
 		8C0DEE751DED1E2A00697E06 /* GemCtoSwift.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE741DED1E2A00697E06 /* GemCtoSwift.m */; };
 		8C0DEE841DED2DC800697E06 /* dopixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE811DED2DC800697E06 /* dopixel.c */; };
@@ -113,6 +114,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		87550690C10EACA53E1A8956 /* RenderTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RenderTypes.swift; path = Gem/Renderer/RenderTypes.swift; sourceTree = "<group>"; };
 		8C0DEE731DED1E2A00697E06 /* GemCtoSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GemCtoSwift.h; sourceTree = "<group>"; };
 		8C0DEE741DED1E2A00697E06 /* GemCtoSwift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GemCtoSwift.m; sourceTree = "<group>"; };
 		8C0DEE811DED2DC800697E06 /* dopixel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dopixel.c; path = ../../src/Rend2D/dopixel.c; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				8C2BF9AF1DEA809E005DDF33 /* Products */,
 				8C19A2531DEAF21200C86DD2 /* Gem-Bridging-Header.h */,
 				E72DED65C6986B7242B71270 /* PixelColor.swift */,
+				87550690C10EACA53E1A8956 /* RenderTypes.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -719,6 +722,7 @@
 				8C794393243EE12B003BBB83 /* AppDelegate.swift in Sources */,
 				8C794392243EE12B003BBB83 /* AppData.swift in Sources */,
 				5055070FED6954D9F6446FB6 /* PixelColor.swift in Sources */,
+				4BED033B046AE9F6B291B43A /* RenderTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
