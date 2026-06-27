@@ -18,7 +18,7 @@ class RawOutputFile: OutputFile {
         
     }
     
-    func savePixel(color: CGColor) {
-        
+    func savePixel(_ color: PixelColor) {
+
     }
 }

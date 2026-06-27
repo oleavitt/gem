@@ -12,5 +12,5 @@ import CoreGraphics
 protocol OutputFile {
     func create(name: String, width: Int, height: Int)
     func resume(name: String)
-    func savePixel(color: CGColor)
+    func savePixel(_ color: PixelColor)
 }

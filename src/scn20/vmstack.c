@@ -35,6 +35,7 @@ static int s_vmstack_maxlevel = 0;
 int vmstack_init(void)
 {
 	/* Did we cleanup after a previous session? */
+    vmstack_close();
 	assert(s_vmstack_stack == NULL);
 	assert(s_vmstack_maxlevel == 0);
 

@@ -10,6 +10,7 @@ import Cocoa
 
 // MARK: MainViewController
 
+@MainActor
 class MainViewController: NSViewController {
 
     @IBOutlet weak var sceneFileButton: NSButton!
