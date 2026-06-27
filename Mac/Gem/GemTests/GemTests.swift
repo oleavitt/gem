@@ -1,4 +1,6 @@
 import XCTest
+import ImageIO
+import UniformTypeIdentifiers
 @testable import Gem
 
 final class PixelColorTests: XCTestCase {
@@ -141,5 +143,46 @@ final class RendererMigrationTests: XCTestCase {
                                    aspectMode: .none)
         for await update in stream { updates.append(update) }
         XCTAssertEqual(updates, [.failed(.sceneParseFailed)])
+    }
+}
+
+final class RenderImageBufferTests: XCTestCase {
+
+    func testNewBufferIsOpaqueBlack() {
+        let buf = RenderImageBuffer(width: 2, height: 2)
+        XCTAssertEqual(buf.pixel(atX: 0, y: 0), PixelColor(a: 255, r: 0, g: 0, b: 0))
+        XCTAssertEqual(buf.pixel(atX: 1, y: 1), PixelColor(a: 255, r: 0, g: 0, b: 0))
+    }
+
+    func testSetRowWritesPixelsReadableBack() {
+        let buf = RenderImageBuffer(width: 2, height: 2)
+        buf.setRow([PixelColor(r: 255, g: 0, b: 0), PixelColor(r: 0, g: 255, b: 0)], at: 1)
+        XCTAssertEqual(buf.pixel(atX: 0, y: 1), PixelColor(a: 255, r: 255, g: 0, b: 0))
+        XCTAssertEqual(buf.pixel(atX: 1, y: 1), PixelColor(a: 255, r: 0, g: 255, b: 0))
+        XCTAssertEqual(buf.pixel(atX: 0, y: 0), PixelColor(a: 255, r: 0, g: 0, b: 0))
+    }
+
+    func testMakeCGImageHasBufferDimensions() {
+        let img = RenderImageBuffer(width: 4, height: 3).makeCGImage()
+        XCTAssertEqual(img?.width, 4)
+        XCTAssertEqual(img?.height, 3)
+    }
+
+    func testZeroSizeMakesNoImage() {
+        XCTAssertNil(RenderImageBuffer(width: 0, height: 0).makeCGImage())
+    }
+}
+
+final class ImageEncodingTests: XCTestCase {
+
+    func testEncodesPngThatDecodesToSameSize() {
+        let buf = RenderImageBuffer(width: 5, height: 4)
+        let image = try! XCTUnwrap(buf.makeCGImage())
+        let data = try! XCTUnwrap(ImageEncoding.data(from: image, type: .png))
+        XCTAssertFalse(data.isEmpty)
+        let src = try! XCTUnwrap(CGImageSourceCreateWithData(data as CFData, nil))
+        let decoded = try! XCTUnwrap(CGImageSourceCreateImageAtIndex(src, 0, nil))
+        XCTAssertEqual(decoded.width, 5)
+        XCTAssertEqual(decoded.height, 4)
     }
 }

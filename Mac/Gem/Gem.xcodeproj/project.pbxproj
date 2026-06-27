@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -99,6 +99,8 @@
 		8CE7B1B21DEFE4D0002461C3 /* vmxform.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CE7B1901DEFE4D0002461C3 /* vmxform.c */; };
 		8CE7B1B61DEFEB89002461C3 /* tracestk.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CE7B1B41DEFEB89002461C3 /* tracestk.c */; };
 		8CE7B1B71DEFEB89002461C3 /* xform.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CE7B1B51DEFEB89002461C3 /* xform.c */; };
+		9FB882FCF15ECE19FB177EB7 /* ImageEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F95597669305BD9CCC555D /* ImageEncoding.swift */; };
+		D48A948DE0FA26B3B3968450 /* RenderImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B133CA8643732DA09CC350A /* RenderImageBuffer.swift */; };
 		E45D50F44B0B0D03ED96C579 /* RenderEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8DCD6C5EB66FF39176503B /* RenderEngine.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +115,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B133CA8643732DA09CC350A /* RenderImageBuffer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RenderImageBuffer.swift; path = Gem/Model/RenderImageBuffer.swift; sourceTree = "<group>"; };
 		87550690C10EACA53E1A8956 /* RenderTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RenderTypes.swift; path = Gem/Renderer/RenderTypes.swift; sourceTree = "<group>"; };
 		8B8DCD6C5EB66FF39176503B /* RenderEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RenderEngine.swift; path = Gem/Renderer/RenderEngine.swift; sourceTree = "<group>"; };
 		8C0DEE731DED1E2A00697E06 /* GemCtoSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GemCtoSwift.h; sourceTree = "<group>"; };
@@ -229,23 +232,20 @@
 		8CE7B1B41DEFEB89002461C3 /* tracestk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tracestk.c; path = ../../src/Raytrace/tracestk.c; sourceTree = "<group>"; };
 		8CE7B1B51DEFEB89002461C3 /* xform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xform.c; path = ../../src/Raytrace/xform.c; sourceTree = "<group>"; };
 		8CE7B1B81DEFEBF4002461C3 /* Findfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Findfile.h; path = ../../src/Include/Findfile.h; sourceTree = "<group>"; };
+		E0F95597669305BD9CCC555D /* ImageEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageEncoding.swift; path = Gem/Model/ImageEncoding.swift; sourceTree = "<group>"; };
 		E72DED65C6986B7242B71270 /* PixelColor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PixelColor.swift; path = Gem/Common/PixelColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8C2BF9AB1DEA809D005DDF33 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8C2BF9BC1DEA809E005DDF33 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -317,6 +317,8 @@
 				E72DED65C6986B7242B71270 /* PixelColor.swift */,
 				87550690C10EACA53E1A8956 /* RenderTypes.swift */,
 				8B8DCD6C5EB66FF39176503B /* RenderEngine.swift */,
+				1B133CA8643732DA09CC350A /* RenderImageBuffer.swift */,
+				E0F95597669305BD9CCC555D /* ImageEncoding.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -570,8 +572,9 @@
 		8C2BF9A61DEA809D005DDF33 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 2630;
 				ORGANIZATIONNAME = Gem;
 				TargetAttributes = {
 					8C2BF9AD1DEA809D005DDF33 = {
@@ -587,7 +590,6 @@
 				};
 			};
 			buildConfigurationList = 8C2BF9A91DEA809D005DDF33 /* Build configuration list for PBXProject "Gem" */;
-			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -595,6 +597,7 @@
 				Base,
 			);
 			mainGroup = 8C2BF9A51DEA809D005DDF33;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 8C2BF9AF1DEA809E005DDF33 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -608,28 +611,23 @@
 /* Begin PBXResourcesBuildPhase section */
 		8C2BF9AC1DEA809D005DDF33 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				8CC28B51244A4FF0009ABE88 /* todo.txt in Resources */,
 				8C794384243EE04C003BBB83 /* Localizable.strings in Resources */,
 				8C794385243EE04C003BBB83 /* Assets.xcassets in Resources */,
 				8C794395243EE12B003BBB83 /* Main.storyboard in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8C2BF9BD1DEA809E005DDF33 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C2BF9AA1DEA809D005DDF33 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				8CE7B1551DEFDFFF002461C3 /* Disc.c in Sources */,
 				8C794397243EEFEF003BBB83 /* RayTraceRenderer.swift in Sources */,
@@ -719,16 +717,15 @@
 				5055070FED6954D9F6446FB6 /* PixelColor.swift in Sources */,
 				4BED033B046AE9F6B291B43A /* RenderTypes.swift in Sources */,
 				E45D50F44B0B0D03ED96C579 /* RenderEngine.swift in Sources */,
+				D48A948DE0FA26B3B3968450 /* RenderImageBuffer.swift in Sources */,
+				9FB882FCF15ECE19FB177EB7 /* ImageEncoding.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8C2BF9BB1DEA809E005DDF33 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				8C2BF9C41DEA809E005DDF33 /* GemTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -777,6 +774,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -785,9 +783,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -806,6 +806,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -836,6 +837,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -844,9 +846,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -858,7 +862,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -870,10 +876,14 @@
 				CODE_SIGN_ENTITLEMENTS = Gem/Gem.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = ../../src/Include;
 				INFOPLIST_FILE = Gem/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gem.Gem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -891,10 +901,14 @@
 				CODE_SIGN_ENTITLEMENTS = Gem/Gem.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = ../../src/Include;
 				INFOPLIST_FILE = Gem/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gem.Gem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -906,11 +920,15 @@
 		8C2BF9D71DEA809E005DDF33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = GemTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gem.GemTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -922,11 +940,15 @@
 		8C2BF9D81DEA809E005DDF33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = GemTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gem.GemTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -944,7 +966,6 @@
 				8C2BF9D11DEA809E005DDF33 /* Debug */,
 				8C2BF9D21DEA809E005DDF33 /* Release */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		8C2BF9D31DEA809E005DDF33 /* Build configuration list for PBXNativeTarget "Gem" */ = {
@@ -953,7 +974,6 @@
 				8C2BF9D41DEA809E005DDF33 /* Debug */,
 				8C2BF9D51DEA809E005DDF33 /* Release */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		8C2BF9D61DEA809E005DDF33 /* Build configuration list for PBXNativeTarget "GemTests" */ = {
@@ -962,7 +982,6 @@
 				8C2BF9D71DEA809E005DDF33 /* Debug */,
 				8C2BF9D81DEA809E005DDF33 /* Release */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
