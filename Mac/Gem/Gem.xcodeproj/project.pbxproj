@@ -354,13 +354,10 @@
 			children = (
 				8CC28B4D24496A33009ABE88 /* Gem.entitlements */,
 				8C794368243EDF5B003BBB83 /* Common */,
-				8C79436B243EDFB0003BBB83 /* Coordinators */,
 				8C79436E243EE01E003BBB83 /* Extensions */,
 				8C794381243EE04B003BBB83 /* OutputFile */,
 				8C79437D243EE04B003BBB83 /* Renderer */,
 				8C794373243EE04B003BBB83 /* Resources */,
-				8C79437A243EE04B003BBB83 /* View Controllers */,
-				8C794377243EE04B003BBB83 /* View Port */,
 				8C79438E243EE12A003BBB83 /* AppData.swift */,
 				8C794390243EE12A003BBB83 /* Info.plist */,
 				8C0DEE731DED1E2A00697E06 /* GemCtoSwift.h */,
@@ -394,13 +391,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		8C79436B243EDFB0003BBB83 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
 		8C79436E243EE01E003BBB83 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,20 +408,6 @@
 				8C794376243EE04B003BBB83 /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		8C794377243EE04B003BBB83 /* View Port */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Port";
-			sourceTree = "<group>";
-		};
-		8C79437A243EE04B003BBB83 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		8C79437D243EE04B003BBB83 /* Renderer */ = {
@@ -552,8 +528,6 @@
 				8C2BF9AC1DEA809D005DDF33 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			name = Gem;
 			productName = Gem;
@@ -765,7 +739,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8C2BF9D11DEA809E005DDF33 /* Debug */ = {
+		8C2BF9D11DEA809E005DDF33 /* Debug configuration for PBXProject "Gem" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -828,7 +802,7 @@
 			};
 			name = Debug;
 		};
-		8C2BF9D21DEA809E005DDF33 /* Release */ = {
+		8C2BF9D21DEA809E005DDF33 /* Release configuration for PBXProject "Gem" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -884,7 +858,7 @@
 			};
 			name = Release;
 		};
-		8C2BF9D41DEA809E005DDF33 /* Debug */ = {
+		8C2BF9D41DEA809E005DDF33 /* Debug configuration for PBXNativeTarget "Gem" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -909,7 +883,7 @@
 			};
 			name = Debug;
 		};
-		8C2BF9D51DEA809E005DDF33 /* Release */ = {
+		8C2BF9D51DEA809E005DDF33 /* Release configuration for PBXNativeTarget "Gem" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -933,7 +907,7 @@
 			};
 			name = Release;
 		};
-		8C2BF9D71DEA809E005DDF33 /* Debug */ = {
+		8C2BF9D71DEA809E005DDF33 /* Debug configuration for PBXNativeTarget "GemTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -953,7 +927,7 @@
 			};
 			name = Debug;
 		};
-		8C2BF9D81DEA809E005DDF33 /* Release */ = {
+		8C2BF9D81DEA809E005DDF33 /* Release configuration for PBXNativeTarget "GemTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -979,24 +953,24 @@
 		8C2BF9A91DEA809D005DDF33 /* Build configuration list for PBXProject "Gem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8C2BF9D11DEA809E005DDF33 /* Debug */,
-				8C2BF9D21DEA809E005DDF33 /* Release */,
+				8C2BF9D11DEA809E005DDF33 /* Debug configuration for PBXProject "Gem" */,
+				8C2BF9D21DEA809E005DDF33 /* Release configuration for PBXProject "Gem" */,
 			);
 			defaultConfigurationName = Release;
 		};
 		8C2BF9D31DEA809E005DDF33 /* Build configuration list for PBXNativeTarget "Gem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8C2BF9D41DEA809E005DDF33 /* Debug */,
-				8C2BF9D51DEA809E005DDF33 /* Release */,
+				8C2BF9D41DEA809E005DDF33 /* Debug configuration for PBXNativeTarget "Gem" */,
+				8C2BF9D51DEA809E005DDF33 /* Release configuration for PBXNativeTarget "Gem" */,
 			);
 			defaultConfigurationName = Release;
 		};
 		8C2BF9D61DEA809E005DDF33 /* Build configuration list for PBXNativeTarget "GemTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8C2BF9D71DEA809E005DDF33 /* Debug */,
-				8C2BF9D81DEA809E005DDF33 /* Release */,
+				8C2BF9D71DEA809E005DDF33 /* Debug configuration for PBXNativeTarget "GemTests" */,
+				8C2BF9D81DEA809E005DDF33 /* Release configuration for PBXNativeTarget "GemTests" */,
 			);
 			defaultConfigurationName = Release;
 		};
