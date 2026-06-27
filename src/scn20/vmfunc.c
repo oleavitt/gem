@@ -266,6 +266,15 @@ VMArgument *parse_vm_argument_declarations(void)
 									vm_delete_arglist(arg);
 									goto fail_alloc;
 								}
+								/* The l-value is now shared by two owners: this
+								 * argument (freed via vm_delete_arglist) and the
+								 * symbol-table entry (freed via symtab_deletetoken).
+								 * Take a reference for the symbol table so it is
+								 * not freed twice. Done only after a successful add
+								 * so the failure path above still owns exactly one
+								 * reference. Mirrors the vm_copy_lvalue() pattern
+								 * used by every other pcontext_addsymbol() l-value. */
+								vm_copy_lvalue(arg->lv);
 							}
 							else
 							{

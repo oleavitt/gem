@@ -85,6 +85,43 @@ private final class FailingRenderer: Renderer {
     func finished() {}
 }
 
+/// Regression test for the VM l-value double-free that corrupted the heap
+/// (ASan: heap-use-after-free in vm_delete_lvalue, via symtab cleanup of a
+/// parsed function argument). Drives the REAL C engine through several full
+/// setup -> trace -> finished cycles using a scene that declares VM functions
+/// with parameters. Best run with AddressSanitizer enabled on the scheme.
+final class RayTraceRepeatedRenderTests: XCTestCase {
+
+    /// Repo root derived from this source file's location:
+    /// <root>/Mac/Gem/GemTests/GemTests.swift
+    private static let repoRoot = URL(fileURLWithPath: #filePath)
+        .deletingLastPathComponent().deletingLastPathComponent()
+        .deletingLastPathComponent().deletingLastPathComponent().path
+
+    override func setUp() {
+        super.setUp()
+        AppData.includeFilePaths = "\(Self.repoRoot)/scenes/library; \(Self.repoRoot)/scenes"
+    }
+
+    func testRepeatedRendersOfFunctionSceneDoNotCorruptHeap() throws {
+        AppData.sceneFilePath = URL(fileURLWithPath: "\(Self.repoRoot)/scenes/Sierpinski.scn")
+        let bounds = CGRect(x: -1, y: 1, width: 2, height: 2)
+        let w = 24, h = 24
+        for _ in 0 ..< 4 {
+            let renderer = RayTraceRenderer()
+            try renderer.setup(viewPortBounds: bounds)
+            for yi in 0 ..< h {
+                let cy = bounds.origin.y - (CGFloat(yi) / CGFloat(h) * bounds.height)
+                for xi in 0 ..< w {
+                    let cx = bounds.origin.x + (CGFloat(xi) / CGFloat(w) * bounds.width)
+                    _ = renderer.color(at: CGPoint(x: cx, y: cy))
+                }
+            }
+            renderer.finished()
+        }
+    }
+}
+
 final class RendererMigrationTests: XCTestCase {
 
     func testTestRendererIsDeterministicAndOpaque() throws {

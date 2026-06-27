@@ -870,6 +870,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gem/Gem.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = ../../src/Include;
 				INFOPLIST_FILE = Gem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -890,6 +891,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gem/Gem.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = ../../src/Include;
 				INFOPLIST_FILE = Gem/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

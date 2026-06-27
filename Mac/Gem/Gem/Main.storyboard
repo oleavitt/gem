@@ -37,7 +37,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="299"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-SL-pXI">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-SL-pXI">
                                 <rect key="frame" x="18" y="118" width="162" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Output Resolution" id="obl-1w-fUA">
                                     <font key="font" metaFont="system"/>
@@ -45,7 +45,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z4I-nr-PDj">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z4I-nr-PDj">
                                 <rect key="frame" x="20" y="91" width="82" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Width" id="AV5-pN-anr">
                                     <font key="font" metaFont="system"/>
@@ -53,7 +53,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sb2-Dd-NOU">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sb2-Dd-NOU">
                                 <rect key="frame" x="108" y="88" width="72" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="Vp3-J2-4Nv"/>
@@ -68,7 +68,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wvw-mb-HCE">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wvw-mb-HCE">
                                 <rect key="frame" x="18" y="65" width="82" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Height" id="eJw-nO-IAe">
                                     <font key="font" metaFont="system"/>
@@ -76,7 +76,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DpI-bE-ugg">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DpI-bE-ugg">
                                 <rect key="frame" x="108" y="62" width="72" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="R8i-fW-YoE"/>
@@ -111,7 +111,7 @@
                                     <action selector="fileOpenButtonSelected:" target="JQC-QG-d9R" id="7YA-6y-oau"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d4c-0c-lhP">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d4c-0c-lhP">
                                 <rect key="frame" x="20" y="235" width="160" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Scene File Name" id="bmZ-6B-bx5">
                                     <font key="font" metaFont="system"/>
