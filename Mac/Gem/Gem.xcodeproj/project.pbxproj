@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5055070FED6954D9F6446FB6 /* PixelColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72DED65C6986B7242B71270 /* PixelColor.swift */; };
 		8C0DEE751DED1E2A00697E06 /* GemCtoSwift.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE741DED1E2A00697E06 /* GemCtoSwift.m */; };
 		8C0DEE841DED2DC800697E06 /* dopixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE811DED2DC800697E06 /* dopixel.c */; };
 		8C0DEE851DED2DC800697E06 /* rend2d.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE831DED2DC800697E06 /* rend2d.c */; };
@@ -228,6 +229,7 @@
 		8CE7B1B41DEFEB89002461C3 /* tracestk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tracestk.c; path = ../../src/Raytrace/tracestk.c; sourceTree = "<group>"; };
 		8CE7B1B51DEFEB89002461C3 /* xform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xform.c; path = ../../src/Raytrace/xform.c; sourceTree = "<group>"; };
 		8CE7B1B81DEFEBF4002461C3 /* Findfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Findfile.h; path = ../../src/Include/Findfile.h; sourceTree = "<group>"; };
+		E72DED65C6986B7242B71270 /* PixelColor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PixelColor.swift; path = Gem/Common/PixelColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +314,7 @@
 				8C2BF9CD1DEA809E005DDF33 /* GemUITests */,
 				8C2BF9AF1DEA809E005DDF33 /* Products */,
 				8C19A2531DEAF21200C86DD2 /* Gem-Bridging-Header.h */,
+				E72DED65C6986B7242B71270 /* PixelColor.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -715,6 +718,7 @@
 				8C0DEE9A1DED2E7300697E06 /* Image.c in Sources */,
 				8C794393243EE12B003BBB83 /* AppDelegate.swift in Sources */,
 				8C794392243EE12B003BBB83 /* AppData.swift in Sources */,
+				5055070FED6954D9F6446FB6 /* PixelColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

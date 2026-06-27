@@ -1,36 +1,22 @@
-//
-//  GemTests.swift
-//  GemTests
-//
-//  Created by Oren Leavitt on 11/26/16.
-//  Copyright © 2016 Gem. All rights reserved.
-//
-
 import XCTest
 @testable import Gem
 
-class GemTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+final class PixelColorTests: XCTestCase {
+
+    func testNormalizedComponentsMapToBytes() {
+        XCTAssertEqual(PixelColor(red: 0, green: 0, blue: 0, alpha: 1),
+                       PixelColor(a: 255, r: 0, g: 0, b: 0))
+        XCTAssertEqual(PixelColor(red: 1, green: 1, blue: 1, alpha: 1),
+                       PixelColor(a: 255, r: 255, g: 255, b: 255))
     }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+
+    func testComponentsAreClampedAndRounded() {
+        let p = PixelColor(red: -0.5, green: 2.0, blue: 0.5, alpha: 1)
+        XCTAssertEqual(p, PixelColor(a: 255, r: 0, g: 255, b: 128))
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    func testInitFromCGColor() {
+        let cg = CGColor(red: 1.0, green: 0.0, blue: 0.5, alpha: 1.0)
+        XCTAssertEqual(PixelColor(cgColor: cg), PixelColor(a: 255, r: 255, g: 0, b: 128))
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
