@@ -12,6 +12,7 @@
 		5C1247675F26476D6DC15251 /* PixelSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5321A88F3026E921134B377 /* PixelSize.swift */; };
 		5CAC51AAF5696CC71D4E0C78 /* RenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B6CD4C342A9D417C5A1057 /* RenderModel.swift */; };
 		6783AEA7E07F124F30C4557D /* SceneControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F211F8E9EBAAF0B57BFCED /* SceneControlsView.swift */; };
+		7000A71DCBB7EC9FA6399569 /* Checkerboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1AFB3349095D2C66020FF1 /* Checkerboard.swift */; };
 		7CD3978879FE235BF3CB726B /* RenderCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C7549FA4E7D2D0236C730 /* RenderCanvasView.swift */; };
 		8C0DEE751DED1E2A00697E06 /* GemCtoSwift.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE741DED1E2A00697E06 /* GemCtoSwift.m */; };
 		8C0DEE841DED2DC800697E06 /* dopixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE811DED2DC800697E06 /* dopixel.c */; };
@@ -236,6 +237,7 @@
 		8CE7B1B51DEFEB89002461C3 /* xform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xform.c; path = ../../src/Raytrace/xform.c; sourceTree = "<group>"; };
 		8CE7B1B81DEFEBF4002461C3 /* Findfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Findfile.h; path = ../../src/Include/Findfile.h; sourceTree = "<group>"; };
 		96ACDFE8F9B8CF53D0EAEE22 /* GemCommands.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GemCommands.swift; path = Gem/App/GemCommands.swift; sourceTree = "<group>"; };
+		9C1AFB3349095D2C66020FF1 /* Checkerboard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Checkerboard.swift; path = Gem/Views/Checkerboard.swift; sourceTree = "<group>"; };
 		A5321A88F3026E921134B377 /* PixelSize.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PixelSize.swift; path = Gem/Model/PixelSize.swift; sourceTree = "<group>"; };
 		ACB246E1C4128BCA563D8981 /* ImageDocument.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageDocument.swift; path = Gem/Views/ImageDocument.swift; sourceTree = "<group>"; };
 		DBF3363751F2DC21569E7302 /* GemApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GemApp.swift; path = Gem/App/GemApp.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				603023306BDD949AB3D77AE7 /* ContentView.swift */,
 				96ACDFE8F9B8CF53D0EAEE22 /* GemCommands.swift */,
 				DBF3363751F2DC21569E7302 /* GemApp.swift */,
+				9C1AFB3349095D2C66020FF1 /* Checkerboard.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -529,6 +532,8 @@
 			);
 			buildRules = (
 			);
+			dependencies = (
+			);
 			name = Gem;
 			productName = Gem;
 			productReference = 8C2BF9AE1DEA809E005DDF33 /* Gem.app */;
@@ -709,6 +714,7 @@
 				DEC7BB6743DF89EABFBCED3A /* ContentView.swift in Sources */,
 				E0A2E66E79B1B9CDB72D758B /* GemCommands.swift in Sources */,
 				D6CCBCAC58217D21C81D4F0E /* GemApp.swift in Sources */,
+				7000A71DCBB7EC9FA6399569 /* Checkerboard.swift in Sources */,
 			);
 		};
 		8C2BF9BB1DEA809E005DDF33 /* Sources */ = {
@@ -739,7 +745,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8C2BF9D11DEA809E005DDF33 /* Debug configuration for PBXProject "Gem" */ = {
+		8C2BF9D11DEA809E005DDF33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -802,7 +808,7 @@
 			};
 			name = Debug;
 		};
-		8C2BF9D21DEA809E005DDF33 /* Release configuration for PBXProject "Gem" */ = {
+		8C2BF9D21DEA809E005DDF33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -858,7 +864,7 @@
 			};
 			name = Release;
 		};
-		8C2BF9D41DEA809E005DDF33 /* Debug configuration for PBXNativeTarget "Gem" */ = {
+		8C2BF9D41DEA809E005DDF33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -883,7 +889,7 @@
 			};
 			name = Debug;
 		};
-		8C2BF9D51DEA809E005DDF33 /* Release configuration for PBXNativeTarget "Gem" */ = {
+		8C2BF9D51DEA809E005DDF33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -907,7 +913,7 @@
 			};
 			name = Release;
 		};
-		8C2BF9D71DEA809E005DDF33 /* Debug configuration for PBXNativeTarget "GemTests" */ = {
+		8C2BF9D71DEA809E005DDF33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -927,7 +933,7 @@
 			};
 			name = Debug;
 		};
-		8C2BF9D81DEA809E005DDF33 /* Release configuration for PBXNativeTarget "GemTests" */ = {
+		8C2BF9D81DEA809E005DDF33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -953,24 +959,24 @@
 		8C2BF9A91DEA809D005DDF33 /* Build configuration list for PBXProject "Gem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8C2BF9D11DEA809E005DDF33 /* Debug configuration for PBXProject "Gem" */,
-				8C2BF9D21DEA809E005DDF33 /* Release configuration for PBXProject "Gem" */,
+				8C2BF9D11DEA809E005DDF33 /* Debug */,
+				8C2BF9D21DEA809E005DDF33 /* Release */,
 			);
 			defaultConfigurationName = Release;
 		};
 		8C2BF9D31DEA809E005DDF33 /* Build configuration list for PBXNativeTarget "Gem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8C2BF9D41DEA809E005DDF33 /* Debug configuration for PBXNativeTarget "Gem" */,
-				8C2BF9D51DEA809E005DDF33 /* Release configuration for PBXNativeTarget "Gem" */,
+				8C2BF9D41DEA809E005DDF33 /* Debug */,
+				8C2BF9D51DEA809E005DDF33 /* Release */,
 			);
 			defaultConfigurationName = Release;
 		};
 		8C2BF9D61DEA809E005DDF33 /* Build configuration list for PBXNativeTarget "GemTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8C2BF9D71DEA809E005DDF33 /* Debug configuration for PBXNativeTarget "GemTests" */,
-				8C2BF9D81DEA809E005DDF33 /* Release configuration for PBXNativeTarget "GemTests" */,
+				8C2BF9D71DEA809E005DDF33 /* Debug */,
+				8C2BF9D81DEA809E005DDF33 /* Release */,
 			);
 			defaultConfigurationName = Release;
 		};

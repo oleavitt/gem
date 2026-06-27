@@ -20,7 +20,7 @@ final class RenderImageBuffer {
         bytes = [UInt8](repeating: 0, count: self.width * self.height * bytesPerPixel)
         var i = 0
         while i < bytes.count {
-            bytes[i] = 255   // opaque alpha; rgb stays 0 (black)
+            bytes[i] = 0   // initialize to black and fully transparent
             i += bytesPerPixel
         }
     }
