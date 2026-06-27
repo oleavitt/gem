@@ -186,3 +186,45 @@ final class ImageEncodingTests: XCTestCase {
         XCTAssertEqual(decoded.height, 4)
     }
 }
+
+@MainActor
+final class RenderModelTests: XCTestCase {
+
+    private func makeModel(width: Int, height: Int) -> RenderModel {
+        let model = RenderModel(renderer: TestRenderer())
+        model.sceneURL = URL(fileURLWithPath: "/tmp/does-not-matter.scn")
+        model.resolution = PixelSize(width: width, height: height)
+        return model
+    }
+
+    func testStartDrivesToFinishedWithImage() async {
+        let model = makeModel(width: 8, height: 6)
+        XCTAssertTrue(model.canStart)
+        model.start()
+        await model.waitUntilIdle()
+
+        guard case .finished = model.phase else {
+            return XCTFail("expected .finished, got \(model.phase)")
+        }
+        XCTAssertEqual(model.progress, 1.0, accuracy: 0.0001)
+        XCTAssertEqual(model.image?.width, 8)
+        XCTAssertEqual(model.image?.height, 6)
+    }
+
+    func testStopPreventsFinish() async {
+        let model = makeModel(width: 300, height: 300)
+        model.start()
+        model.stop()
+        await model.waitUntilIdle()
+        if case .finished = model.phase {
+            XCTFail("render should not finish after immediate stop")
+        }
+    }
+
+    func testCannotStartWithoutScene() {
+        let model = RenderModel(renderer: TestRenderer())
+        model.sceneURL = nil
+        model.resolution = PixelSize(width: 8, height: 8)
+        XCTAssertFalse(model.canStart)
+    }
+}

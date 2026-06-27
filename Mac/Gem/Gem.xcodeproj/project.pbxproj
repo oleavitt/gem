@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4BED033B046AE9F6B291B43A /* RenderTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87550690C10EACA53E1A8956 /* RenderTypes.swift */; };
 		5055070FED6954D9F6446FB6 /* PixelColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72DED65C6986B7242B71270 /* PixelColor.swift */; };
+		5C1247675F26476D6DC15251 /* PixelSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5321A88F3026E921134B377 /* PixelSize.swift */; };
+		5CAC51AAF5696CC71D4E0C78 /* RenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B6CD4C342A9D417C5A1057 /* RenderModel.swift */; };
 		8C0DEE751DED1E2A00697E06 /* GemCtoSwift.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE741DED1E2A00697E06 /* GemCtoSwift.m */; };
 		8C0DEE841DED2DC800697E06 /* dopixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE811DED2DC800697E06 /* dopixel.c */; };
 		8C0DEE851DED2DC800697E06 /* rend2d.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C0DEE831DED2DC800697E06 /* rend2d.c */; };
@@ -116,6 +118,7 @@
 
 /* Begin PBXFileReference section */
 		1B133CA8643732DA09CC350A /* RenderImageBuffer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RenderImageBuffer.swift; path = Gem/Model/RenderImageBuffer.swift; sourceTree = "<group>"; };
+		44B6CD4C342A9D417C5A1057 /* RenderModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RenderModel.swift; path = Gem/Model/RenderModel.swift; sourceTree = "<group>"; };
 		87550690C10EACA53E1A8956 /* RenderTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RenderTypes.swift; path = Gem/Renderer/RenderTypes.swift; sourceTree = "<group>"; };
 		8B8DCD6C5EB66FF39176503B /* RenderEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RenderEngine.swift; path = Gem/Renderer/RenderEngine.swift; sourceTree = "<group>"; };
 		8C0DEE731DED1E2A00697E06 /* GemCtoSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GemCtoSwift.h; sourceTree = "<group>"; };
@@ -232,6 +235,7 @@
 		8CE7B1B41DEFEB89002461C3 /* tracestk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tracestk.c; path = ../../src/Raytrace/tracestk.c; sourceTree = "<group>"; };
 		8CE7B1B51DEFEB89002461C3 /* xform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xform.c; path = ../../src/Raytrace/xform.c; sourceTree = "<group>"; };
 		8CE7B1B81DEFEBF4002461C3 /* Findfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Findfile.h; path = ../../src/Include/Findfile.h; sourceTree = "<group>"; };
+		A5321A88F3026E921134B377 /* PixelSize.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PixelSize.swift; path = Gem/Model/PixelSize.swift; sourceTree = "<group>"; };
 		E0F95597669305BD9CCC555D /* ImageEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageEncoding.swift; path = Gem/Model/ImageEncoding.swift; sourceTree = "<group>"; };
 		E72DED65C6986B7242B71270 /* PixelColor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PixelColor.swift; path = Gem/Common/PixelColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -319,6 +323,8 @@
 				8B8DCD6C5EB66FF39176503B /* RenderEngine.swift */,
 				1B133CA8643732DA09CC350A /* RenderImageBuffer.swift */,
 				E0F95597669305BD9CCC555D /* ImageEncoding.swift */,
+				A5321A88F3026E921134B377 /* PixelSize.swift */,
+				44B6CD4C342A9D417C5A1057 /* RenderModel.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -719,6 +725,8 @@
 				E45D50F44B0B0D03ED96C579 /* RenderEngine.swift in Sources */,
 				D48A948DE0FA26B3B3968450 /* RenderImageBuffer.swift in Sources */,
 				9FB882FCF15ECE19FB177EB7 /* ImageEncoding.swift in Sources */,
+				5C1247675F26476D6DC15251 /* PixelSize.swift in Sources */,
+				5CAC51AAF5696CC71D4E0C78 /* RenderModel.swift in Sources */,
 			);
 		};
 		8C2BF9BB1DEA809E005DDF33 /* Sources */ = {
@@ -802,7 +810,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -859,7 +867,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -884,7 +892,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gem.Gem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Gem-Bridging-Header.h";
@@ -909,7 +917,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gem.Gem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Gem-Bridging-Header.h";
@@ -929,7 +937,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gem.GemTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -949,7 +957,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gem.GemTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
