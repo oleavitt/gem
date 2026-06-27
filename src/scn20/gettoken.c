@@ -8,7 +8,7 @@
 
 #include "local.h"
 
-
+#define ARRAY_SIZE(a)  (sizeof(a) / sizeof(*(a)))
 
 static TOKEN tokens[] =
 {
@@ -171,6 +171,9 @@ static TOKEN tokens[] =
 	{ "", THE_END, 0 }
 };
 
+/* Number of searchable keywords (excludes THE_END sentinel). */
+#define N_KEYWORDS  ((int)(ARRAY_SIZE(tokens) - 1))
+
 TOKEN misc_token;
 
 /*
@@ -187,7 +190,34 @@ static int gettoken_mode = GETTOKEN_NORMAL;
 static FILEDATA *fdp;
 static int last_line;
 static long fpos;
-static TOKEN *last_token;
+
+/*
+ * Two-character operator table.
+ * Each row maps a first char (c1) and optional second char (c2):
+ *   - If c2 matches, return tok2 (the compound operator).
+ *   - Otherwise push back c2 and return tok1 (the single-char operator).
+ */
+struct Op2Entry { char c1, c2; int tok2, tok1; };
+
+static const struct Op2Entry op2_table[] =
+{
+	{ '+', '=', OP_PLUSASSIGN,   OP_PLUS        },
+	{ '-', '=', OP_MINUSASSIGN,  OP_MINUS       },
+	{ '*', '=', OP_MULTASSIGN,   OP_MULT        },
+	{ '/', '=', OP_DIVASSIGN,    OP_DIVIDE      },
+	{ '&', '&', OP_ANDAND,       OP_AND         },
+	{ '|', '|', OP_OROR,         OP_OR          },
+	{ '<', '=', OP_LESSEQUAL,    OP_LESSTHAN    },
+	{ '>', '=', OP_GREATEQUAL,   OP_GREATERTHAN },
+	{ '!', '=', OP_NOTEQUAL,     OP_NOT         },
+	{ '=', '=', OP_EQUAL,        OP_ASSIGN      },
+};
+
+/* bsearch comparator for keyword lookup. */
+static int cmp_keyword(const void *key, const void *elem)
+{
+	return strcmp((const char *)key, ((const TOKEN *)elem)->name);
+}
 
 int gettoken_Init(const char *fname)
 {
@@ -198,12 +228,6 @@ int gettoken_Init(const char *fname)
 
 	g_cur_token = &misc_token;
 	misc_token.token = TK_EOF;
-
-	/* Locate the last token in the list. */
-	for (last_token = tokens;
-		last_token->token != THE_END;
-		last_token++)
-			;  /* Just inc through the list... */
 
 	return 1;
 }
@@ -224,7 +248,7 @@ static int Parse_Quoted_String(FILEDATA *fdp)
 	{
 		c = fgetc(fp);
 		if (c == '\n')
-			fdp->line_num++; /* update the line counter */
+			fdp->line_num++;
 	}
 	while (isspace(c));
 
@@ -234,42 +258,41 @@ static int Parse_Quoted_String(FILEDATA *fdp)
 		file_PrintFileAndLineNumber();
 		return 0;
 	}
-	
+
 	b = g_token_buffer;
 	for (i = 0; i < MAX_TOKEN_LEN; i++)
 	{
 		lastc = c;
 		c = fgetc(fp);
-		if ((c == '\n')&&(lastc == '\\')) /* Backslash contiuation char. */
+		if ((c == '\n') && (lastc == '\\')) /* Backslash continuation char. */
 		{
 			i--;
-			b--; /* spit out the backslash */
-			fdp->line_num++; /* update the line counter */
-			c = fgetc(fp); /* get next char after newline */
+			b--;                /* remove the backslash */
+			fdp->line_num++;
+			c = fgetc(fp);
 		}
-		if (c == '"') /* Closing '"' reached... */
-		{ /* If there are any more quoted strings following... */
-		  /* ...concatenate them. */
-			fps = ftell(fp);
+		if (c == '"') /* Closing '"' reached — concatenate any following strings. */
+		{
+			fps  = ftell(fp);
 			lastl = fdp->line_num;
-			do /* gobble up white space */
+			do  /* gobble up whitespace */
 			{
 				c = fgetc(fp);
 				if (c == '\n')
-					fdp->line_num++; /* update the line counter */
+					fdp->line_num++;
 			}
 			while (isspace(c));
-			if (c != '"')   /* if no opening quote, push back and return */
+			if (c != '"')   /* no opening quote — push back and return */
 			{
 				fseek(fp, fps, SEEK_SET);
 				fdp->line_num = lastl;
 				*b = '\0';
 				return 1;
 			}
-			/* else, segue into next string */
+			/* segue into the next string */
 			c = fgetc(fp);
 		}
-		if ((c == '\n')||(c == EOF))
+		if ((c == '\n') || (c == EOF))
 			break;
 		*b++ = (char)c;
 	}
@@ -290,7 +313,7 @@ static int Parse_Quoted_String(FILEDATA *fdp)
 				logerror("Unterminated string literal, end of line reached.");
 				logmsg("  Expecting closing  \"");
 				file_PrintFileAndLineNumber();
-				fdp->line_num++; /* update the line counter */
+				fdp->line_num++;
 				return 0;
 			case EOF:
 				logerror("Unterminated string literal, end of file reached.");
@@ -317,12 +340,72 @@ int gettoken_GetNewIdentifier(void)
 	return token;
 }
 
+/* Scan an identifier starting with first_c into g_token_buffer. */
+static void scan_identifier(FILE *fp, int first_c)
+{
+	char *b = g_token_buffer;
+	int c = first_c;
+	do {
+		*b++ = (char)c;
+		c = fgetc(fp);
+	} while (isalnum(c) || c == '_');
+	ungetc(c, fp);
+	*b = '\0';
+}
+
+/*
+ * Scan a numeric literal starting with first_c into g_token_buffer.
+ * Returns CV_INT_CONST, CV_FLOAT_CONST, or OP_DOT (for a lone '.').
+ */
+static int scan_number(FILE *fp, int c)
+{
+	char *b = g_token_buffer;
+	int dp_count = 0, exp_count = 0;
+
+	if (c == '.')
+	{
+		*b++ = (char)c;
+		dp_count++;
+		c = fgetc(fp);
+	}
+	while (isdigit(c))
+	{
+		*b++ = (char)c;
+		c = fgetc(fp);
+		if (c == '.' && dp_count == 0)
+		{
+			*b++ = (char)c;
+			dp_count++;
+			c = fgetc(fp);
+		}
+		if (toupper(c) == 'E' && exp_count == 0)
+		{
+			*b++ = (char)c;
+			c = fgetc(fp);
+			exp_count++;
+			dp_count++;     /* prevents a second '.' after the exponent */
+			if (c == '-')
+			{
+				*b++ = (char)c;
+				c = fgetc(fp);
+			}
+		}
+	}
+	*b = '\0';
+	ungetc(c, fp);
+
+	if (dp_count == 0)
+		return CV_INT_CONST;
+	if (b - g_token_buffer > 1)
+		return CV_FLOAT_CONST;
+	return OP_DOT;  /* lone '.' */
+}
+
 int gettoken(void)
 {
-	int c, c2, start_line, nest_level, result;
+	int c, c2, start_line, nest_level;
 	int token = TK_EOF;
 	char *b;
-	TOKEN *t, *lo, *hi;
 	FILE *fp;
 
 	g_cur_token = &misc_token;
@@ -336,13 +419,13 @@ int gettoken(void)
 
 	fp = fdp->fp;
 
-	for (;;)
+	while (1)
 	{
 		/* Bookmark previous position for gettoken_Unget(). */
 		fpos = ftell(fp);
 		last_line = fdp->line_num;
 
-		/* Gobble up white space and count lines... */
+		/* Gobble up whitespace and count lines. */
 		do
 		{
 			c = fgetc(fp);
@@ -351,12 +434,12 @@ int gettoken(void)
 		}
 		while (isspace(c));
 
-		/* Gobble up comments... */
+		/* Gobble up comments. */
 		if (c == '/')
 		{
 			c2 = fgetc(fp);
 
-			if (c2 == '/')      /* ANSI C++ style single-line comment. */
+			if (c2 == '/')      /* C++ single-line comment */
 			{
 				do
 				{
@@ -367,21 +450,20 @@ int gettoken(void)
 					}
 				}
 				while (c != '\n');
-					fdp->line_num++;
+				fdp->line_num++;
 				continue;
 			}
-			else if (c2 == '*') /* C style multi-line comment. */
+			else if (c2 == '*') /* C multi-line comment */
 			{
-				/* Remember where we started in case of error. */
 				start_line = fdp->line_num;
 				nest_level = 0;
-				for (;;)
+				while (1)
 				{
 					/* Entering nested comment? */
 					if ((c = fgetc(fp)) == '/')
 						if ((c = fgetc(fp)) == '*')
 							nest_level++;
-					/* End of outer most comment? */
+					/* End of outermost comment? */
 					if (c == '*')
 						if ((c = fgetc(fp)) == '/')
 							if (nest_level-- < 1)
@@ -392,7 +474,7 @@ int gettoken(void)
 					{
 						logerror("Unexpected end of file.");
 						logmsg("  Unterminated comment started on line: %d",
-						start_line);
+							start_line);
 						file_PrintFileAndLineNumber();
 						break;
 					}
@@ -402,22 +484,14 @@ int gettoken(void)
 			ungetc(c2, fp);
 		}
 
-		/* Stuff from this point on will be buffered... */
-		b = g_token_buffer;
-
-		/* See if we have an identifier name... */
+		/* Identifier? */
 		if (isalpha(c) || c == '_')
 		{
-			do
-			{
-				*b++ = (char)c;
-				c = fgetc(fp);
-			}
-			while (isalnum(c) || c == '_');
-			ungetc(c, fp);
-			*b = '\0';
+			TOKEN *t;
 
-			/* See if it is a user-defined symbol... */
+			scan_identifier(fp, c);
+
+			/* Check user-defined symbols first. */
 			g_cur_token = pcontext_findsymbol(
 				g_token_buffer,
 				(gettoken_mode == GETTOKEN_NEWID));
@@ -427,7 +501,7 @@ int gettoken(void)
 				goto done;
 			}
 
-			/* See if it is the "include" directive... */
+			/* Handle the "include" directive. */
 			if (strcmp(g_token_buffer, "include") == 0)
 			{
 				if (Parse_Quoted_String(fdp))
@@ -443,30 +517,20 @@ int gettoken(void)
 				}
 			}
 
-			/* See if it is a keyword... */
-			lo = tokens;
-			hi = last_token;
-			for (;;)
+			/* Binary search in the keyword table. */
+			t = bsearch(g_token_buffer, tokens, N_KEYWORDS,
+				sizeof(tokens[0]), cmp_keyword);
+			if (t != NULL)
 			{
-				if (lo >= hi)
+				/* RT_ variables are only valid inside an fn_xyz object. */
+				if ((t->token > RT_RT_BEGIN) &&
+					(t->token < RT_RT_END) &&
+					(pcontext_getobjtype() != TK_FN_XYZ))
 				{
-					t = last_token;
-					break;
+					/* fall through to TK_UNKNOWN_ID */
 				}
-				t = lo + (unsigned)(hi - lo) / 2;
-				if ((result = strcmp(t->name, g_token_buffer)) > 0)
-					hi = t;
-				else if (result < 0)
-					lo = t + 1;
-				else if (result == 0)   /* match found */
+				else
 				{
-					// These are recognized only in the fn_xyz object.
-					//
-					if ((t->token > RT_RT_BEGIN) &&
-						(t->token < RT_RT_END) &&
-						(pcontext_getobjtype() != TK_FN_XYZ))
-						break;
-
 					g_cur_token = t;
 					token = t->token;
 					goto done;
@@ -474,158 +538,65 @@ int gettoken(void)
 			}
 
 			g_cur_token = &misc_token;
-
 			token = TK_UNKNOWN_ID;
 			goto done;
 		}
 
-		/* See if we have a number... */
+		/* Numeric literal? */
 		if (isdigit(c) || c == '.')
 		{
-			int dp_count, exp_count;
-
-			dp_count = exp_count = 0;
-			if (c == '.')
-			{
-				*b++ = (char)c;
-				dp_count++;
-				c = fgetc(fp);
-			}
-			while (isdigit(c))
-			{
-				*b++ = (char)c;
-				c = fgetc(fp);
-				if (c == '.' && dp_count == 0)
-				{
-					*b++ = (char)c;
-					dp_count++;
-					c = fgetc(fp);
-				}
-				if (toupper(c) == 'E' && exp_count == 0)
-				{
-					*b++ = (char)c;
-					c = fgetc(fp);
-					exp_count++;
-					dp_count++;
-					if (c == '-')
-					{
-						*b++ = (char)c;
-						c = fgetc(fp);
-					}
-				}
-			}
-			*b = '\0';
-			ungetc(c, fp);
-			token = (dp_count == 0) ? CV_INT_CONST :
-				(strlen(g_token_buffer) > 1) ? CV_FLOAT_CONST : OP_DOT;
+			token = scan_number(fp, c);
 			goto done;
 		}
 
-		/* Place char in buffer... */
+		/* Place the char in the buffer. */
+		b = g_token_buffer;
 		*b++ = (char)c;
 		*b = '\0';
 
-		/* operator? */
-		switch(c)
+		/* Operator? */
+		switch (c)
 		{
-			/* Check for duets... */
-			case '+':
-			case '-':
-			case '*':
-			case '/':
-			case '&':
-			case '|':
-			case '<':
-			case '>':
-			case '!':
-			case '=':
+			/* Two-character compound operators (table-driven). */
+			case '+': case '-': case '*': case '/':
+			case '&': case '|': case '<': case '>': case '!': case '=':
+			{
+				size_t i;
 				c2 = fgetc(fp);
-				*b++ = (char)c2;
-				*b-- = '\0';
-				switch(c)
+				for (i = 0; i < ARRAY_SIZE(op2_table); i++)
 				{
-					case '+':
-						token = (c2 == '=') ? OP_PLUSASSIGN :
-						/*	(c2 == '+') ? OP_INCREMENT : */
-						(ungetc(c2, fp), *b = '\0', OP_PLUS);
-						goto done;
-					case '-':
-						token = (c2 == '=') ? OP_MINUSASSIGN :
-						/*	(c2 == '-') ? OP_DECREMENT : */
-						(ungetc(c2, fp), *b = '\0', OP_MINUS);
-						goto done;
-					case '*':
-						token = (c2 == '=') ? OP_MULTASSIGN :
-						(ungetc(c2, fp), *b = '\0', OP_MULT);
-						goto done;
-					case '/':
-						token = (c2 == '=') ? OP_DIVASSIGN :
-						(ungetc(c2, fp), *b = '\0', OP_DIVIDE);
-						goto done;
-					case '&':
-						token = (c2 == '&') ? OP_ANDAND :
-						(ungetc(c2, fp), *b = '\0', OP_AND);
-						goto done;
-					case '|':
-						token = (c2 == '|') ? OP_OROR :
-						(ungetc(c2, fp), *b = '\0', OP_OR);
-						goto done;
-					case '<':
-						token = (c2 == '=') ? OP_LESSEQUAL :
-						(c2 == '>') ? OP_NOTEQUAL :
-						(ungetc(c2, fp), *b = '\0', OP_LESSTHAN);
-						goto done;
-					case '>':
-						token = (c2 == '=') ? OP_GREATEQUAL :
-						(ungetc(c2, fp), *b = '\0', OP_GREATERTHAN);
-						goto done;
-					case '!':
-						token = (c2 == '=') ? OP_NOTEQUAL :
-						(ungetc(c2, fp), *b = '\0', OP_NOT);
-						goto done;
-					case '=':
-						token = (c2 == '=') ? OP_EQUAL :
-						(ungetc(c2, fp), *b = '\0', OP_ASSIGN);
-						goto done;
+					if (op2_table[i].c1 != c)
+						continue;
+					if (op2_table[i].c2 == c2)
+					{
+						*b++ = (char)c2;
+						*b   = '\0';
+						token = op2_table[i].tok2;
+					}
+					else
+					{
+						ungetc(c2, fp);
+						/* buffer already holds just c */
+						token = op2_table[i].tok1;
+					}
+					goto done;
 				}
-			/* Shouldn't get here. */
+				token = TK_UNKNOWN_CHAR;
+				goto done;
+			}
 
-			case ',':
-				token = OP_COMMA;
-				goto done;
-			case '{':
-				token = TK_LEFTBRACE;
-				goto done;
-			case '}':
-				token = TK_RIGHTBRACE;
-				goto done;
-			case '(':
-				token = OP_LPAREN;
-				goto done;
-			case ')':
-				token = OP_RPAREN;
-				goto done;
-			case '[':
-				token = OP_LSQUARE;
-				goto done;
-			case ']':
-				token = OP_RSQUARE;
-				goto done;
-			case '^':
-				token = OP_POW;
-				goto done;
-			case '%':
-				token = OP_MOD;
-				goto done;
-			case '?':
-				token = OP_QUESTION;
-				goto done;
-			case ':':
-				token = OP_COLON;
-				goto done;
-			case ';':
-				token = OP_SEMICOLON;
-				goto done;
+			case ',':   token = OP_COMMA;       goto done;
+			case '{':   token = TK_LEFTBRACE;   goto done;
+			case '}':   token = TK_RIGHTBRACE;  goto done;
+			case '(':   token = OP_LPAREN;      goto done;
+			case ')':   token = OP_RPAREN;      goto done;
+			case '[':   token = OP_LSQUARE;     goto done;
+			case ']':   token = OP_RSQUARE;     goto done;
+			case '^':   token = OP_POW;         goto done;
+			case '%':   token = OP_MOD;         goto done;
+			case '?':   token = OP_QUESTION;    goto done;
+			case ':':   token = OP_COLON;       goto done;
+			case ';':   token = OP_SEMICOLON;   goto done;
 			case '"':
 				ungetc(c, fp);
 				Parse_Quoted_String(fdp);
@@ -633,8 +604,7 @@ int gettoken(void)
 				goto done;
 		}
 
-
-		/* end of file? */
+		/* End of file? */
 		if (feof(fp))
 		{
 			if ((fdp = file_CloseInclude()) != NULL)
@@ -647,13 +617,12 @@ int gettoken(void)
 			break;
 		}
 
-		/* Unknown non-alpha character. */
+		/* Unknown character. */
 		token = TK_UNKNOWN_CHAR;
 		break;
 	}
 
-	done:
-
+done:
 	misc_token.token = token;
 	if (token == TK_EOF)
 		strcpy(g_token_buffer, "End Of File");
@@ -661,12 +630,12 @@ int gettoken(void)
 	return token;
 }
 
+
 /*************************************************************************
 *
 *	gettoken_Unget() - Undo the last call to gettoken().
-*	Restores the stream
-*	position and line number to the values saved by gettoken() before
-*	it reads from the stream.
+*	Restores the stream position and line number to the values saved
+*	by gettoken() before it reads from the stream.
 *
 *************************************************************************/
 void gettoken_Unget(void)
@@ -686,20 +655,17 @@ void gettoken_Unget(void)
 *
 *************************************************************************/
 int gettoken_Expect(
-	int				expected_token,
-	const char *	token_name
+	int             expected_token,
+	const char *    token_name
 	)
 {
-	int		token;
-
-	token = gettoken();
+	int token = gettoken();
 	if (token != expected_token)
 	{
 		logerror("%s: '%s' expected. Found '%s'",
 			ME, token_name, g_token_buffer);
 		file_PrintFileAndLineNumber();
 	}
-
 	return token;
 }
 
@@ -716,15 +682,9 @@ int gettoken_Expect(
 void gettoken_ErrUnknown(int token, const char *expected)
 {
 	if (token == TK_EOF)
-	{
-		logerror("%s: Unexpected End Of File.",
-			ME);
-	}
+		logerror("%s: Unexpected End Of File.", ME);
 	else
-	{
-		logerror("%s: Unknown or misplaced token '%s'.",
-			ME, g_token_buffer);
-	}
+		logerror("%s: Unknown or misplaced token '%s'.", ME, g_token_buffer);
 
 	if (expected != NULL)
 		logmsg("  '%s' expected.", expected);

@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "Expr.h"	/* Math primitive types and Expr type. */
+#include "expr.h"	/* Math primitive types and Expr type. */
 #include "image.h"	/* Image type. */
 #include "vm.h"		/* Virtual machine functions and types. */
 

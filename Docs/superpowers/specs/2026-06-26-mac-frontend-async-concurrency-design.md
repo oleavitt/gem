@@ -64,12 +64,14 @@ Eliminates per-pixel `CGColor` allocation and makes pixel data trivially
 ### 2. `Renderer` protocol (synchronous compute, engine-owned)
 
 ```swift
-protocol Renderer {
-    mutating func setup(viewPortBounds: CGRect) throws
+protocol Renderer: AnyObject {
+    func setup(viewPortBounds: CGRect) throws
     func color(at pointOnViewPort: CGPoint) -> PixelColor
     func finished()
 }
 ```
+
+(Both conformers are classes, so `Renderer` is constrained to `AnyObject`.)
 
 - `setup` now `throws`; `RayTraceRenderer.setup` throws `RenderError` on
   `scn20_parse` / `Ray_Setup` failure instead of silently returning.
