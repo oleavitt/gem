@@ -27,6 +27,10 @@ struct ContentView: View {
                     Button("Render", systemImage: "play.fill") { model.start() }
                         .disabled(!model.canStart)
                 }
+                Button("Save Image…", systemImage: "square.and.arrow.down") {
+                    model.isPresentingExporter = true
+                }
+                .disabled(model.image == nil)
                 if case .finished(let elapsed) = model.phase {
                     Text(String(format: "%.3g s", elapsed))
                         .foregroundStyle(.secondary)
