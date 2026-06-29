@@ -14,6 +14,7 @@ class AppData {
     private static let outputResolutionSizeKey = baseKey + "outputResolutionSize"
     private static let sceneFilePathKey = baseKey + "sceneFilePath"
     private static let includeFilePathsKey = baseKey + "includeFilePaths"
+    private static let autoSaveEnabledKey = baseKey + "autoSaveEnabled"
 
     static var outputResolution: NSSize {
         get {
@@ -37,6 +38,18 @@ class AppData {
         }
     }
     
+    /// Whether finished renders are written to disk automatically.
+    /// Defaults to `true` when the user has never set a preference.
+    static var autoSaveEnabled: Bool {
+        get {
+            guard UserDefaults.standard.object(forKey: autoSaveEnabledKey) != nil else { return true }
+            return UserDefaults.standard.bool(forKey: autoSaveEnabledKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: autoSaveEnabledKey)
+        }
+    }
+
     static var includeFilePaths: String? {
         get {
             return UserDefaults.standard.string(forKey: includeFilePathsKey)

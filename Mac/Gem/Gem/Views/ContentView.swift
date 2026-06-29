@@ -50,5 +50,10 @@ struct ContentView: View {
         } message: {
             Text(model.failureMessage)
         }
+        .alert("Auto-Save Failed", isPresented: $model.isShowingAutoSaveError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(model.autoSaveError ?? "")
+        }
     }
 }

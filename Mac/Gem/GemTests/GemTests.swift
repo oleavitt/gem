@@ -148,10 +148,12 @@ final class RendererMigrationTests: XCTestCase {
 
 final class RenderImageBufferTests: XCTestCase {
 
-    func testNewBufferIsOpaqueBlack() {
+    func testNewBufferIsTransparentBlack() {
+        // The buffer initializes fully transparent so the canvas checkerboard
+        // shows through unrendered areas (see RenderImageBuffer.init).
         let buf = RenderImageBuffer(width: 2, height: 2)
-        XCTAssertEqual(buf.pixel(atX: 0, y: 0), PixelColor(a: 255, r: 0, g: 0, b: 0))
-        XCTAssertEqual(buf.pixel(atX: 1, y: 1), PixelColor(a: 255, r: 0, g: 0, b: 0))
+        XCTAssertEqual(buf.pixel(atX: 0, y: 0), PixelColor(a: 0, r: 0, g: 0, b: 0))
+        XCTAssertEqual(buf.pixel(atX: 1, y: 1), PixelColor(a: 0, r: 0, g: 0, b: 0))
     }
 
     func testSetRowWritesPixelsReadableBack() {
@@ -159,7 +161,7 @@ final class RenderImageBufferTests: XCTestCase {
         buf.setRow([PixelColor(r: 255, g: 0, b: 0), PixelColor(r: 0, g: 255, b: 0)], at: 1)
         XCTAssertEqual(buf.pixel(atX: 0, y: 1), PixelColor(a: 255, r: 255, g: 0, b: 0))
         XCTAssertEqual(buf.pixel(atX: 1, y: 1), PixelColor(a: 255, r: 0, g: 255, b: 0))
-        XCTAssertEqual(buf.pixel(atX: 0, y: 0), PixelColor(a: 255, r: 0, g: 0, b: 0))
+        XCTAssertEqual(buf.pixel(atX: 0, y: 0), PixelColor(a: 0, r: 0, g: 0, b: 0))
     }
 
     func testMakeCGImageHasBufferDimensions() {
@@ -189,6 +191,21 @@ final class ImageEncodingTests: XCTestCase {
 
 @MainActor
 final class RenderModelTests: XCTestCase {
+
+    private var savedAutoSave = true
+
+    override func setUp() {
+        super.setUp()
+        // Snapshot the user's real preference and disable auto-save so the
+        // general tests don't write files; auto-save tests opt back in.
+        savedAutoSave = AppData.autoSaveEnabled
+        AppData.autoSaveEnabled = false
+    }
+
+    override func tearDown() {
+        AppData.autoSaveEnabled = savedAutoSave
+        super.tearDown()
+    }
 
     private func makeModel(width: Int, height: Int) -> RenderModel {
         let model = RenderModel(renderer: TestRenderer())
@@ -226,5 +243,59 @@ final class RenderModelTests: XCTestCase {
         model.sceneURL = nil
         model.resolution = PixelSize(width: 8, height: 8)
         XCTAssertFalse(model.canStart)
+    }
+
+    func testAutoSaveURLIsPngBesideScene() {
+        let model = makeModel(width: 8, height: 6)
+        model.sceneURL = URL(fileURLWithPath: "/some/dir/Sierpinski.scn")
+        XCTAssertEqual(model.autoSaveURL, URL(fileURLWithPath: "/some/dir/Sierpinski.png"))
+    }
+
+    func testAutoSaveWritesPngWhenEnabled() async throws {
+        let dir = URL(fileURLWithPath: NSTemporaryDirectory())
+            .appendingPathComponent("gem-autosave-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: dir) }
+
+        AppData.autoSaveEnabled = true
+        let model = makeModel(width: 8, height: 6)
+        model.sceneURL = dir.appendingPathComponent("MyScene.scn")
+
+        model.start()
+        await model.waitUntilIdle()
+
+        let saved = dir.appendingPathComponent("MyScene.png")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: saved.path))
+        XCTAssertNil(model.autoSaveError)
+    }
+
+    func testAutoSaveSkippedWhenDisabled() async throws {
+        let dir = URL(fileURLWithPath: NSTemporaryDirectory())
+            .appendingPathComponent("gem-autosave-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: dir) }
+
+        AppData.autoSaveEnabled = false
+        let model = makeModel(width: 8, height: 6)
+        model.sceneURL = dir.appendingPathComponent("MyScene.scn")
+
+        model.start()
+        await model.waitUntilIdle()
+
+        let saved = dir.appendingPathComponent("MyScene.png")
+        XCTAssertFalse(FileManager.default.fileExists(atPath: saved.path))
+    }
+
+    func testAutoSaveReportsErrorForUnwritableDestination() async throws {
+        AppData.autoSaveEnabled = true
+        let model = makeModel(width: 8, height: 6)
+        // A directory that does not exist -> write fails.
+        model.sceneURL = URL(fileURLWithPath: "/nonexistent-dir-\(UUID().uuidString)/MyScene.scn")
+
+        model.start()
+        await model.waitUntilIdle()
+
+        XCTAssertNotNil(model.autoSaveError)
+        XCTAssertTrue(model.isShowingAutoSaveError)
     }
 }
