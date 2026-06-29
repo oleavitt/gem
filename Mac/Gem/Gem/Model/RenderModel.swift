@@ -6,6 +6,7 @@
 import Foundation
 import CoreGraphics
 import Observation
+import UniformTypeIdentifiers
 
 @MainActor
 @Observable
@@ -22,6 +23,9 @@ final class RenderModel {
     var resolution: PixelSize
     var isPresentingImporter = false
     var isPresentingExporter = false
+
+    /// Set when an automatic save of a finished render fails. Drives an alert.
+    var autoSaveError: String?
 
     private(set) var phase: Phase = .idle
     private(set) var image: CGImage?
@@ -59,6 +63,11 @@ final class RenderModel {
     var isShowingFailureAlert: Bool {
         get { if case .failed = phase { return true } else { return false } }
         set { if !newValue, case .failed = phase { phase = .idle } }
+    }
+
+    var isShowingAutoSaveError: Bool {
+        get { autoSaveError != nil }
+        set { if !newValue { autoSaveError = nil } }
     }
 
     func start() {
@@ -103,6 +112,7 @@ final class RenderModel {
                 case .finished:
                     self.image = buffer.makeCGImage()
                     self.phase = .finished(elapsed: -startTime.timeIntervalSinceNow)
+                    self.autoSaveIfNeeded()
                 }
             }
         }
@@ -110,6 +120,27 @@ final class RenderModel {
 
     func stop() {
         renderTask?.cancel()
+    }
+
+    /// Destination URL for an auto-saved render: a PNG beside the scene file,
+    /// named after the scene (e.g. `…/Sierpinski.scn` → `…/Sierpinski.png`).
+    var autoSaveURL: URL? {
+        sceneURL?.deletingPathExtension().appendingPathExtension("png")
+    }
+
+    /// Writes the finished render to disk if auto-save is enabled. Surfaces
+    /// any failure via `autoSaveError` so the UI can present an alert.
+    private func autoSaveIfNeeded() {
+        guard AppData.autoSaveEnabled, let image, let destination = autoSaveURL else { return }
+        guard let data = ImageEncoding.data(from: image, type: .png) else {
+            autoSaveError = "Could not encode the rendered image for auto-save."
+            return
+        }
+        do {
+            try data.write(to: destination)
+        } catch {
+            autoSaveError = "Could not save \(destination.lastPathComponent): \(error.localizedDescription)"
+        }
     }
 
     /// Awaits the current render task (used by tests and on quit).
