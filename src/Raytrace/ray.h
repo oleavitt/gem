@@ -45,7 +45,7 @@ typedef struct tag_tracestack
 	double ior, Phong;	/* Saved ior & Phong power for this level. */
 	Surface *surface;	/* The surface to use for shading. */
 	Vec3 weight;		/* Contribution significance for this ray. */
-	Vec3 total_color;	/* Cummulative color total for this ray. */
+	RGBA total_color;	/* Cummulative color total with alpha channel for this ray. */
 } TraceStack;
 
 

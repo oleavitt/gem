@@ -29,9 +29,9 @@ class RayTraceRenderer: Renderer {
     }
 
     func color(at pointOnViewPort: CGPoint) -> PixelColor {
-        var color = Vec3()
+        var color = RGBA()
         Ray_TraceRayFromViewport(Double(pointOnViewPort.x), Double(pointOnViewPort.y), &color)
-        return PixelColor(red: color.x, green: color.y, blue: color.z, alpha: 1.0)
+        return PixelColor(red: color.r, green: color.g, blue: color.b, alpha: color.a)
     }
 
     func finished() {

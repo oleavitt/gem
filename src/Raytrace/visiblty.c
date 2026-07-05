@@ -12,21 +12,18 @@
 Vec3 ray_visibility_color;
 double ray_visibility_distance;
 
-void InitializeVisibility(void)
-{
+void InitializeVisibility(void) {
 }
 
 
-void CloseVisibility(void)
-{
+void CloseVisibility(void) {
 }
 
-
-void Ray_ApplyVisibility(void)
-{
-   if (ray_visibility_distance > EPSILON)
-   {
-      double v = exp(ct.t/-ray_visibility_distance);
-      V3Interpolate(&ct.total_color, &ray_visibility_color, v, &ct.total_color);
+void Ray_ApplyVisibility(void) {
+   if (ray_visibility_distance > EPSILON) {
+       double v = exp(ct.t/-ray_visibility_distance);
+       ct.total_color.r = ray_visibility_color.x + v * (ray_visibility_color.x - ct.total_color.r);
+       ct.total_color.g = ray_visibility_color.y + v * (ray_visibility_color.y - ct.total_color.g);
+       ct.total_color.b = ray_visibility_color.z + v * (ray_visibility_color.z - ct.total_color.b);
    }
 }

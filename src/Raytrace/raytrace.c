@@ -52,12 +52,14 @@ int Ray_Initialize(void)
 		InitializeBackground();
       InitializeVisibility();
 
-		/* Set default background colors to black. */
+		// Set default background colors to black and alpha for missed viewport rays
+        // to fully transparent (no background).
 		V3Set(&ray_background_color1, 0.0, 0.0, 0.0);
 		V3Set(&ray_background_color2, 0.0, 0.0, 0.0);
+        ray_background_no_hit_alpha = 0.0;
 
-      ray_visibility_distance = -1;
-      V3Set(&ray_visibility_color, 1.0, 1.0, 1.0);
+        ray_visibility_distance = -1;
+        V3Set(&ray_visibility_color, 1.0, 1.0, 1.0);
 
 		/* Set default "up" orientation vector for the world. */
 		V3Set(&ray_up_vector, 0.0, 0.0, 1.0);
@@ -101,6 +103,7 @@ int Ray_Setup(RaySetupData *rsd)
 	/* Background colors. */
 	ray_background_color1 = rsd->background_color1;
 	ray_background_color2 = rsd->background_color2;
+    ray_background_no_hit_alpha = rsd->background_no_hit_alpha;
 
    // Visibility falloff
    ray_visibility_distance = rsd->visibility_distance;
@@ -161,10 +164,11 @@ void Ray_GetSetup(RaySetupData *rsd)
 	/* Background colors. */
 	rsd->background_color1 = ray_background_color1;
 	rsd->background_color2 = ray_background_color2;
+    rsd->background_no_hit_alpha = ray_background_no_hit_alpha;
 
-   // Visibility falloff
-   rsd->visibility_distance = ray_visibility_distance;
-   rsd->visibility_color = ray_visibility_color;
+    // Visibility falloff
+    rsd->visibility_distance = ray_visibility_distance;
+    rsd->visibility_color = ray_visibility_color;
 
 	/* Up orientation vector. */
 	rsd->up_vector = ray_up_vector;

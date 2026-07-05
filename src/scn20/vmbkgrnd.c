@@ -166,8 +166,9 @@ void vm_background(VMStmt *curstmt)
 	// Set up the background colors in the renderer.
 	V3Copy(&g_rsd->background_color1, &color1);
 	V3Copy(&g_rsd->background_color2, &color2);
+    g_rsd->background_no_hit_alpha = 1.0;
 
-	// TODO: Background shader.
+    // TODO: Background shader.
 }
 
 /**

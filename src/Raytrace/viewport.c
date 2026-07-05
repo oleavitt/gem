@@ -43,7 +43,7 @@ void Ray_GetViewportInfo(Viewport *pvp, Vec3 *fromright, int *projection_mode)
 }
 
 
-int Ray_TraceRayFromViewport(double u, double v, Vec3 *color)
+int Ray_TraceRayFromViewport(double u, double v, RGBA *color)
 {
 	static RayInitData raydata;
 	int result;
@@ -64,12 +64,11 @@ int Ray_TraceRayFromViewport(double u, double v, Vec3 *color)
 	V3Normalize(&raydata.D);
 	result = Ray_TraceRay(&raydata);
 
-	if (viewport_projection == VIEWPORT_ANAGLYPH)
-	{
+	if (viewport_projection == VIEWPORT_ANAGLYPH) {
 		/* Render a 3D "funny glasses" stereogram. */
 		/* Put the gray-scale value of the left eye color in the blue channel. */
-		color->z = raydata.color.x * 0.33 + raydata.color.y * 0.56 + raydata.color.z * 0.11;
-		color->y = 0.0;
+		color->b = raydata.color.r * 0.33 + raydata.color.g * 0.56 + raydata.color.b * 0.11;
+		color->g = 0.0;
 		/* Trace a ray from the right eye viewport. */
 		raydata.B = right_viewport.LookFrom;
 		raydata.D.x = right_viewport.N.x + u * right_viewport.U.x +
@@ -81,10 +80,10 @@ int Ray_TraceRayFromViewport(double u, double v, Vec3 *color)
 		V3Normalize(&raydata.D);
 		result = Ray_TraceRay(&raydata);
 		/* Put the gray-scale value of the right eye color in the red channel. */
-		color->x = raydata.color.x * 0.33 + raydata.color.y * 0.56 + raydata.color.z * 0.11;
-	}
-	else
-		*color = raydata.color;
+		color->r = raydata.color.r * 0.33 + raydata.color.g * 0.56 + raydata.color.b * 0.11;
+    } else {
+        *color = raydata.color;
+    }
 
 	return result;
 }

@@ -78,6 +78,7 @@ typedef struct tag_raysetupdata
 	/* Background colors. */
 	Vec3 background_color1;
 	Vec3 background_color2;
+    double background_no_hit_alpha;
 
    // Visibility falloff distance and color
    Vec3 visibility_color;
@@ -224,7 +225,7 @@ typedef struct tag_rayinitdata
 {
 	Vec3 B, D;			/* Base and normalized direction of ray. */
 	double tmin, tmax;	/* Interval in which to search for intersections. */
-	Vec3 color;			/* Color value to return for this ray. */
+	RGBA color;			/* Color value to return for this ray. */
 } RayInitData;
 
 
@@ -793,7 +794,7 @@ extern void Ray_RunShader(Shader *shader, void *data);
 extern void Ray_SetupViewport(Vec3 *fromleft, Vec3 *fromright,
 	Vec3 *at, Vec3 *up, double FOVdegrees, int projection);
 extern int Ray_TraceRayFromViewport(double u, double v,
-	Vec3 *color);
+	RGBA *color);
 extern void Ray_GetViewportInfo(Viewport *pvp, Vec3 *fromright,
 	int *projection_mode);
 
@@ -842,6 +843,7 @@ extern void Ray_DrawScene(
 /* Background colors. */
 extern Vec3 ray_background_color1;
 extern Vec3 ray_background_color2;
+extern double ray_background_no_hit_alpha;
 extern Shader *ray_background_shader_list;
 
 // Visibility falloff
