@@ -46,6 +46,14 @@ typedef struct tag_mat4x4
 	double e[4][4];
 } Mat4x4;
 
+typedef struct tag_rgba
+{
+    double r, g, b, a;
+} RGBA;
+
+#define RGBASet(_color, _red, _green, _blue, _alpha) ((_color).r=(_red), (_color).g=(_green), (_color).b=(_blue), (_color).a=(_alpha))
+//#define RGBASet(V, a, b, c, d) ((V).r=(a), (V).g=(b), (V).g=(c), (V).a=(d))
+
 /*************************************************************************
 *
 *	Useful constants and macros

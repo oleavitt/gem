@@ -215,9 +215,9 @@ void CalcLighting(void)
 	}
 
 	FinishCalcLighting:
-	ct.total_color.x += color.x;
-	ct.total_color.y += color.y;
-	ct.total_color.z += color.z;
+	ct.total_color.r += color.x;
+	ct.total_color.g += color.y;
+	ct.total_color.b += color.z;
 }
 
 Light *NewLight(void)

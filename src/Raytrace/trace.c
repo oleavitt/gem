@@ -47,11 +47,11 @@ int Ray_TraceRay( RayInitData *raydata )
 	ray_eye_rays++;
 	ct.B = raydata->B;
 	ct.D = raydata->D;
-	V3Set( &ct.weight, 1.0, 1.0, 1.0 );
-	TraceRecursiveRay( );
+	V3Set(&ct.weight, 1.0, 1.0, 1.0);
+	TraceRecursiveRay();
 	raydata->color = ct.total_color;
 
-	return ( ct.objhit != NULL );
+	return ct.objhit != NULL;
 }
 
 
@@ -59,7 +59,7 @@ void TraceRecursiveRay( void )
 {
 	ct.tmax = ct.t = ray_max_trace_dist;
 	ct.tmin = ray_min_trace_dist;
-	V3Set( &ct.total_color, 0.0, 0.0, 0.0 );
+    RGBASet(ct.total_color, 0.0, 0.0, 0.0, 1.0);
 	rt_D = ct.D;
 
 	if ( FindClosestIntersection( ray_object_list, ct.hits ) )
@@ -91,9 +91,9 @@ void TraceRecursiveRay( void )
 			 * this ray.
 			 */
 			PopTraceStack( );
-			ct.total_color.x += pt.total_color.x * ct.kr.x;
-			ct.total_color.y += pt.total_color.y * ct.kr.y;
-			ct.total_color.z += pt.total_color.z * ct.kr.z;
+			ct.total_color.r += pt.total_color.r * ct.kr.x;
+			ct.total_color.g += pt.total_color.g * ct.kr.y;
+			ct.total_color.b += pt.total_color.b * ct.kr.z;
 		}
 
 		/*
@@ -131,15 +131,15 @@ void TraceRecursiveRay( void )
 			PopTraceStack( );
 			if ( ( pt.ray_flags & RAY_INTREFLECTED ) && ( ! ct.entering ) )
 			{
-				ct.total_color.x = pt.total_color.x;
-				ct.total_color.y = pt.total_color.y;
-				ct.total_color.z = pt.total_color.z;
+				ct.total_color.r = pt.total_color.r;
+				ct.total_color.g = pt.total_color.g;
+				ct.total_color.b = pt.total_color.b;
 			}
 			else
 			{
-				ct.total_color.x += pt.total_color.x * ct.kt.x;
-				ct.total_color.y += pt.total_color.y * ct.kt.y;
-				ct.total_color.z += pt.total_color.z * ct.kt.z;
+				ct.total_color.r += pt.total_color.r * ct.kt.x;
+				ct.total_color.g += pt.total_color.g * ct.kt.y;
+				ct.total_color.b += pt.total_color.b * ct.kt.z;
 			}
 		}
 	}
@@ -196,9 +196,9 @@ int Ray_TraceShadowRay( Vec3 *D, Light *light, Vec3 *color )
 	PopTraceStack( );
 	if ( caustics_scale > 0.0 )
 	{
-		color->x = pt.total_color.x * caustics_scale;
-		color->y = pt.total_color.y * caustics_scale;
-		color->z = pt.total_color.z * caustics_scale;
+		color->x = pt.total_color.r * caustics_scale;
+		color->y = pt.total_color.g * caustics_scale;
+		color->z = pt.total_color.b * caustics_scale;
 	}
 	else
 	{
@@ -229,7 +229,7 @@ void TraceRecursiveShadowRay( void )
 		if ( ( V3Mag( &ct.kt ) > ray_min_color_weight ) &&
 			( ct.trace_level < ray_max_trace_depth ) )
 		{
-			ct.total_color = ct.kt;
+            RGBASet(ct.total_color, ct.kt.x, ct.kt.y, ct.kt.z, 1.0);
 			PushTraceStack( );
 			ct.ray_flags = RAY_SHADOW | RAY_TRANSMITTED;
 			ct.B = pt.Q;
@@ -259,9 +259,9 @@ void TraceRecursiveShadowRay( void )
 			PopTraceStack( );
 
 			/* Weigh in transmitted ray's shadow level. */
-			ct.total_color.x *= pt.total_color.x;
-			ct.total_color.y *= pt.total_color.y;
-			ct.total_color.z *= pt.total_color.z;
+			ct.total_color.r *= pt.total_color.r;
+			ct.total_color.g *= pt.total_color.g;
+			ct.total_color.b *= pt.total_color.b;
 		}
 		else  /* Shadow ray is completely blocked. */
 		{
@@ -275,7 +275,7 @@ void TraceRecursiveShadowRay( void )
 	}
 	else    /* No blocking objects hit. */
 	{
-		V3Set( &ct.total_color, 1.0, 1.0, 1.0 );
+		RGBASet(ct.total_color, 1.0, 1.0, 1.0, 1.0);
 	}
 }
 

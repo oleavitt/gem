@@ -19,15 +19,11 @@
  */
 typedef struct tVMStmtBackground
 {
-	VMStmt		vmstmt;
-	VMStmt		*block;
-	VMExpr		*expr_color1;
-	VMExpr		*expr_color2;
-	VMExpr		*expr_falloff;
-	VMLValue	*lv_location;
-	VMLValue	*lv_color;
-	VMLValue	*lv_falloff;
-	int			light_token;
+    VMStmt vmstmt;
+    VMStmt *block;
+    VMExpr *expr_color1;
+    VMExpr *expr_color2;
+    VMExpr *expr_no_hit_alpha;
 } VMStmtBackground;
 
 
@@ -58,7 +54,7 @@ VMStmt * parse_vm_background(void)
 {
 	VMStmtBackground *	newstmt =
 		(VMStmtBackground *) vm_alloc_stmt(sizeof(VMStmtBackground), &s_background_stmt_methods);
-	ParamList		params[3];
+	ParamList		params[4];
 	int				nparams, i;
 	char			name[] = "background";
 
@@ -75,7 +71,7 @@ VMStmt * parse_vm_background(void)
 
 	// Parse the background's parameters and body.
 	//
-	nparams = parse_paramlist("OEOEOB", name, params);
+	nparams = parse_paramlist("OEOEOEOB", name, params);
 	for (i = 0; i < nparams; i++)
 	{
 		switch (params[i].type)
@@ -83,8 +79,10 @@ VMStmt * parse_vm_background(void)
 			case PARAM_EXPR:
 				if (newstmt->expr_color1 == NULL) /* color1 */
 					newstmt->expr_color1 = params[i].data.expr;
-				else /* color2 */
+				else if (newstmt->expr_color2 == NULL) /* color2 */
 					newstmt->expr_color2 = params[i].data.expr;
+                else // No hit background alpha
+                    newstmt->expr_no_hit_alpha = params[i].data.expr;
 				break;
 			case PARAM_BLOCK:
 				newstmt->block = params[i].data.block;
@@ -143,7 +141,7 @@ void vm_background(VMStmt *curstmt)
 	VMStmtBackground *	stmtbkgrnd = (VMStmtBackground *) curstmt;
 	VMStmt *		stmt;
 	Vec3			color1, color2;
-
+    double no_hit_alpha;
 	// Evaluate any parameters following the background token before the block.
 	if (stmtbkgrnd->expr_color1 != NULL)
 		vm_evalvector(stmtbkgrnd->expr_color1, &color1);
@@ -154,6 +152,11 @@ void vm_background(VMStmt *curstmt)
 		vm_evalvector(stmtbkgrnd->expr_color2, &color2);
 	else
 		V3Copy(&color2, &color1);
+
+    if (stmtbkgrnd->expr_no_hit_alpha != NULL)
+        no_hit_alpha = vm_evaldouble(stmtbkgrnd->expr_no_hit_alpha);
+    else
+        no_hit_alpha = 1.0;
 
 	// Loop thru the statements in this block.
 	//
@@ -166,8 +169,9 @@ void vm_background(VMStmt *curstmt)
 	// Set up the background colors in the renderer.
 	V3Copy(&g_rsd->background_color1, &color1);
 	V3Copy(&g_rsd->background_color2, &color2);
+    g_rsd->background_no_hit_alpha = no_hit_alpha;
 
-	// TODO: Background shader.
+    // TODO: Background shader.
 }
 
 /**
