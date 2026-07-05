@@ -23,7 +23,7 @@ include "basicsurfs.inc"
 
 // Define a background shader
 //
-//background_shader RainbowTurbulant(float Depth, float Scale = 10)
+//background_shader RainbowTurbulent(float Depth, float Scale = 10)
 //{
 //	color = color + vturb(D * Scale, 3) * Depth;
 //}
@@ -42,17 +42,18 @@ main
 		angle = 45; // A nice wide angle view.
 	}
 
-	// Create a two-tone white to sky blue background.
-	// Add a shader that will add a little random 'turbulance' to it.
-	// The variable 'color' is already initialized with the standard solid
+	// Create a programmatically shaded background.
+	// This employs a shader that will use the turb() function on the ray direction (D) to create "clouds" on a blue sky. 
+	// The variable 'color' is already initialized with the default black or any solid
 	// or two-tone color. If the shader does not modify 'color', the standard
 	// background will appear.
 	//
-	background White, SkyBlue
+	background
 	{
 		background_shader
 		{
-			color = color + vturb(D * 10, 1) * 0.1;
+			float clouds = turb(D * <3, 1, 10>, 3) * 0.5 + 0.5;
+			color = <clouds, clouds, 1>;
 		}
 
 		// This is how to use a pre-defined shader.

@@ -28,8 +28,10 @@ void CloseBackground(void)
 
 void Ray_DoBackground(void)
 {
-    if (ct.trace_level == 0 && ISZERO(ray_background_no_hit_alpha)) {
-        // Full alpha for missed viewport rays.
+    if (ct.trace_level == 0 &&
+        ray_background_shader_list == NULL &&
+        ISZERO(ray_background_no_hit_alpha)) {
+        // Full alpha and no shaders for missed viewport rays.
         // No need to calculate background colors.
         RGBASet(ct.total_color, 0.0, 0.0, 0.0, 0.0);
         return;
@@ -37,9 +39,10 @@ void Ray_DoBackground(void)
 
 	Shader *shader;
 	double dot = fabs(V3Dot(&ct.D, &ray_up_vector));
-    Vec3 color;
-	V3Interpolate(&color, &ray_background_color1, dot,
+    Background background;
+	V3Interpolate(&background.color, &ray_background_color1, dot,
 		&ray_background_color2);
+    background.alpha = ray_background_no_hit_alpha;
 
 	// Run the shader(s)
 	//
@@ -47,13 +50,13 @@ void Ray_DoBackground(void)
 		shader != NULL;
 		shader = shader->next)
 	{
-		Ray_RunShader(shader, &color);
+		Ray_RunShader(shader, &background);
 	}
 
-    ct.total_color.r += color.x;
-    ct.total_color.g += color.y;
-    ct.total_color.b += color.z;
+    ct.total_color.r += background.color.x;
+    ct.total_color.g += background.color.y;
+    ct.total_color.b += background.color.z;
 
     // Set the background alpha amount if ray is a miss on the first shot.
-    ct.total_color.a = ct.trace_level == 0 ? ray_background_no_hit_alpha : 1.0;
+    ct.total_color.a = ct.trace_level == 0 ? background.alpha : 1.0;
 }

@@ -1,0 +1,51 @@
+//---------------------------------------------------------
+//	Demonstrates a two tone background statement with the missed ray background fully transparent.
+//
+//  background <color1>, <color2>, alpha
+//
+//---------------------------------------------------------
+
+// Include a collection of pre-defined colors.
+//
+include "colors.inc"
+
+// Include some pre-defined basic surface types.
+//
+include "basicsurfs.inc"
+
+// Main entry point to generate the scene
+//
+main
+{
+	// Set up the 'eye' or 'camera' - where we are looking from, where we
+	// are looking at, and the viewing angle.
+	//
+	viewport
+	{
+		from = <0, -5, 1>;
+		at = <0, 0, 0>;
+		angle = 30;
+	}
+
+	// Create a solid sky blue background and set the image alpha for viewport rays that miss completely to fully transparent.
+	//
+	background White, SkyBlue, 0;
+
+	// Turn on a light.
+	//
+	light
+	{
+		location = <25, -25, 100>;
+		color = White;
+	}
+
+	// Add a mirrored sphere to give us a fish-eye view of the
+	// background we are demonstrating.
+	//
+	sphere <0, 0, 0>, 1
+	{
+		// Use the pre-defined Mirror surface as-is.
+		//
+		Mirror;
+	}
+}

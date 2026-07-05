@@ -182,11 +182,12 @@ typedef struct tVMBackgroundShader
 {
 	VMShader		vmshaderstmt;
 
-	/* Input variables - these map to runtime environment variables. */
-	VMLValue		*lv_D;
+	// Input variables - these map to runtime environment variables.
+	VMLValue		*lv_D; // Ray direction
 
-	/* Output variable - this sets the background color. */
-	VMLValue		*lv_color;
+	// Output variables
+    VMLValue        *lv_color; // background color.
+    VMLValue        *lv_alpha; // Image alpha value for viewport rays that don't hit anything
 } VMBackgroundShader;
 
 // Debug helpers

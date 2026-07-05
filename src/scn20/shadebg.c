@@ -60,6 +60,11 @@ VMBackgroundShader * parse_vm_background_shader(void)
 		pcontext_addsymbol("color", DECL_VECTOR, 0,
 			(void *)vm_copy_lvalue(newstmt->lv_color));
 
+    newstmt->lv_alpha = vm_new_lvalue(TK_FLOAT);
+    if (newstmt->lv_alpha != NULL)
+        pcontext_addsymbol("alpha", DECL_FLOAT, 0,
+                           (void *)vm_copy_lvalue(newstmt->lv_alpha));
+
 	// Parse the shader's body.
 	//
 	if (parse_paramlist("B", "background_shader", params))
@@ -93,32 +98,30 @@ void vm_background_shader(VMStmt *curstmt)
 {
 	VMBackgroundShader	*sh = (VMBackgroundShader *) curstmt;
 	VMStmt				*stmt;
-	Vec3				*color = (Vec3*) sh->vmshaderstmt.tmp_data;
-	
+	Background			*background = (Background*) sh->vmshaderstmt.tmp_data;
+
 	vmstack_push(curstmt);
 	
-	// Initialize the shader's color parameter with the
-	// current background color.
-	//
-	V3Copy(&sh->lv_color->v, color);
-	
+	// Initialize the shader's color and alpha parameters with the
+	// current background color and alpha.
+	V3Copy(&sh->lv_color->v, &background->color);
+    sh->lv_alpha->v.x = background->alpha;
+
 	// Initialize the available runtime environment values to current
 	// state of the renderer.
 	// These are read only. Any changes to them in the shader are not stored.
-	//
 	if (sh->lv_D != NULL)
 		V3Copy(&sh->lv_D->v, &rt_D);
 
 	// Loop thru the statements in this block.
-	//
 	for (stmt = sh->vmshaderstmt.block; stmt != NULL; stmt = stmt->next)
 	{
 		stmt->methods->fn(stmt);
 	}
 
-	// Set the color to the possibly changed shader color value. 
-	//
-	V3Copy(color, &sh->lv_color->v);
+	// Set the color to the possibly changed shader color value.
+	V3Copy(&background->color, &sh->lv_color->v);
+    background->alpha = sh->lv_alpha->v.x;
 
 	vmstack_pop();
 }
